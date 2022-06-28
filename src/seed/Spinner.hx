@@ -1,0 +1,5 @@
+package seed;
+
+class Spinner {
+  
+}

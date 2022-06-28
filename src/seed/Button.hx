@@ -1,0 +1,103 @@
+package seed;
+
+import pine.*;
+import pine.html.*;
+import pine.html.HtmlAttributes;
+import pine.html.HtmlEvents;
+import pine.html.TagTypes.getTypeForTag;
+
+using Nuke;
+
+enum abstract ButtonKind(String) to String {
+  final Button = 'button';
+  final Submit = 'submit';
+}
+
+enum abstract ButtonTag(String) to String {
+  final Button = 'button';
+  final Anchor = 'a';
+  final Div = 'div';
+}
+
+class Button extends HtmlElementComponent<
+  GlobalAttr
+  & ButtonAttr
+  & AnchorAttr
+  & HtmlEvents
+> {
+  final type:UniqueId;
+
+  public function new(props:{
+    ?tag:ButtonTag,
+    ?priority:Priority,
+    ?kind:ButtonKind,
+    ?styles:ClassName,
+    ?href:String,
+    ?onClick:EventListener,
+    ?children:Array<HtmlChild>
+  }) {
+    var tag:ButtonTag = props.href != null 
+      ? Anchor 
+      : props.tag == null
+        ? Button
+        : props.tag;
+    var priority:Priority = props.priority == null
+      ? Secondary
+      : props.priority;
+
+    type = getTypeForTag(tag);
+
+    super({
+      tag: tag,
+      attrs: {
+        href: switch tag {
+          case Anchor: props.href;
+          default: null;
+        },
+        onclick: switch tag {
+          case Button: props.onClick;
+          default: e -> {
+            e.preventDefault();
+            props.onClick(e);
+          }
+        },
+        role: switch tag {
+          case Button: null;
+          default: 'button';         
+        },
+        type: switch tag {
+          case Button: props.kind;
+          default: null;
+        },
+        className: Css.atoms({
+          display: 'inline-block',
+          outline: 'none',
+          border: 'none',
+          fontFamily: theme(seed.button.font.family, theme(seed.font.family)),
+          fontSize: theme(seed.button.font.size, theme(seed.font.size)),
+          fontWeight: theme(seed.button.font.weight),
+          textAlign: 'center',
+          textDecoration: 'none',
+          verticalAlign: 'middle',
+          boxSizing: theme(seed.box.sizing, 'border-box'),
+          padding: [
+            theme(seed.button.padding.y, theme(seed.rounded.padding.y, theme(seed.box.padding.y))),
+            theme(seed.button.padding.x, theme(seed.rounded.padding.x, theme(seed.box.padding.x)))
+          ],
+          borderRadius: theme(seed.button.border.radius, theme(seed.rounded.border.radius)),
+          // @todo: hover/disabled/etc. states
+        }).with([
+          'seed-button',
+          'seed-button-${priority.toString()}',
+          priority.toStyle(),
+          props.styles
+        ])
+      },
+      children: props.children
+    });
+  }
+
+  public function getComponentType():UniqueId {
+    return type;
+  }
+}
