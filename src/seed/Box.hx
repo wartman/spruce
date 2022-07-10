@@ -13,7 +13,7 @@ typedef BoxProps = {
   ?styles:ClassName,
   ?layout:Layout,
   ?role:String,
-  ?children:Array<HtmlChild>,
+  ?children:HtmlChildren,
   ?onClick:EventListener,
   ?onKeyUp:EventListener,
   ?onDblClick:EventListener

@@ -6,7 +6,7 @@ import pine.html.*;
 using Nuke;
 
 class SidebarBody extends ImmutableComponent {
-  @prop final children:Array<HtmlChild>;
+  @prop final children:HtmlChildren;
 
   public function render(context:Context) {
     return new Box({

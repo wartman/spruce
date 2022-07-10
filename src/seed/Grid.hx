@@ -10,10 +10,10 @@ class Grid<@:const Rest> {}
 
 abstract class GridBase extends ProxyComponent {
   final styles:Null<ClassName>;
-  final children:Array<HtmlChild>;
+  final children:HtmlChildren;
 
   public function new(props:{
-    children:Array<HtmlChild>,
+    children:HtmlChildren,
     ?styles:ClassName,
     ?key:Key
   }) {

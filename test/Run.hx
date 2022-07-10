@@ -1,3 +1,4 @@
+import seed.style.BoxDecoration;
 import js.Browser;
 import pine.*;
 import pine.html.*;
@@ -51,6 +52,10 @@ function main() {
       rounded: {
         border: {
           radius: .75.rem()
+        },
+        padding: {
+          y: .75.rem(),
+          x: 1.rem()
         }
       },
       grid: {
@@ -114,50 +119,55 @@ function render() {
             // @todo: Should `width: 100.pct()` be the default?
             styles: Css.atoms({ width: 100.pct() }),
             children: [
-              new GridColumn<4, 'lg:2'>({
+              new GridColumn<4, 'md:2', 'lg:3'>({
                 children: [
-                  new Card({
-                    children: [ 'yay' ]
-                  }),
+                  new Html<'p'>({ children: 'Some text' }),
                   new ShowModal({})
                 ]
               }),
-              new Card({
+              new GridColumn<4, 'md:2', 'lg:1'>({
                 children: [
-                  new Html<'p'>({ children: [ 'Hey world' ] }),
-                  new Dropdown({
-                    label: 'A dropdown!',
-                    child: new DropdownMenu({
-                      items: [
-                        new MenuItem({ 
-                          child: new DropdownMenuLink({
-                            kind: Action(() -> trace('bar')),
-                            child: 'Bar!'
-                          }) 
-                        }),
-                        new MenuItem({ 
-                          child: new DropdownMenuLink({
-                            kind: Action(() -> trace('foop')),
-                            child: 'Foober!'
-                          }) 
-                        })
-                      ]
-                    })
-                  })
-                ]
-              }),
-              new Collapse({
-                toggle: (toggle, collapsed) -> new Button({
-                  onClick: _ -> toggle(),
-                  children: [ if (collapsed) 'Close' else 'Open' ]
-                }),
-                children: [
-                  new Card({
-                    styles: Css.atoms({ marginTop: theme(seed.grid.yGap) }),
+                  new Box({
+                    layout: Vertical,
                     children: [
-                      new Html<'p'>({ children: [ 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' ] })
+                      new Card({
+                        children: [
+                          new Html<'p'>({ children: [ 'Hey world' ] }),
+                          new Dropdown({
+                            label: 'A dropdown!',
+                            child: new DropdownMenu({
+                              items: [
+                                new MenuItem({ 
+                                  child: new DropdownMenuLink({
+                                    kind: Action(() -> trace('bar')),
+                                    child: 'Bar!'
+                                  }) 
+                                }),
+                                new MenuItem({ 
+                                  child: new DropdownMenuLink({
+                                    kind: Action(() -> trace('foop')),
+                                    child: 'Foober!'
+                                  }) 
+                                })
+                              ]
+                            })
+                          })
+                        ]
+                      }),
+                      new Collapse({
+                        children: [
+                          new CollapseHeader({
+                            child: 'Some Collapsed Thingie' 
+                          }),
+                          new CollapseBody({
+                            children: new Html<'p'>({ 
+                              children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                            })
+                          }),
+                        ]
+                      })
                     ]
-                  }),
+                  })
                 ]
               })
             ]
@@ -172,8 +182,8 @@ class ShowModal extends ObserverComponent {
   @track var isOpen:Bool = false;
 
   public function render(context:Context) {
-    return new Card({
-      children: ([
+    return new Fragment({
+      children: [
         new Button({
           priority: Primary,
           onClick: _ -> isOpen = true,
@@ -193,10 +203,24 @@ class ShowModal extends ObserverComponent {
             new ModalHeader({ 
               child: new ModalTitle({ child: 'Test' }) 
             }),
-            new ModalBody({ children: [ 'This should work' ] })
+            new ModalBody({ children: [ 'This should work' ] }),
+            new ModalFooter({
+              children: [
+                new Button({
+                  onClick: _ -> isOpen = false,
+                  priority: Primary,
+                  children: [ 'Ok' ]
+                }),
+                new Button({
+                  onClick: _ -> isOpen = false,
+                  priority: Secondary,
+                  children: [ 'Cancel' ]
+                }),
+              ]
+            })
           ]
         }) else null
-      ]:Array<Component>).filter(n -> n != null) 
+      ] 
     });
   }
 }

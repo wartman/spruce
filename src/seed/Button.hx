@@ -34,7 +34,7 @@ class Button extends HtmlElementComponent<
     ?styles:ClassName,
     ?href:String,
     ?onClick:EventListener,
-    ?children:Array<HtmlChild>
+    ?children:HtmlChildren
   }) {
     var tag:ButtonTag = props.href != null 
       ? Anchor 

@@ -16,7 +16,7 @@ class Navbar extends ImmutableComponent {
   @prop final tag:NavbarTag = Nav;
   @prop final kind:ContainerKind = Lg;
   @prop final styles:ClassName = null;
-  @prop final children:Array<HtmlChild>;
+  @prop final children:HtmlChildren;
 
   public function render(context:Context):Component {
     return new Box({

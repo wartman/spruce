@@ -14,7 +14,7 @@ enum ModalContainerSize {
 
 class ModalContainer extends ImmutableComponent {
   @prop final styles:ClassName = null;
-  @prop final children:Array<HtmlChild>;
+  @prop final children:HtmlChildren;
   @prop final size:ModalContainerSize = Md;
 
   function getContainerSize() {

@@ -65,21 +65,6 @@ function useBaseStyles() {
       display: ['none', '!important']
     }
   });
-
-  Breakpoint.lg({
-    'h1': {
-      fontSize: 2.5.rem()
-    },
-    'h2': {
-      fontSize: 2.rem()
-    },
-    'h3': {
-      fontSize: 1.75.rem()
-    },
-    'h4': {
-      fontSize: 1.5.rem()
-    }
-  });
 }
 
 function useDefaultTheme() {

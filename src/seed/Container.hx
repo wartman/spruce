@@ -18,7 +18,7 @@ class Container extends ImmutableComponent {
   @prop final kind:ContainerKind = Fluid;
   @prop final layout:Layout = Auto;
   @prop final styles:ClassName = null;
-  @prop final children:Array<HtmlChild>;
+  @prop final children:HtmlChildren;
 
   public function render(context:Context) {
     return new Box({

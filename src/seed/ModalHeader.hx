@@ -20,8 +20,8 @@ class ModalHeader extends ImmutableComponent {
         borderTopLeftRadius: theme(seed.modal.border.radius, theme(seed.rounded.border.radius)),
         borderTopRightRadius: theme(seed.modal.border.radius, theme(seed.rounded.border.radius)),
         padding: [
-          theme(seed.modal.padding.y, theme(seed.box.padding.y)),
-          theme(seed.modal.padding.x, theme(seed.box.padding.x))
+          theme(seed.modal.padding.y, theme(seed.rounded.padding.y, theme(seed.box.padding.y))),
+          theme(seed.modal.padding.x, theme(seed.rounded.padding.x, theme(seed.box.padding.x)))
         ],
       }).with([
         'seed-modal-header',

@@ -10,7 +10,7 @@ using Nuke;
 class Modal extends ImmutableComponent {
   @prop final styles:ClassName = null;
   @prop final onHide:()->Void;
-  @prop final children:Array<HtmlChild>;
+  @prop final children:HtmlChildren;
   @prop final size:ModalContainerSize = Md;
   @prop final hideOnEscape:Bool = true;
 

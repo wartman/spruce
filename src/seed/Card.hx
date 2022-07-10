@@ -7,7 +7,7 @@ using Nuke;
 
 class Card extends ImmutableComponent {
   @prop final styles:ClassName = null;
-  @prop final children:Array<HtmlChild>;
+  @prop final children:HtmlChildren;
 
   public function render(context:Context) {
     return new Box({

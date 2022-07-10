@@ -13,7 +13,7 @@ typedef HeadingProps = {
   ?styles:ClassName,
   ?onClick:EventListener,
   ?role:String,
-  ?children:Array<HtmlChild>
+  ?children:HtmlChildren
 }
 
 class Heading extends HtmlElementComponent<GlobalAttr & HtmlEvents> {

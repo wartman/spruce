@@ -14,7 +14,7 @@ enum SidebarAttachment {
 class Sidebar extends ImmutableComponent {
   @prop final attachment:SidebarAttachment = Left;
   @prop final onHide:()->Void;
-  @prop final children:Array<HtmlChild>;
+  @prop final children:HtmlChildren;
 
   public function render(context:Context):Component {
     return new Portal({
