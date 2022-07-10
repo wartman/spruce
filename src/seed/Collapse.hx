@@ -12,15 +12,20 @@ class Collapse extends ImmutableComponent {
   @prop final collapsed:Bool = false;
 
   public function render(context:Context) {
-    return new CollapseContextProvider({
-      create: () -> new CollapseContext(),
-      dispose: collapse -> collapse.dispose(),
-      render: collapse -> new Box({
-        styles: [
-          'seed-collapse',
-          styles
-        ],
-        children: children
+    return new Consumer<AccordianContext>({
+      render: res -> new CollapseContextProvider({
+        create: () -> switch res {
+          case None: new CollapseContext();
+          case Some(accordian): accordian.createCollapseContext();
+        },
+        dispose: collapse -> collapse.dispose(),
+        render: collapse -> new Box({
+          styles: [
+            'seed-collapse',
+            styles
+          ],
+          children: children
+        })
       })
     });
   }

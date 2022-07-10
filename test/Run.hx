@@ -165,6 +165,35 @@ function render() {
                             })
                           }),
                         ]
+                      }),
+                      new Accordian({
+                        styles: Card.baseStyles,
+                        children: [
+                          new Collapse({
+                            children: [
+                              new CollapseHeader({
+                                child: 'One' 
+                              }),
+                              new CollapseBody({
+                                children: new Html<'p'>({ 
+                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                                })
+                              }),
+                            ]
+                          }),
+                          new Collapse({
+                            children: [
+                              new CollapseHeader({
+                                child: 'Two' 
+                              }),
+                              new CollapseBody({
+                                children: new Html<'p'>({ 
+                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                                })
+                              }),
+                            ]
+                          }),
+                        ]
                       })
                     ]
                   })

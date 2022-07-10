@@ -25,6 +25,25 @@ class Button extends HtmlElementComponent<
   & AnchorAttr
   & HtmlEvents
 > {
+  public static final baseStyles = Css.atoms({
+    display: 'inline-block',
+    outline: 'none',
+    border: 'none',
+    fontFamily: theme(seed.button.font.family, theme(seed.font.family)),
+    fontSize: theme(seed.button.font.size, theme(seed.font.size)),
+    fontWeight: theme(seed.button.font.weight),
+    textAlign: 'center',
+    textDecoration: 'none',
+    verticalAlign: 'middle',
+    boxSizing: theme(seed.box.sizing, 'border-box'),
+    padding: [
+      theme(seed.button.padding.y, theme(seed.rounded.padding.y, theme(seed.box.padding.y))),
+      theme(seed.button.padding.x, theme(seed.rounded.padding.x, theme(seed.box.padding.x)))
+    ],
+    borderRadius: theme(seed.button.border.radius, theme(seed.rounded.border.radius)),
+    // @todo: hover/disabled/etc. states
+  });
+
   final type:UniqueId;
 
   public function new(props:{
@@ -69,24 +88,7 @@ class Button extends HtmlElementComponent<
           case Button: props.kind;
           default: null;
         },
-        className: Css.atoms({
-          display: 'inline-block',
-          outline: 'none',
-          border: 'none',
-          fontFamily: theme(seed.button.font.family, theme(seed.font.family)),
-          fontSize: theme(seed.button.font.size, theme(seed.font.size)),
-          fontWeight: theme(seed.button.font.weight),
-          textAlign: 'center',
-          textDecoration: 'none',
-          verticalAlign: 'middle',
-          boxSizing: theme(seed.box.sizing, 'border-box'),
-          padding: [
-            theme(seed.button.padding.y, theme(seed.rounded.padding.y, theme(seed.box.padding.y))),
-            theme(seed.button.padding.x, theme(seed.rounded.padding.x, theme(seed.box.padding.x)))
-          ],
-          borderRadius: theme(seed.button.border.radius, theme(seed.rounded.border.radius)),
-          // @todo: hover/disabled/etc. states
-        }).with([
+        className: baseStyles.with([
           'seed-button',
           'seed-button-${priority.toString()}',
           priority.toStyle(),
