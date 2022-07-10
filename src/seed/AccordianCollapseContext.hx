@@ -9,6 +9,6 @@ class AccordianCollapseContext extends CollapseContext {
   }
 
   override function toggle(collapsed:Bool) {
-    if (collapsed) accordian.hide() else accordian.show(this);
+    if (collapsed) accordian.hide(this) else accordian.show(this);
   }
 }

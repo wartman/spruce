@@ -17,22 +17,22 @@ class CollapseContext implements Disposable {
 
   public function activate(getEl:()->Dynamic) {
     Debug.assert(controller == null);
+    Debug.assert(obs == null);
+
     controller = new CollapseController(getEl);
     Process.defer(() -> {
+      if (obs != null) obs.dispose();
       obs = new Observer(() -> controller.toggle(collapsed.get()));
     });
   }
 
   public function show() {
-    if (controller == null) return;
     collapsed.set(false);
   }
 
   public function hide() {
-    if (controller == null) return;
     collapsed.set(true);
   }
-
 
   public function toggle(collapsed:Bool) {
     if (collapsed) hide() else show();

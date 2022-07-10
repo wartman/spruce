@@ -166,6 +166,7 @@ function render() {
                           }),
                         ]
                       }),
+
                       new Accordian({
                         styles: Card.baseStyles,
                         children: [
@@ -193,8 +194,109 @@ function render() {
                               }),
                             ]
                           }),
+                          new Collapse({
+                            children: [
+                              new CollapseHeader({
+                                child: 'Three' 
+                              }),
+                              new CollapseBody({
+                                children: new Html<'p'>({ 
+                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                                })
+                              }),
+                            ]
+                          }),
+                          new Collapse({
+                            children: [
+                              new CollapseHeader({
+                                child: 'Four' 
+                              }),
+                              new CollapseBody({
+                                children: new Html<'p'>({ 
+                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                                })
+                              }),
+                            ]
+                          }),
+                        ]
+                      }),
+
+                      // Shows how to make Accordian sticky:
+                      new Accordian({
+                        sticky: true,
+                        styles: Card.baseStyles,
+                        children: [
+                          new Scope({
+                            render: context -> new Box({
+                              layout: Horizontal,
+                              children: [
+                                new Button({
+                                  onClick: _ -> AccordianContext.from(context).hideAll(),
+                                  children: 'Hide'
+                                }),
+                                new Isolate({
+                                  wrap: _ -> new Button({
+                                    onClick: _ -> AccordianContext.from(context).toggleSticky(),
+                                    children: if (AccordianContext.from(context).isSticky)
+                                      'Unstick'
+                                    else
+                                      'Stick'
+                                  })
+                                })
+                              ]
+                            })
+                          }),
+                          new Collapse({
+                            children: [
+                              new CollapseHeader({
+                                child: 'One' 
+                              }),
+                              new CollapseBody({
+                                children: new Html<'p'>({ 
+                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                                })
+                              }),
+                            ]
+                          }),
+                          new Collapse({
+                            children: [
+                              new CollapseHeader({
+                                child: 'Two' 
+                              }),
+                              new CollapseBody({
+                                children: new Html<'p'>({ 
+                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                                })
+                              }),
+                            ]
+                          }),
+                          new Collapse({
+                            children: [
+                              new CollapseHeader({
+                                child: 'Three' 
+                              }),
+                              new CollapseBody({
+                                children: new Html<'p'>({ 
+                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                                })
+                              }),
+                            ]
+                          }),
+                          new Collapse({
+                            children: [
+                              new CollapseHeader({
+                                child: 'Four' 
+                              }),
+                              new CollapseBody({
+                                children: new Html<'p'>({ 
+                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                                })
+                              }),
+                            ]
+                          }),
                         ]
                       })
+
                     ]
                   })
                 ]

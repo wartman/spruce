@@ -8,13 +8,6 @@ using Nuke;
 class CollapseHeader extends ObserverComponent {
   @prop final styles:ClassName = null;
   @prop final child:HtmlChild;
-  // @track var collapsed:Bool = true;
-  
-  // override function init(context:InitContext) {
-  //   Effect.on(context).add(() -> {
-  //     CollapseContext.from(context).toggle(collapsed);
-  //   });
-  // }
 
   public function render(context:Context) {
     var collapse = CollapseContext.from(context);

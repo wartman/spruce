@@ -10,8 +10,16 @@ class AccordianContext implements Disposable {
   }
 
   final contexts:Array<AccordianCollapseContext> = [];
+  final sticky:State<Bool>;
 
-  public function new() {}
+  public var isSticky(get, never):Bool;
+  inline function get_isSticky() {
+    return sticky.get();
+  }
+
+  public function new(sticky) {
+    this.sticky = new State(sticky);
+  }
 
   public function createCollapseContext() {
     var context = new AccordianCollapseContext(this);
@@ -20,14 +28,38 @@ class AccordianContext implements Disposable {
   }
 
   public function show(current:AccordianCollapseContext) {
-    for (context in contexts) if (context == current) {
+    if (isSticky) {
+      current.show();
+    } else for (context in contexts) if (context == current) {
       context.show();
     } else {
       context.hide();
     }
   }
 
-  public function hide() {
+  public function hide(current:AccordianCollapseContext) {
+    if (isSticky) {
+      current.hide();
+    } else for (context in contexts) context.hide();
+  }
+
+  public function toggleSticky() {
+    sticky.set(@:privateAccess !sticky.value);
+  }
+
+  public function makeSticky() {
+    sticky.set(true);
+  }
+
+  public function makeNotSticky() {
+    sticky.set(false);
+  }
+
+  public function showAll() {
+    for (context in contexts) context.show();
+  }
+
+  public function hideAll() {
     for (context in contexts) context.hide();
   }
 
