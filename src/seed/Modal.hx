@@ -18,9 +18,10 @@ class Modal extends ImmutableComponent {
     return new Portal({
       target: PortalContext.from(context).getTarget(),
       child: new Overlay({
-        onShow: () -> {
+        beforeShow: () -> {
           DomService.from(context).body.lock();
         },
+        onShow: () -> {},
         onHide: () -> {
           DomService.from(context).body.unlock();
           onHide();

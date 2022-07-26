@@ -14,6 +14,7 @@ class OverlayFadeContext extends OverlayContext {
       animateHide: el -> {
         el.style.opacity = '0';
       },
+      beforeShow: props.beforeShow,
       onShow: props.onShow,
       onHide: props.onHide
     });

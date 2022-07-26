@@ -25,9 +25,10 @@ class Sidebar extends ImmutableComponent {
           DomService.from(context).body.unlock();
           onHide();
         },
-        createContext: (onShow, onHide, context) -> new SidebarContext({
+        createContext: (?beforeShow, onShow, onHide, context) -> new SidebarContext({
           attachment: attachment,
           getEl: () -> context.getObject(),
+          beforeShow: beforeShow,
           onShow: onShow,
           onHide: onHide
         }),

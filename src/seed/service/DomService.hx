@@ -3,6 +3,7 @@ package seed.service;
 import pine.Context;
 import seed.controller.BodyController;
 
+// todo: I'm not sure this class makes sense.
 class DomService {
   static var instance:Null<DomService> = null;
 

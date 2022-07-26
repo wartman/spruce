@@ -1,24 +1,28 @@
 package seed;
 
 import pine.*;
+#if (js && !nodejs)
+  import seed.controller.KeyboardController;
+#end
 
 class OverlayEscapable extends ImmutableComponent {
   @prop final container:OverlayContainer;
 
-  #if (js && !nodejs)
-    override function init(context:InitContext) {
-      var controller = new seed.controller.KeyboardController(key -> {
-        switch key {
-          case Escape:
-            OverlayContext.from(context).hide();
-          default:
-        }
-      });
-      Cleanup.on(context).add(controller);
-    }
-  #end
-
   public function render(context:Context) {
-    return container;
+    #if (js && !nodejs)
+      return new Provider<KeyboardController>({
+        create: () -> new KeyboardController(key -> {
+          switch key {
+            case Escape:
+              OverlayContext.from(context).hide();
+            default:
+          }
+        }),
+        dispose: controller -> controller.dispose(),
+        render: _ -> container
+      });
+    #else
+      return container;
+    #end
   }
 }

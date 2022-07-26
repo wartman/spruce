@@ -44,7 +44,7 @@ class AccordianContext implements Disposable {
   }
 
   public function toggleSticky() {
-    sticky.set(@:privateAccess !sticky.value);
+    sticky.set(!sticky.peek());
   }
 
   public function makeSticky() {

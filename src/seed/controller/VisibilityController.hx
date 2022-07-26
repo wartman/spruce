@@ -1,9 +1,11 @@
 package seed.controller;
 
+import pine.Disposable;
 import pine.Process;
 
-class VisibilityController {
+class VisibilityController implements Disposable {
   final getEl:()->js.html.Element;
+  final beforeShow:Null<()->Void>;
   final onHide:()->Void;
   final onShow:()->Void;
   final animateShow:(el:js.html.Element)->Void;
@@ -14,6 +16,7 @@ class VisibilityController {
     this.getEl = props.getEl;
     this.onHide = props.onHide;
     this.onShow = props.onShow;
+    this.beforeShow = props.beforeShow;
     this.animateShow = props.animateShow;
     this.animateHide = props.animateHide;
   }
@@ -24,6 +27,7 @@ class VisibilityController {
 
   public function show() {
     isTransitioning = true;
+    if (beforeShow != null) beforeShow();
     var el = getEl();
     el.addEventListener('transitionend', finishShow);
     animateShow(el);

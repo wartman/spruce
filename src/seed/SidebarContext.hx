@@ -26,6 +26,7 @@ class SidebarContext extends OverlayContext {
           case Right: sidebar.style.right = '-500px';
         }
       },
+      beforeShow: props.beforeShow,
       onShow: props.onShow,
       onHide: props.onHide
     });

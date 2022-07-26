@@ -127,6 +127,11 @@ function render() {
               }),
               new GridColumn<4, 'md:2', 'lg:1'>({
                 children: [
+                  new Html<'p'>({ children: 'Another column' })
+                ]
+              }),
+              new GridColumn<4>({
+                children: [
                   new Box({
                     layout: Vertical,
                     children: [
@@ -170,6 +175,14 @@ function render() {
                       new Accordian({
                         styles: Card.baseStyles,
                         children: [
+                          new CardHeader({
+                            children: [
+                              new Heading({
+                                level: 5,
+                                children: 'Accordian Example'
+                              })
+                            ]
+                          }),
                           new Collapse({
                             children: [
                               new CollapseHeader({
@@ -226,6 +239,14 @@ function render() {
                         sticky: true,
                         styles: Card.baseStyles,
                         children: [
+                          new CardHeader({
+                            children: [
+                              new Heading({
+                                level: 5,
+                                children: 'Configurable Accordian Example'
+                              })
+                            ]
+                          }),
                           new Scope({
                             render: context -> new Box({
                               layout: Horizontal,

@@ -50,6 +50,7 @@ class PopoverContext extends OverlayContext {
       animateHide: el -> {
         el.style.opacity = '0';
       },
+      beforeShow: () -> null,
       onShow: () -> null,
       onHide: onHide
     });

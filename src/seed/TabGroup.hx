@@ -1,2 +1,5 @@
 package seed;
 
+class TabGroup {
+  
+}
