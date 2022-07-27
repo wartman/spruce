@@ -20,7 +20,7 @@ class Dropdown extends ObserverComponent {
         isOpen = false;
       }
 
-      Effect.on(context).add(() -> {
+      Effect.on(context).track(() -> {
         if (isOpen)
           js.Browser.document.addEventListener('click', onClick);
         else

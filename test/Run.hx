@@ -130,7 +130,7 @@ function render() {
                   new Html<'p'>({ children: 'Another column' })
                 ]
               }),
-              new GridColumn<4>({
+              new GridColumn<4, 'md:2'>({
                 children: [
                   new Box({
                     layout: Vertical,
@@ -141,7 +141,7 @@ function render() {
                           new Dropdown({
                             label: 'A dropdown!',
                             child: new DropdownMenu({
-                              items: [
+                              children: [
                                 new MenuItem({ 
                                   child: new DropdownMenuLink({
                                     kind: Action(() -> trace('bar')),
@@ -321,6 +321,17 @@ function render() {
                     ]
                   })
                 ]
+              }),
+
+              new GridColumn<4, 'md:2'>({
+                children: [
+                  new TabGroup({
+                    tabs: [
+                      { label: ('Foo':HtmlChild), render: context -> ('Hey world':HtmlChild) },
+                      { label: ('Bar':HtmlChild), render: context -> ('Bye world':HtmlChild) },
+                    ]
+                  })
+                ]
               })
             ]
           })
@@ -356,19 +367,21 @@ class ShowModal extends ObserverComponent {
               child: new ModalTitle({ child: 'Test' }) 
             }),
             new ModalBody({ children: [ 'This should work' ] }),
-            new ModalFooter({
-              children: [
-                new Button({
-                  onClick: _ -> isOpen = false,
-                  priority: Primary,
-                  children: [ 'Ok' ]
-                }),
-                new Button({
-                  onClick: _ -> isOpen = false,
-                  priority: Secondary,
-                  children: [ 'Cancel' ]
-                }),
-              ]
+            new Scope({
+              render: context -> new ModalFooter({
+                children: [
+                  new Button({
+                    onClick: _ -> OverlayContext.from(context).hide(),
+                    priority: Primary,
+                    children: [ 'Ok' ]
+                  }),
+                  new Button({
+                    onClick: _ -> OverlayContext.from(context).hide(),
+                    priority: Secondary,
+                    children: [ 'Cancel' ]
+                  }),
+                ]
+              })
             })
           ]
         }) else null
@@ -378,7 +391,7 @@ class ShowModal extends ObserverComponent {
 }
 
 class SiteHeader extends ObserverComponent {
-  @prop final items:Array<MenuItem>;
+  @prop final items:Array<Component>;
   @track var isOpen:Bool = false;
 
   function render(context:Context) {
@@ -407,7 +420,7 @@ class SiteHeader extends ObserverComponent {
             Css.atoms({ display: 'none' }),
             Breakpoint.md({ display: 'flex' })
           ],
-          items: items
+          children: items
         }),
         if (isOpen)
           new Sidebar({
@@ -421,7 +434,7 @@ class SiteHeader extends ObserverComponent {
                 children: [
                   new Menu({
                     layout: Vertical,
-                    items: items
+                    children: items
                   })
                 ]
               })

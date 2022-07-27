@@ -7,6 +7,10 @@ import seed.service.*;
 
 using Nuke;
 
+// todo: Consider removing `children` and replacing it with
+// `(context:OverlayContext) -> HtmlChildren` instead? We have
+// use `OverlayContext` to hide the modal, so children will
+// need access to it anyway.
 class Modal extends ImmutableComponent {
   @prop final styles:ClassName = null;
   @prop final onHide:()->Void;

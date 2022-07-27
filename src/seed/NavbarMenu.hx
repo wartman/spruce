@@ -1,12 +1,13 @@
 package seed;
 
 import pine.*;
+import pine.html.*;
 
 using Nuke;
 
 class NavbarMenu extends ImmutableComponent {
   @prop final styles:ClassName = null;
-  @prop final items:Array<MenuItem>;
+  @prop final children:HtmlChildren;
 
   public function render(context:Context) {
     return new Menu({
@@ -17,7 +18,7 @@ class NavbarMenu extends ImmutableComponent {
         styles
       ]),
       layout: Horizontal,
-      items: items
+      children: children
     });
   }
 }

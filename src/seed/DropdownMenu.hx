@@ -1,11 +1,12 @@
 package seed;
 
 import pine.*;
+import pine.html.*;
 
 using Nuke;
 
 class DropdownMenu extends ImmutableComponent {
-  @prop final items:Array<MenuItem>; 
+  @prop final children:HtmlChildren; 
   @prop final layout:Layout = Vertical;
 
   public function render(context:Context) {
@@ -38,7 +39,7 @@ class DropdownMenu extends ImmutableComponent {
       onClick: e -> {
         e.stopPropagation();
       },
-      items: items
+      children: children
     });
   }
 }

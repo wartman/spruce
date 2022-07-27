@@ -1,10 +1,8 @@
 package seed;
 
 import pine.*;
-import pine.html.*;
 
-class Tab extends ImmutableComponent {
-  public function render(context:Context) {
-    return null;
-  }
+typedef Tab = {
+  public final label:Component;
+  public final render:(context:Context)->Component;
 }
