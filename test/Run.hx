@@ -1,4 +1,3 @@
-import seed.style.BoxDecoration;
 import js.Browser;
 import pine.*;
 import pine.html.*;
@@ -267,54 +266,37 @@ function render() {
                               ]
                             })
                           }),
-                          new Collapse({
-                            children: [
-                              new CollapseHeader({
-                                child: 'One' 
+                          new Box({
+                            styles: Css.atoms({
+                              border: [ 1.px(), 'solid' ]
+                            }),
+                            children: [   
+                              new AccordianItem({
+                                label: 'One',
+                                children: new Html<'p'>({ 
+                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                                })
                               }),
-                              new CollapseBody({
+                              new AccordianItem({
+                                label: 'Two',
+                                children: new Html<'p'>({ 
+                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                                })
+                              }),
+                              new AccordianItem({
+                                label: 'three',
+                                children: new Html<'p'>({ 
+                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                                })
+                              }),
+                              new AccordianItem({
+                                label: 'four',
                                 children: new Html<'p'>({ 
                                   children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
                                 })
                               }),
                             ]
-                          }),
-                          new Collapse({
-                            children: [
-                              new CollapseHeader({
-                                child: 'Two' 
-                              }),
-                              new CollapseBody({
-                                children: new Html<'p'>({ 
-                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
-                                })
-                              }),
-                            ]
-                          }),
-                          new Collapse({
-                            children: [
-                              new CollapseHeader({
-                                child: 'Three' 
-                              }),
-                              new CollapseBody({
-                                children: new Html<'p'>({ 
-                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
-                                })
-                              }),
-                            ]
-                          }),
-                          new Collapse({
-                            children: [
-                              new CollapseHeader({
-                                child: 'Four' 
-                              }),
-                              new CollapseBody({
-                                children: new Html<'p'>({ 
-                                  children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
-                                })
-                              }),
-                            ]
-                          }),
+                          })
                         ]
                       })
 
@@ -336,6 +318,10 @@ function render() {
             ]
           })
         ]
+      }),
+
+      new Footer({
+        children: 'Test'
       })
     ]
   });
@@ -406,11 +392,19 @@ class SiteHeader extends ObserverComponent {
         }
       }),
       children: [   
-        new Button({
+        new ControlGroup({
           styles: Breakpoint.md({ display: [ 'none', '!important' ] }),
-          onClick: _ -> isOpen = true,
-          children: [ 'Menu' ]
-        }), 
+          controls: [
+            new ControlButton({
+              onClick: _ -> isOpen = true,
+              arialLabel: 'Toggle Menu',
+              child: new Icon({
+                styles: Css.atoms({ width: 2.em(), height: 2.em() }),
+                kind: Hamburger 
+              })
+            })
+          ]
+        }),
         new NavbarBrand({ 
           styles: Css.atoms({ flexGrow: 3 }), 
           child: new Html<'h1'>({ children: [ 'Test' ] }) 
@@ -443,6 +437,40 @@ class SiteHeader extends ObserverComponent {
         else
           null
       ]
+    });
+  }
+}
+
+class AccordianItem extends ImmutableComponent {
+  @prop final label:String;
+  @prop final children:HtmlChildren;
+
+  function render(context:Context) {
+    return new Collapse({
+      styles: Css.atoms({ 
+        borderBottom: [ 1.px(), 'solid' ],
+        ':last-of-type': {
+          borderBottom: 'none'
+        }
+      }),
+      children: [
+        new CollapseHeader({
+          styles: Css.atoms({
+            padding: .5.em(),
+            alignItems: 'center'
+          }),
+          child: label
+        }),
+        new CollapseBody({
+          children: new Box({
+            styles: Css.atoms({
+              padding: .5.em(),
+              borderTop: [ 1.px(), 'solid' ],
+            }),
+            children: children 
+          })
+        })
+      ] 
     });
   }
 }

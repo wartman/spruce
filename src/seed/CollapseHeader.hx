@@ -16,18 +16,30 @@ class CollapseHeader extends ObserverComponent {
       styles: [
         Css.atoms({
           ':hover': { cursor: 'pointer' },
-          width: 100.pct()
+          width: 100.pct(),
+          // transition: [ 'margin-bottom', 300.ms() ]
         }),
         'seed-collapse-header',
+        // if (!isCollapsed) Css.atoms({
+        //   marginBottom: theme(seed.grid.gap)
+        // }) else Css.atoms({
+        //   marginBottom: 0
+        // }),
         styles
       ],
       layout: Horizontal,
       onClick: _ -> collapse.toggle(!isCollapsed),
       children: [
-        child,
-        // @todo: This is temporary
-        new Html<'span'>({
-          children: if (isCollapsed) '+' else '-'
+        new Box({
+          styles: Css.atoms({ marginRight: 'auto' }),
+          children: [ child ]
+        }),
+        new Icon({
+          styles: Css.atoms({
+            width: 1.em(),
+            height: 1.em()
+          }),
+          kind: isCollapsed ? ChevronDown : ChevronUp
         })
       ]
     });

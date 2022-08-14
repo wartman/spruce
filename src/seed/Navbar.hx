@@ -24,10 +24,6 @@ class Navbar extends ImmutableComponent {
       styles: Css.atoms({
         backgroundColor: theme(seed.navbar.bgColor),
         color: theme(seed.navbar.color),
-        padding: [
-          theme(seed.navbar.padding.y, theme(seed.box.padding.y)),
-          theme(seed.navbar.padding.x, theme(seed.box.padding.x))
-        ]
       }).with([
         'seed-navbar',
         styles
@@ -36,7 +32,13 @@ class Navbar extends ImmutableComponent {
         new Container({
           kind: kind,
           layout: Horizontal,
-          styles: Css.atoms({ alignItems: 'center' }),
+          styles: Css.atoms({
+            alignItems: 'center',
+            padding: [
+              theme(seed.navbar.padding.y, theme(seed.box.padding.y)),
+              theme(seed.navbar.padding.x, theme(seed.box.padding.x))
+            ]
+          }),
           children: children
         })
       ]

@@ -81,7 +81,7 @@ enum abstract BoxTag(String) to String {
   // final H6 = 'h6';
   // final Strong = 'strong';
   // final Em = 'em';
-  // final Span = 'span';
+  final Span = 'span';
   // final Anchor = 'a';
   // final Paragraph = 'p';
   // final Ins = 'ins';

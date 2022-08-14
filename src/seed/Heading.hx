@@ -35,7 +35,7 @@ class Heading extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
   }
 
   function getTag(level:Int):String {
-    Debug.assert(level > 1 && level < 6);
+    Debug.assert(level > 0 && level < 6);
     return 'h$level';
   }
 

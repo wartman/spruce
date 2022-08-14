@@ -26,12 +26,13 @@ class Container extends ImmutableComponent {
         display: 'flex',
         marginLeft: 'auto',
         marginRight: 'auto',
+        width: 100.pct(),
         paddingLeft: theme(seed.container.padding.x, theme(seed.grid.xGap)),
         paddingRight: theme(seed.container.padding.x, theme(seed.grid.xGap)),
       }).with([
         'seed-container',
         switch kind {
-          case Fluid: Css.atoms({ width: 100.pct() });
+          case Fluid: null;
           case Sm: Css.atoms({ maxWidth: Constants.breakpointSm });
           case Md: Css.atoms({ maxWidth: Constants.breakpointMd });
           case Lg: Css.atoms({ maxWidth: Constants.breakpointLg });

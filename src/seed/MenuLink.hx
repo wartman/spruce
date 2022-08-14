@@ -11,19 +11,18 @@ enum MenuLinkKind {
 }
 
 class MenuLink extends ImmutableComponent {
+  public static final baseStyles = Css.atoms({
+    display: 'block',
+    color: theme(seed.menu.link.color, theme(seed.link.color))
+  }).with('seed-menu-link');
+
   @prop final kind:MenuLinkKind;
   @prop final styles:ClassName = null;
   @prop final child:HtmlChild;
 
   public function render(context:Context) {
     return new Html<'a'>({
-      className: Css.atoms({
-        display: 'block',
-        color: theme(seed.menu.link.color, theme(seed.link.color))
-      }).with([
-        'seed-menu-link',
-        styles
-      ]),
+      className: baseStyles.with(styles),
       href: switch kind {
         case Link(url): url;
         default: null;

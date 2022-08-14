@@ -40,7 +40,11 @@ class ModalHeader extends ImmutableComponent {
           controls: [
             new ControlButton({
               onClick: _ -> OverlayContext.from(context).hide(),
-              child: 'X'
+              arialLabel: 'Close',
+              child: new Icon({
+                styles: Css.atoms({ width: 2.em(), height: 2.em() }),
+                kind: Close
+              })
             })
           ]
         })
