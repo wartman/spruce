@@ -8,7 +8,7 @@ using Nuke;
 
 class SidebarHeader extends ImmutableComponent {
   @prop final styles:ClassName = null;
-  @prop final child:HtmlChild;
+  @prop final child:HtmlChild = null;
   
   public function render(context:Context) {
     return new Box({
@@ -32,7 +32,7 @@ class SidebarHeader extends ImmutableComponent {
           controls: [
             new ControlButton({
               onClick: _ -> OverlayContext.from(context).hide(),
-              arialLabel: 'Close',
+              ariaLabel: 'Close',
               child: new Icon({ 
                 styles: Css.atoms({ width: 2.em(), height: 2.em() }),
                 kind: Close 

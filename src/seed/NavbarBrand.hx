@@ -15,7 +15,10 @@ class NavbarBrand extends ImmutableComponent {
   public function render(context:Context):Component {
     var navbarBrandStyle = Css.atoms({
       display: 'block',
-      margin: 0,
+      marginTop: 0,
+      marginBottom: 0,
+      marginRight: 'auto',
+      marginLeft: 0,
       padding: 0
     }).with([
       'seed-navbar-brand',

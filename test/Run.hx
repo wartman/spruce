@@ -397,7 +397,7 @@ class SiteHeader extends ObserverComponent {
           controls: [
             new ControlButton({
               onClick: _ -> isOpen = true,
-              arialLabel: 'Toggle Menu',
+              ariaLabel: 'Toggle Menu',
               child: new Icon({
                 styles: Css.atoms({ width: 2.em(), height: 2.em() }),
                 kind: Hamburger 

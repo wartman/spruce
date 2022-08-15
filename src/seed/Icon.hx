@@ -13,6 +13,8 @@ enum IconKind {
   CaretUp;
   ChevronDown;
   ChevronUp;
+  ChevronLeft;
+  ChevronRight;
 }
 
 // @todo: This just contains a few icons I stole from Bootstrap. This
@@ -54,6 +56,14 @@ class Icon extends ImmutableComponent {
         case ChevronUp:
           new Svg<'path'>({
             d: 'M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z'
+          });
+        case ChevronLeft:
+          new Svg<'path'>({
+            d: 'M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'
+          });
+        case ChevronRight:
+          new Svg<'path'>({
+            d: 'M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'
           });
       }
     });
