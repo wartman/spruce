@@ -6,6 +6,28 @@ import pine.html.*;
 using Nuke;
 
 class CollapseHeader extends ObserverComponent {
+  public static final baseStyles = Css.atoms({
+    display: 'flex',
+    width: 100.pct(),
+    border: 0,
+    borderRadius: 0,
+    backgroundColor: theme(seed.collapse.bgColor, 'transparent'),
+    fontFamily: theme(seed.collapse.header.font.family, 'inherit'), 
+    fontSize: theme(seed.collapse.header.font.size, 'inherit'),
+    fontColor: theme(seed.collapse.header.font.color, 'inherit'),
+    outline: 0,
+    padding: [
+      theme(seed.collapse.padding.x, 0),
+      theme(seed.collapse.padding.y, 0)
+    ],
+    margin: [
+      theme(seed.collapse.margin.top, 0),
+      theme(seed.collapse.margin.y, 0),
+      theme(seed.collapse.margin.bottom, 0),
+      theme(seed.collapse.margin.y, 0),
+    ]
+  });
+
   @prop final styles:ClassName = null;
   @prop final child:HtmlChild;
 
@@ -13,18 +35,11 @@ class CollapseHeader extends ObserverComponent {
     var collapse = CollapseContext.from(context);
     var isCollapsed = collapse.collapsed.get();
     return new Box({
+      tag: Button,
       styles: [
-        Css.atoms({
-          ':hover': { cursor: 'pointer' },
-          width: 100.pct(),
-          // transition: [ 'margin-bottom', 300.ms() ]
-        }),
         'seed-collapse-header',
-        // if (!isCollapsed) Css.atoms({
-        //   marginBottom: theme(seed.grid.gap)
-        // }) else Css.atoms({
-        //   marginBottom: 0
-        // }),
+        baseStyles,
+        Button.focusStyles,
         styles
       ],
       layout: Horizontal,
@@ -35,11 +50,17 @@ class CollapseHeader extends ObserverComponent {
           children: [ child ]
         }),
         new Icon({
-          styles: Css.atoms({
-            width: 1.em(),
-            height: 1.em()
-          }),
-          kind: isCollapsed ? ChevronDown : ChevronUp
+          styles: [
+            Css.atoms({
+              width: 1.em(),
+              height: 1.em(),
+              transition: [ 'transform', 150.ms(), 'ease-in-out' ]
+            }),
+            if (isCollapsed) Css.atoms({
+              transform: rotate((-180).deg())
+            }) else null
+          ],
+          kind: ChevronDown
         })
       ]
     });

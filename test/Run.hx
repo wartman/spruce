@@ -57,6 +57,11 @@ function main() {
           x: 1.rem()
         }
       },
+      container: {
+        padding: {
+          x: 2.em()
+        }
+      },
       grid: {
         gap: 1.5.rem(),
         yGap: theme(seed.grid.gap),

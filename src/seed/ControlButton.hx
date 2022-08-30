@@ -16,7 +16,8 @@ class ControlButton extends ImmutableComponent {
     margin: 0,
     fontFamily: theme(seed.controlButton.font.family, theme(seed.font.family)),
     fontSize: theme(seed.controlButton.font.size, theme(seed.font.size)),
-    fontWeight: theme(seed.controlButton.font.weight)
+    fontWeight: theme(seed.controlButton.font.weight),
+    borderRadius: 50.pct()
   });
 
   public static final baseDisabledStyles = Css.atoms({
@@ -42,6 +43,7 @@ class ControlButton extends ImmutableComponent {
         className: baseStyles.with([
           'seed-control-button',
           styles,
+          Button.focusStyles,
           baseDisabledStyles,
           disabledStyles
         ]),
@@ -68,6 +70,7 @@ class ControlButton extends ImmutableComponent {
         'seed-control-button',
         if (disabled) baseDisabledStyles else null,
         if (disabled) disabledStyles else null,
+        Button.focusStyles,
         styles
       ]),
       children: child == null ? [] : [ child ]

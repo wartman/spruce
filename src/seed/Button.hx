@@ -41,7 +41,15 @@ class Button extends HtmlElementComponent<
       theme(seed.button.padding.x, theme(seed.rounded.padding.x, theme(seed.box.padding.x)))
     ],
     borderRadius: theme(seed.button.border.radius, theme(seed.rounded.border.radius)),
-    // @todo: hover/disabled/etc. states
+  });
+  public static final focusStyles = Css.atoms({
+    ':focus': {
+      boxShadow: theme(
+        seed.button.focus.shadow,
+        // @todo: this needs some work:
+        [ 0, 0, 0, .25.rem(), rgba(0, 0, 0, .25) ]
+      )
+    }
   });
 
   final type:UniqueId;
@@ -91,6 +99,7 @@ class Button extends HtmlElementComponent<
         className: baseStyles.with([
           'seed-button',
           'seed-button-${priority.toString()}',
+          focusStyles,
           priority.toStyle(),
           props.styles
         ])

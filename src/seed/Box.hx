@@ -93,8 +93,8 @@ enum abstract BoxTag(String) to String {
   final UnorderedList = 'ul';
   final OrderedList = 'ol';
   final ListItem = 'li';
-  // final Label = 'label';
-  // final Button = 'button';
+  final Label = 'label';
+  final Button = 'button';
   // final Pre = 'pre';
   // final Picture = 'picture';
   // final Canvas = 'canvas';
