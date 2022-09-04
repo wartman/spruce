@@ -142,7 +142,7 @@ function render() {
                       new Card({
                         children: [
                           new Html<'p'>({ children: [ 'Hey world' ] }),
-                          new Dropdown({
+                          new DropdownButton({
                             label: 'A dropdown!',
                             child: new DropdownMenu({
                               children: [

@@ -57,6 +57,7 @@ class Button extends HtmlElementComponent<
   public function new(props:{
     ?tag:ButtonTag,
     ?priority:Priority,
+    ?layout:Layout,
     ?kind:ButtonKind,
     ?styles:ClassName,
     ?href:String,
@@ -71,6 +72,9 @@ class Button extends HtmlElementComponent<
     var priority:Priority = props.priority == null
       ? Secondary
       : props.priority;
+    var layout:Layout = props.layout == null
+      ? Auto
+      : props.layout;
 
     type = getTypeForTag(tag);
 
@@ -101,6 +105,7 @@ class Button extends HtmlElementComponent<
           'seed-button-${priority.toString()}',
           focusStyles,
           priority.toStyle(),
+          layout.toStyle(),
           props.styles
         ])
       },
