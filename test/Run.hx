@@ -42,6 +42,15 @@ function main() {
         }
         // etc
       },
+      spinner: {
+        track: {
+          width: .25.em(), 
+          color: theme(seed.color.dark)
+        },
+        indicator: {
+          color: theme(seed.color.info)
+        }
+      },
       box: {
         padding: {
           y: .5.rem(),
@@ -126,6 +135,7 @@ function render() {
               new GridColumn<4, 'md:2', 'lg:3'>({
                 children: [
                   new Html<'p'>({ children: 'Some text' }),
+                  new Spinner({}),
                   new ShowModal({})
                 ]
               }),

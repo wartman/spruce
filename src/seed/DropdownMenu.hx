@@ -15,15 +15,15 @@ class DropdownMenu extends ImmutableComponent {
       styles: [
         Css.atoms({
           border: [
-            theme(seed.dropdownMenu.border.width, theme(seed.rounded.border.width)), 
-            theme(seed.dropdownMenu.border.style, theme(seed.rounded.border.style, 'solid')), 
-            theme(seed.dropdownMenu.border.color, theme(seed.rounded.border.color))
+            theme(seed.dropdownMenu.border.width), 
+            theme(seed.dropdownMenu.border.style), 
+            theme(seed.dropdownMenu.border.color)
           ],
           padding: [
-            theme(seed.dropdownMenu.padding.y, theme(seed.rounded.padding.y, theme(seed.box.padding.y))),
+            theme(seed.dropdownMenu.padding.y, theme(seed.box.padding.y)),
             0.px()
           ],
-          borderRadius: theme(seed.dropdownMenu.border.radius, theme(seed.rounded.border.radius)),
+          borderRadius: theme(seed.dropdownMenu.border.radius),
           backgroundColor: theme(seed.dropdownMenu.bgColor),
           minWidth: theme(seed.dropdownMenu.minWidth, 10.rem()),
           color: theme(seed.dropdownMenu.color)

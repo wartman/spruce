@@ -63,6 +63,10 @@ function useBaseStyles() {
     },
     '[hidden]': {
       display: ['none', '!important']
+    },
+    'figure': {
+      margin: 0,
+      padding: 0
     }
   });
 }
