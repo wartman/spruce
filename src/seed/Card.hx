@@ -13,7 +13,8 @@ class Card extends ImmutableComponent {
     minWidth: 0,
     wordWrap: 'break-word',
     borderRadius: theme(seed.card.border.radius),
-    color: theme(seed.card.color)
+    color: theme(seed.card.color),
+    boxShadow: theme(seed.card.shadow)
   });
 
   @prop final styles:ClassName = null;

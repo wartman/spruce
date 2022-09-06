@@ -110,7 +110,8 @@ function main() {
         padding: {
           y: 1.rem(),
           x: 1.rem()
-        }
+        },
+        shadow: [ 0, 0, 0, 1.px(), theme(seed.color.secondary) ]
       },
       dropdownMenu: {
         bgColor: theme(seed.color.light),
@@ -496,8 +497,7 @@ class AccordianItem extends ImmutableComponent {
   function render(context:Context) {
     return new Collapse({
       styles: [
-        Card.baseStyle,
-        Priority.Secondary.toStyle()
+        Card.baseStyle
       ],
       children: [
         new CollapseHeader({
