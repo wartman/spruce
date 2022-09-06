@@ -19,12 +19,7 @@ enum abstract ButtonTag(String) to String {
   final Div = 'div';
 }
 
-class Button extends HtmlElementComponent<
-  GlobalAttr
-  & ButtonAttr
-  & AnchorAttr
-  & HtmlEvents
-> {
+class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr & HtmlEvents> {
   public static final baseStyles = Css.atoms({
     display: 'inline-block',
     outline: 'none',
@@ -36,11 +31,10 @@ class Button extends HtmlElementComponent<
     textDecoration: 'none',
     verticalAlign: 'middle',
     boxSizing: theme(seed.box.sizing, 'border-box'),
-    padding: [
-      theme(seed.button.padding.y, theme(seed.rounded.padding.y, theme(seed.box.padding.y))),
-      theme(seed.button.padding.x, theme(seed.rounded.padding.x, theme(seed.box.padding.x)))
-    ],
-    borderRadius: theme(seed.button.border.radius, theme(seed.rounded.border.radius)),
+    padding: [ theme(seed.button.padding.y), theme(seed.button.padding.x) ],
+    borderRadius: theme(seed.button.border.radius),
+    // borderWidth: theme(seed.button.border.width),
+    // borderStyle: theme(seed.button.border.style),
   });
   public static final focusStyles = Css.atoms({
     ':focus': {

@@ -67,6 +67,10 @@ function useBaseStyles() {
     'figure': {
       margin: 0,
       padding: 0
+    },
+    'button': {
+      outline: 0,
+      border: 0
     }
   });
 }

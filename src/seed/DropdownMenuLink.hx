@@ -16,7 +16,7 @@ class DropdownMenuLink extends ImmutableComponent {
       styles: Css.atoms({
         padding: [
           0.px(),
-          theme(seed.dropdownMenu.padding.x, theme(seed.rounded.padding.x, theme(seed.box.padding.x)))
+          theme(seed.dropdownMenu.padding.x)
         ],
         ':hover': {
           backgroundColor: theme(seed.dropdownMenu.hilightBgColor),

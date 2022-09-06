@@ -43,8 +43,8 @@ class Spinner extends ImmutableComponent {
           case Inline: null;
           case Centered: Css.atoms({
             position: 'absolute',
-            top: 50.pct() - theme(seed.spinner.size, 1.em()) / 2,
-            left: 50.pct() - theme(seed.spinner.size, 1.em()) / 2
+            top: 50.pct() - calc(theme(seed.spinner.size, 1.em()) / 2),
+            left: 50.pct() - calc(theme(seed.spinner.size, 1.em()) / 2)
           });
         }
       ])

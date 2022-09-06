@@ -44,7 +44,7 @@ class ModalContainer extends ImmutableComponent {
         marginRight: theme(seed.grid.xGap),
         backgroundColor: theme(seed.modal.bgColor, theme(seed.color.light)),
         color: theme(seed.modal.color, theme(seed.color.dark)),
-        borderRadius: theme(seed.modal.border.radius, theme(seed.rounded.border.radius)),
+        borderRadius: theme(seed.modal.border.radius),
         backgroundClip: 'padding-box'
       }).with([
         'seed-modal-container',

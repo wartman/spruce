@@ -9,23 +9,11 @@ class CollapseHeader extends ObserverComponent {
   public static final baseStyles = Css.atoms({
     display: 'flex',
     width: 100.pct(),
-    border: 0,
-    borderRadius: 0,
     backgroundColor: theme(seed.collapse.bgColor, 'transparent'),
     fontFamily: theme(seed.collapse.header.font.family, 'inherit'), 
     fontSize: theme(seed.collapse.header.font.size, 'inherit'),
     fontColor: theme(seed.collapse.header.font.color, 'inherit'),
-    outline: 0,
-    padding: [
-      theme(seed.collapse.padding.x, 0),
-      theme(seed.collapse.padding.y, 0)
-    ],
-    margin: [
-      theme(seed.collapse.margin.top, 0),
-      theme(seed.collapse.margin.y, 0),
-      theme(seed.collapse.margin.bottom, 0),
-      theme(seed.collapse.margin.y, 0),
-    ]
+    outline: 0
   });
 
   @prop final styles:ClassName = null;
@@ -56,7 +44,7 @@ class CollapseHeader extends ObserverComponent {
               height: 1.em(),
               transition: [ 'transform', 150.ms(), 'ease-in-out' ]
             }),
-            if (isCollapsed) Css.atoms({
+            if (!isCollapsed) Css.atoms({
               transform: rotate((-180).deg())
             }) else null
           ],

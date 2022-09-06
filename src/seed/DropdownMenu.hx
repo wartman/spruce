@@ -14,16 +14,10 @@ class DropdownMenu extends ImmutableComponent {
       layout: layout,
       styles: [
         Css.atoms({
-          border: [
-            theme(seed.dropdownMenu.border.width), 
-            theme(seed.dropdownMenu.border.style), 
-            theme(seed.dropdownMenu.border.color)
-          ],
-          padding: [
-            theme(seed.dropdownMenu.padding.y, theme(seed.box.padding.y)),
-            0.px()
-          ],
+          border: theme(seed.dropdownMenu.border.appearance),
           borderRadius: theme(seed.dropdownMenu.border.radius),
+          padding: [ theme(seed.dropdownMenu.padding.y), 0.px() ],
+          margin: theme(seed.dropdownMenu.margin, 0),
           backgroundColor: theme(seed.dropdownMenu.bgColor),
           minWidth: theme(seed.dropdownMenu.minWidth, 10.rem()),
           color: theme(seed.dropdownMenu.color)

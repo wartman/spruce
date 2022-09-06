@@ -37,9 +37,17 @@ function main() {
           color: theme(seed.color.light)
         },
         secondary: {
-          bgColor: theme(seed.color.secondary),
-          color: theme(seed.color.light)
-        }
+          bgColor: 'transparent',
+          border: [ 1.px(), 'solid', theme(seed.color.secondary) ]
+        },
+        info: {
+          bgColor: theme(seed.color.info),
+          color: theme(seed.color.dark)
+        },
+        warning: {
+          bgColor: theme(seed.color.warning),
+          color: theme(seed.color.dark)
+        },
         // etc
       },
       spinner: {
@@ -66,9 +74,27 @@ function main() {
           x: 1.rem()
         }
       },
+      modal: {
+        border: {
+          radius: .75.rem()
+        },
+        padding: {
+          y: .75.rem(),
+          x: 1.rem()
+        }
+      },
+      button: {
+        border: {
+          radius: theme(seed.rounded.border.radius)
+        },
+        padding: {
+          y: .50.rem(),
+          x: .75.rem()
+        }
+      },
       container: {
         padding: {
-          x: 2.em()
+          x: 2.rem()
         }
       },
       grid: {
@@ -77,14 +103,28 @@ function main() {
         xGap: theme(seed.grid.gap) * .5
       },
       card: {
-        bg: {
-          color: theme(seed.color.secondary),
+        border: {
+          appearance: theme(seed.priority.secondary.border),
+          radius: theme(seed.rounded.border.radius)
+        },
+        padding: {
+          y: 1.rem(),
+          x: 1.rem()
         }
       },
       dropdownMenu: {
-        bgColor: theme(seed.color.dark),
-        color: theme(seed.color.light),
-        hilightBgColor: rgba(255,255,255,0.2),
+        bgColor: theme(seed.color.light),
+        color: theme(seed.color.dark),
+        margin: .25.em(),
+        border: {
+          appearance: theme(seed.priority.secondary.border),
+          radius: theme(seed.rounded.border.radius)
+        },
+        padding: {
+          x: theme(seed.rounded.padding.x),
+          y: theme(seed.rounded.padding.y)
+        },
+        hilightBgColor: rgba(0,0,0,0.2),
       }
     }
   });
@@ -118,15 +158,7 @@ function render() {
       }),
       new Container({
         kind: Lg,
-        styles: Css
-          .atoms({ marginTop: theme(seed.grid.yGap) })
-          .with(Theme.define({
-            seed: {
-              card: {
-                bgColor: theme(seed.color.info)
-              }
-            }
-          })),
+        styles: Css.atoms({ marginTop: theme(seed.grid.yGap) }),
         children: [
           new Grid<4>({
             // @todo: Should `width: 100.pct()` be the default?
@@ -151,25 +183,38 @@ function render() {
                     children: [
                       new Card({
                         children: [
-                          new Html<'p'>({ children: [ 'Hey world' ] }),
-                          new DropdownButton({
-                            label: 'A dropdown!',
-                            child: new DropdownMenu({
-                              children: [
-                                new MenuItem({ 
-                                  child: new DropdownMenuLink({
-                                    kind: Action(() -> trace('bar')),
-                                    child: 'Bar!'
-                                  }) 
-                                }),
-                                new MenuItem({ 
-                                  child: new DropdownMenuLink({
-                                    kind: Action(() -> trace('foop')),
-                                    child: 'Foober!'
-                                  }) 
+                          new CardHeader({
+                            priority: Primary,
+                            children: [
+                              new Heading({
+                                level: 5,
+                                children: 'Card Example'
+                              })
+                            ]
+                          }),
+                          new CardBody({
+                            children: [
+                              new Html<'p'>({ children: [ 'Hey world' ] }),
+                              new DropdownButton({
+                                label: 'A dropdown!',
+                                child: new DropdownMenu({
+                                  children: [
+                                    new MenuItem({ 
+                                      child: new DropdownMenuLink({
+                                        kind: Action(() -> trace('bar')),
+                                        child: 'Bar!'
+                                      }) 
+                                    }),
+                                    new MenuItem({ 
+                                      child: new DropdownMenuLink({
+                                        kind: Action(() -> trace('foop')),
+                                        child: 'Foober!'
+                                      }) 
+                                    })
+                                  ]
                                 })
-                              ]
-                            })
+                              })
+                            ]
                           })
                         ]
                       }),
@@ -187,7 +232,6 @@ function render() {
                       }),
 
                       new Accordian({
-                        styles: Card.baseStyles,
                         children: [
                           new CardHeader({
                             children: [
@@ -251,15 +295,10 @@ function render() {
                       // Shows how to make Accordian sticky:
                       new Accordian({
                         sticky: true,
-                        styles: Card.baseStyles,
                         children: [
-                          new CardHeader({
-                            children: [
-                              new Heading({
-                                level: 5,
-                                children: 'Configurable Accordian Example'
-                              })
-                            ]
+                          new Heading({
+                            level: 5,
+                            children: 'Configurable Accordian Example'
                           }),
                           new Scope({
                             render: context -> new Box({
@@ -283,8 +322,9 @@ function render() {
                           }),
                           new Box({
                             styles: Css.atoms({
-                              border: [ 1.px(), 'solid' ]
+                              gap: theme(seed.grid.gap)
                             }),
+                            layout: Vertical,
                             children: [   
                               new AccordianItem({
                                 label: 'One',
@@ -354,17 +394,10 @@ class ShowModal extends ObserverComponent {
           children: [ 'Click me' ]
         }),
         if (isOpen) new Modal({
-          styles: Theme.define({
-            seed: {
-              modalHeader: {
-                bgColor: theme(seed.color.primary),
-                color: theme(seed.color.light)
-              }
-            }
-          }),
           onHide: () -> isOpen = false,
           children: [
             new ModalHeader({ 
+              priority: Warning,
               child: new ModalTitle({ child: 'Test' }) 
             }),
             new ModalBody({ children: [ 'This should work' ] }),
@@ -462,26 +495,28 @@ class AccordianItem extends ImmutableComponent {
 
   function render(context:Context) {
     return new Collapse({
-      styles: Css.atoms({ 
-        borderBottom: [ 1.px(), 'solid' ],
-        ':last-of-type': {
-          borderBottom: 'none'
-        }
-      }),
+      styles: [
+        Card.baseStyle,
+        Priority.Secondary.toStyle()
+      ],
       children: [
         new CollapseHeader({
-          styles: Css.atoms({
-            padding: .5.em(),
-            alignItems: 'center'
-          }),
+          styles: [
+            Css.atoms({ 
+              alignItems: 'center',
+            }),
+            CardHeader.baseStyles
+          ],
           child: label
         }),
         new CollapseBody({
           children: new Box({
-            styles: Css.atoms({
-              padding: .5.em(),
-              borderTop: [ 1.px(), 'solid' ],
-            }),
+            styles: [
+              Css.atoms({
+                borderTop: [ 1.px(), 'solid', theme(seed.color.secondary) ],
+                padding: [ theme(seed.card.padding.y), theme(seed.card.padding.x) ]
+              })
+            ],
             children: children 
           })
         })

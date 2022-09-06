@@ -8,6 +8,7 @@ using Nuke;
 
 class ModalHeader extends ImmutableComponent {
   @prop final styles:ClassName = null;
+  @prop final priority:Priority = null;
   @prop final child:HtmlChild;
 
   public function render(context:Context) {
@@ -15,17 +16,15 @@ class ModalHeader extends ImmutableComponent {
       tag: Header,
       styles: Css.atoms({
         alignItems: 'center',
-        backgroundColor: theme(seed.modalHeader.bgColor),
-        color: theme(seed.modalHeader.color),
-        borderTopLeftRadius: theme(seed.modal.border.radius, theme(seed.rounded.border.radius)),
-        borderTopRightRadius: theme(seed.modal.border.radius, theme(seed.rounded.border.radius)),
-        padding: [
-          theme(seed.modal.padding.y, theme(seed.rounded.padding.y, theme(seed.box.padding.y))),
-          theme(seed.modal.padding.x, theme(seed.rounded.padding.x, theme(seed.box.padding.x)))
-        ],
+        // backgroundColor: theme(seed.modalHeader.bgColor),
+        // color: theme(seed.modalHeader.color),
+        borderTopLeftRadius: theme(seed.modal.border.radius),
+        borderTopRightRadius: theme(seed.modal.border.radius),
+        padding: [ theme(seed.modal.padding.y), theme(seed.modal.padding.x) ],
       }).with([
         'seed-modal-header',
         Stack.horizontal,
+        if (priority != null) priority.toStyle() else null,
         styles
       ]),
       children: [
