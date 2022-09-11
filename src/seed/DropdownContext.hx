@@ -2,6 +2,7 @@ package seed;
 
 import pine.*;
 import pine.html.HtmlEvents;
+import seed.controller.AnimationTools;
 
 typedef DropdownContextProvider = Provider<DropdownContext>;
 
@@ -31,7 +32,7 @@ class DropdownContext implements Disposable implements DisposableHost {
       close();
     }
     addDisposable(new Observer(() -> switch status.get() {
-      case Open: js.Browser.document.addEventListener('click', onClick);
+      case Open: defer(() -> js.Browser.document.addEventListener('click', onClick));
       case Closed: js.Browser.document.removeEventListener('click', onClick);
     }));
     addDisposable(() -> {

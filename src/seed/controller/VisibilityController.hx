@@ -1,7 +1,8 @@
 package seed.controller;
 
+import js.Browser;
 import pine.Disposable;
-import pine.Process;
+import seed.controller.AnimationTools;
 
 class VisibilityController implements Disposable {
   final getEl:()->js.html.Element;
@@ -22,7 +23,7 @@ class VisibilityController implements Disposable {
   }
 
   public function activate() {
-    Process.defer(show);
+    defer(show);
   }
 
   public function show() {

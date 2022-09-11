@@ -30,7 +30,12 @@ class Popover extends ImmutableComponent {
     };
 
     return new PopoverContextProvider({
-      create: () -> new PopoverContext(getTarget, v, h, onHide),
+      create: () -> new PopoverContext({ 
+        getTarget: getTarget, 
+        v: v, 
+        h: h, 
+        onHide: onHide 
+      }),
       dispose: pop -> pop.dispose(),
       render: _ -> new Portal({
         target: PortalContext.from(context).getTarget(),

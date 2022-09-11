@@ -27,40 +27,43 @@ class Sidebar extends ImmutableComponent {
         },
         createContext: (?beforeShow, onShow, onHide, context) -> new SidebarContext({
           attachment: attachment,
-          getEl: () -> context.getObject(),
           beforeShow: beforeShow,
           onShow: onShow,
           onHide: onHide
         }),
-        child: new Box({
-          onClick: e -> e.stopPropagation(),
-          styles: Css.atoms({
-            backgroundColor: theme(seed.sidebar.bgColor, theme(seed.color.light)),
-            color: theme(seed.sidebar.color, theme(seed.color.dark)),
-            overflowX: 'scroll',
-            position: 'absolute',
-            top: 0,
-            bottom: 0,
-            width: 250.px(),
-            '@media screen and (max-width: 250px)': {
-              width: 100.pct()
-            }
-          }).with([
-            'seed-sidebar',
-            switch attachment {
-              case Left: Css.atoms({ 
-                left: (-500).px(),
-                transition: [ 'left', 300.ms() ]
-              });
-              case Right: Css.atoms({ 
-                right: (-500).px(),
-                transition: [ 'right', 300.ms() ]
-              });
-            }
-          ]),
-          children: children
-        })
+        child: createBody()
       })
+    });
+  }
+
+  inline function createBody() {
+    return new Box({
+      onClick: e -> e.stopPropagation(),
+      styles: Css.atoms({
+        backgroundColor: theme(seed.sidebar.bgColor, theme(seed.color.light)),
+        color: theme(seed.sidebar.color, theme(seed.color.dark)),
+        overflowX: 'scroll',
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        width: 250.px(),
+        '@media screen and (max-width: 250px)': {
+          width: 100.pct()
+        }
+      }).with([
+        'seed-sidebar',
+        switch attachment {
+          case Left: Css.atoms({ 
+            left: (-500).px(),
+            transition: [ 'left', 300.ms() ]
+          });
+          case Right: Css.atoms({ 
+            right: (-500).px(),
+            transition: [ 'right', 300.ms() ]
+          });
+        }
+      ]),
+      children: children
     });
   }
 }

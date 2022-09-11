@@ -10,6 +10,10 @@ class OverlayContainer extends ImmutableComponent {
   @prop final child:HtmlChild;
   @prop final hideOnClick:Bool = true;
 
+  override function init(context:InitContext) {
+    OverlayContext.from(context).activate(context.getObject);
+  }
+
   public function render(context:Context) {
     return new Box({
       styles: Css.atoms({

@@ -1,6 +1,7 @@
 package seed;
 
 import pine.*;
+import seed.controller.AnimationTools;
 
 typedef CollapseContextProvider = Provider<CollapseContext>;
 
@@ -20,7 +21,7 @@ class CollapseContext implements Disposable {
     Debug.assert(obs == null);
 
     controller = new CollapseController(getEl);
-    Process.defer(() -> {
+    defer(() -> {
       if (obs != null) obs.dispose();
       obs = new Observer(() -> controller.toggle(collapsed.get()));
     });
@@ -56,7 +57,7 @@ private class CollapseController implements Disposable {
 
   public function new(getEl) {
     this.getEl = getEl;
-    Process.defer(() -> {
+    defer(() -> {
       this.getEl().addEventListener('transitionend', onTransitionEnd);
     });
   }
@@ -74,7 +75,7 @@ private class CollapseController implements Disposable {
     } else {
       var height = el.scrollHeight;
       el.style.height = '${height}px';
-      Process.defer(() -> el.style.height = '0px');
+      defer(() -> el.style.height = '0px');
     }
   }
 

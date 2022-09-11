@@ -3,11 +3,11 @@ package seed;
 import seed.controller.VisibilityController;
 
 class OverlayFadeContext extends OverlayContext {
-  final visibility:VisibilityController;
+  var visibility:Null<VisibilityController> = null;
 
-  public function new(props) {
+  public function activate(getEl:()->Dynamic) {
     visibility = new VisibilityController({
-      getEl: props.getEl,
+      getEl: getEl,
       animateShow: el -> {
         el.style.opacity = '1';
       },
@@ -22,12 +22,13 @@ class OverlayFadeContext extends OverlayContext {
   }
 
   public function hide() {
-    visibility.hide();
+    if (visibility != null) visibility.hide();
   }
 
   public function show() {}
 
   public function dispose() {
-    visibility.dispose();
+    if (visibility != null) visibility.dispose();
+    visibility = null;
   }
 }

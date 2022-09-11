@@ -1,15 +1,23 @@
 package seed;
 
+import seed.OverlayContext.OverlayContextProps;
 import seed.Sidebar;
 import seed.controller.VisibilityController;
 
 class SidebarContext extends OverlayContext {
-  final visibility:VisibilityController;
+  var visibility:Null<VisibilityController> = null;
+  final attachment:SidebarAttachment;
 
-  public function new(props) {
-    var attachment:SidebarAttachment = props.attachment;
+  public function new(props:{
+    attachment:SidebarAttachment,
+  } & OverlayContextProps) {
+    super(props);
+    attachment = props.attachment;
+  }
+
+  public function activate(getEl:()->Dynamic) {
     visibility = new VisibilityController({
-      getEl: props.getEl,
+      getEl: getEl,
       animateShow: el -> {
         el.style.opacity = '1';
         var sidebar = el.querySelector('.seed-sidebar');
@@ -34,14 +42,15 @@ class SidebarContext extends OverlayContext {
   }
 
   public function show() {
-    visibility.show();
+    if (visibility != null) visibility.show();
   }
 
   public function hide() {
-    visibility.hide();
+    if (visibility != null) visibility.hide();
   }
 
   public function dispose() {
-    visibility.dispose();
+    if (visibility != null) visibility.dispose();
+    visibility = null;
   }
 }

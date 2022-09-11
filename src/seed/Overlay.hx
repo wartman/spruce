@@ -18,8 +18,8 @@ class Overlay extends ImmutableComponent {
   @prop final createContext:OverlayContextFactory = (?beforeShow, onShow, onHide, context) -> new OverlayFadeContext({
     beforeShow: beforeShow,
     onShow: onShow,
-    onHide: onHide,
-    getEl: () -> context.getObject()
+    onHide: onHide
+    // getEl: () -> context.getObject()
   });
 
   public function render(context:Context):Component {

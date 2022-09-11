@@ -30,10 +30,12 @@ class AccordianContext implements Disposable {
   public function show(current:AccordianCollapseContext) {
     if (isSticky) {
       current.show();
-    } else for (context in contexts) if (context == current) {
-      context.show();
     } else {
-      context.hide();
+      for (context in contexts) if (context == current) {
+        context.show();
+      } else {
+        context.hide();
+      }
     }
   }
 

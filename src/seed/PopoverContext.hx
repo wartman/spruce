@@ -14,21 +14,20 @@ class PopoverContext extends OverlayContext {
   final getTarget:() -> Dynamic;
   final v:AttachmentVertical;
   final h:AttachmentHorizontal;
-  final onHide:() -> Void;
 
   var position:Null<PositionController> = null;
   var visibility:VisibilityController = null;
 
-  public function new(
-    getTarget,
+  public function new(props:{
+    getTarget:()->Dynamic,
     v:AttachmentVertical,
     h:AttachmentHorizontal,
     onHide:()->Void
-  ) {
-    this.getTarget = getTarget;
-    this.v = v;
-    this.h = h;
-    this.onHide = onHide;
+  }) {
+    super({ onHide: props.onHide });
+    this.getTarget = props.getTarget;
+    this.v = props.v;
+    this.h = props.h;
   }
 
   public function activate(getEl:()->Dynamic) {
@@ -52,7 +51,7 @@ class PopoverContext extends OverlayContext {
       },
       beforeShow: () -> null,
       onShow: () -> null,
-      onHide: onHide
+      onHide: props.onHide
     });
 
     position.activate();

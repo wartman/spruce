@@ -3,6 +3,7 @@ package seed.controller;
 import js.html.Element;
 import pine.*;
 import seed.Attachment;
+import seed.controller.AnimationTools;
 
 class PositionController implements Disposable {
   final getEl:()->Element;
@@ -18,7 +19,7 @@ class PositionController implements Disposable {
   }
 
   public function activate() {
-    Process.defer(() -> {
+    defer(() -> {
       js.Browser.window.addEventListener('resize', positionElement);
       js.Browser.window.addEventListener('scroll', positionElement);
       positionElement();
