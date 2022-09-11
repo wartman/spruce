@@ -1,7 +1,7 @@
 package seed;
 
 import pine.*;
-import seed.controller.AnimationTools;
+import seed.animation.AnimationContext;
 
 typedef CollapseContextProvider = Provider<CollapseContext>;
 
@@ -10,20 +10,28 @@ class CollapseContext implements Disposable {
     return CollapseContextProvider.from(context);
   }
 
-  public final collapsed:State<Bool> = new State(true);
+  public final collapsed:State<Bool>;
+  final animation:AnimationContext;
+  final speed:Int;
   var obs:Null<Observer> = null;
-  var controller:Null<CollapseController> = null;
 
-  public function new() {}
+  public function new(props) {
+    this.collapsed = new State(props.collapsed);
+    this.animation = props.animation;
+    this.speed = props.speed;
+  }
 
   public function activate(getEl:()->Dynamic) {
-    Debug.assert(controller == null);
     Debug.assert(obs == null);
-
-    controller = new CollapseController(getEl);
-    defer(() -> {
-      if (obs != null) obs.dispose();
-      obs = new Observer(() -> controller.toggle(collapsed.get()));
+    
+    var first = true;
+    obs = new Observer(() -> {
+      var dir = collapsed.get();
+      if (!first) animation.expand(getEl(), switch dir {
+        case true: Up;
+        default: Down;
+      }, speed);
+      first = false;
     });
   }
 
@@ -40,55 +48,9 @@ class CollapseContext implements Disposable {
   }
 
   public function dispose() {
-    if (controller != null) {
-      controller.dispose();
-      controller = null;
-    }
     if (obs != null) {
       obs.dispose();
       obs = null;
-    }
-  }
-}
-
-private class CollapseController implements Disposable {
-  var onReady:Null<()->Void>;
-  final getEl:()->Dynamic;
-
-  public function new(getEl) {
-    this.getEl = getEl;
-    defer(() -> {
-      this.getEl().addEventListener('transitionend', onTransitionEnd);
-    });
-  }
-
-  public function toggle(collapsed:Bool) {
-    var el = getEl();
-
-    if (onReady != null) onReady = null;
-    if (el == null) return;
-
-    if (!collapsed) {
-      var height = el.scrollHeight;
-      el.style.height = '${height}px';
-      onReady = () -> el.style.height = 'auto';
-    } else {
-      var height = el.scrollHeight;
-      el.style.height = '${height}px';
-      defer(() -> el.style.height = '0px');
-    }
-  }
-
-  function onTransitionEnd() {
-    if (onReady != null) onReady();
-  }
-
-  public function dispose() { 
-    if (onReady != null) onReady = null;
-
-    var el = getEl();
-    if (el != null) {
-      el.removeEventListener('transitionend', onTransitionEnd);
     }
   }
 }

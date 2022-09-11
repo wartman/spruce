@@ -2,6 +2,7 @@ package seed;
 
 import pine.*;
 import pine.html.*;
+import seed.animation.AnimationContext;
 import seed.CollapseContext;
 
 using Nuke;
@@ -9,13 +10,18 @@ using Nuke;
 class Collapse extends ImmutableComponent {
   @prop final styles:ClassName = null;
   @prop final children:HtmlChildren;
-  @prop final collapsed:Bool = false;
+  @prop final speed:Int = 300;
+  @prop final collapsed:Bool = true;
 
   public function render(context:Context) {
     return new Consumer<AccordianContext>({
       render: res -> new CollapseContextProvider({
         create: () -> switch res {
-          case None: new CollapseContext();
+          case None: new CollapseContext({
+            collapsed: collapsed,
+            animation: AnimationContext.from(context),
+            speed: speed
+          });
           case Some(accordian): accordian.createCollapseContext();
         },
         dispose: collapse -> collapse.dispose(),

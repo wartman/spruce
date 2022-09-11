@@ -1,6 +1,7 @@
 package seed;
 
 import pine.*;
+import seed.animation.AnimationContext;
 
 typedef AccordianContextProvider = Provider<AccordianContext>; 
 
@@ -10,6 +11,8 @@ class AccordianContext implements Disposable {
   }
 
   final contexts:Array<AccordianCollapseContext> = [];
+  final animation:AnimationContext;
+  final speed:Int;
   final sticky:State<Bool>;
 
   public var isSticky(get, never):Bool;
@@ -17,12 +20,19 @@ class AccordianContext implements Disposable {
     return sticky.get();
   }
 
-  public function new(sticky) {
-    this.sticky = new State(sticky);
+  public function new(props) {
+    this.sticky = new State(props.sticky);
+    this.animation = props.animation;
+    this.speed = props.speed;
   }
 
   public function createCollapseContext() {
-    var context = new AccordianCollapseContext(this);
+    var context = new AccordianCollapseContext({
+      accordian: this,
+      animation: animation,
+      speed: speed,
+      collapsed: true
+    });
     contexts.push(context);
     return context;
   }

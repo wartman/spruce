@@ -19,7 +19,6 @@ class CollapseBody extends ImmutableComponent {
         Css.atoms({
           overflow: 'hidden',
           height: 0.px(),
-          transition: [ 'height', 300.ms() ],
         }),
         'seed-collapse-body',
         styles
