@@ -6,8 +6,12 @@ import seed.animation.AnimationContext;
 typedef AccordianContextProvider = Provider<AccordianContext>; 
 
 class AccordianContext implements Disposable {
-  public static function from(context:Context) {
+  public inline static function from(context:Context) {
     return AccordianContextProvider.from(context);
+  }
+
+  public inline static function maybeFrom(context:Context) {
+    return AccordianContextProvider.maybeFrom(context);
   }
 
   final contexts:Array<AccordianCollapseContext> = [];

@@ -9,6 +9,10 @@ class FormContext implements Record {
     return FormContextProvider.from(context);
   }
 
+  public static inline function maybeFrom(context:Context) {
+    return FormContextProvider.maybeFrom(context);
+  }
+
   @track public var isSubmitted:Bool;
   @track public var isValidating:Bool;
   // etc

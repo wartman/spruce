@@ -22,6 +22,7 @@ class CollapseHeader extends ObserverComponent {
   public function render(context:Context) {
     var collapse = CollapseContext.from(context);
     var isCollapsed = collapse.collapsed.get();
+    
     return new Box({
       tag: Button,
       styles: [

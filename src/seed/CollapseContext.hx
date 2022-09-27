@@ -7,7 +7,10 @@ typedef CollapseContextProvider = Provider<CollapseContext>;
 
 class CollapseContext implements Disposable {
   public static function from(context:Context) {
-    return CollapseContextProvider.from(context);
+    return switch CollapseContextProvider.maybeFrom(context) {
+      case Some(collapse): collapse;
+      case None: throw 'No collapse context was found';
+    }
   }
 
   public final collapsed:State<Bool>;
