@@ -10,5 +10,5 @@
 -D analyzer-optimize
 -dce full
 
--main Run
+-main Run2
 -js dist/test.js
