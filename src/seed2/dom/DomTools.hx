@@ -11,3 +11,31 @@ function defer(exec:() -> Void) {
     haxe.Timer.delay(() -> exec(), 10);
 }
 
+function lockBody() {
+  #if (js && !nodejs)
+    var body = getBody();
+    var beforeWidth = body.offsetWidth;
+    body.setAttribute('style', 'overflow:hidden;');
+    var afterWidth = body.offsetWidth;
+    var offset = afterWidth - beforeWidth;
+    if (offset > 0) {
+      body.setAttribute('style', 'overflow:hidden;padding-right:${offset}px');
+    }
+  #end
+}
+
+function unlockBody() {
+  #if (js && !nodejs)
+    getBody().removeAttribute('style');
+  #end
+}
+
+#if (js && !nodejs)
+  function getBody() {
+    return js.Browser.document.body;
+  }
+#else
+  function getBody() {
+    return null;
+  }
+#end

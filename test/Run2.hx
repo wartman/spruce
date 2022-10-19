@@ -1,4 +1,3 @@
-import seed2.layer.LayerContext;
 import js.Browser;
 import pine.*;
 import pine.html.dom.DomBootstrap;
@@ -7,6 +6,8 @@ import seed2.core.Box;
 import seed2.core.PortalContext;
 import seed2.button.Button;
 import seed2.modal.*;
+import seed2.sidebar.*;
+import seed2.layer.LayerContext;
 
 using Nuke;
 
@@ -145,6 +146,7 @@ class App extends ImmutableComponent {
       children: [
         new Toggle({}),
         new ShowModal({}),
+        new ShowSidebar({})
       ]
     });
   }
@@ -199,7 +201,7 @@ class ShowModal extends ObserverComponent {
         new Button({
           priority: Primary,
           onClick: _ -> isOpen = true,
-          children: [ 'Click me' ]
+          children: [ 'Modal' ]
         }),
         if (isOpen) new Modal({
           onHide: () -> isOpen = false,
@@ -228,6 +230,39 @@ class ShowModal extends ObserverComponent {
           ]
         }) else null
       ] 
+    });
+  }
+}
+
+class ShowSidebar extends ObserverComponent {
+  @track var isOpen:Bool = false;
+
+  function render(context:Context) {
+    var sidebar = if (isOpen)
+      new Sidebar({
+        attachment: Right,
+        onHide: () -> isOpen = false,
+        children: [
+          new SidebarHeader({
+            child: new SidebarTitle({ child: 'Main Menu' })
+          }),
+          new SidebarBody({
+            children: [ 'hey world' ]
+          })
+        ]
+      })
+    else
+      null;
+
+    return new Fragment({
+      children: [
+        new Button({
+          priority: Primary,
+          onClick: _ -> isOpen = true,
+          children: [ 'Sidebar' ]
+        }),
+        sidebar
+      ]
     });
   }
 }

@@ -5,6 +5,7 @@ import pine.html.*;
 import seed2.core.PortalContext;
 import seed2.modal.ModalContainer;
 import seed2.layer.Layer;
+import seed2.dom.DomTools;
 
 using Nuke;
 
@@ -20,13 +21,13 @@ class Modal extends ImmutableComponent {
       target: PortalContext.from(context).getTarget(),
       child: new Layer({
         beforeShow: () -> {
-          // DomService.from(context).body.lock();
+          lockBody();
         },
         onShow: () -> {
           // @todo: give the modal focus
         },
         onHide: () -> {
-          // DomService.from(context).body.unlock();
+          unlockBody();
           onHide();
         },
         child: new ModalContainer({

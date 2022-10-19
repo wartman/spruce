@@ -14,19 +14,19 @@ class LayerContainer extends ObserverComponent {
 
   public function render(context:Context) {
     var layer = LayerContext.from(context);
-    var status = layer.status.get();
+    var status = layer.status;
 
     return new Transition({
       transitions: switch status {
-        case Showing: layer.props.showTransition;
-        case Hiding: layer.props.hideTransition;
+        case Showing: layer.showTransition;
+        case Hiding: layer.hideTransition;
       },
-      speed: layer.props.transitionSpeed,
+      speed: layer.transitionSpeed,
       onTransition: () -> switch status {
         case Showing:
-          if (layer.props.onShow != null) layer.props.onShow();
+          if (layer.onShow != null) layer.onShow();
         case Hiding:
-          if (layer.props.onHide != null) layer.props.onHide();
+          if (layer.onHide != null) layer.onHide();
       },
       render: () -> renderContent(context)
     });
@@ -49,7 +49,7 @@ class LayerContainer extends ObserverComponent {
         backgroundColor: theme(seed.layer.bgColor, theme(seed.color.scrim)),
         zIndex: 9999
       }).with([
-        'seed-overlay',
+        'seed-layer',
         styles
       ]),
       onClick: e -> if (hideOnClick) {

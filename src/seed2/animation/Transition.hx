@@ -38,10 +38,9 @@ class Transition extends Component {
 class TransitionElement extends Element {
   final classes:Array<ClassName> = [];
 
+  var child:Null<Element> = null;
   var transition(get, never):Transition;
   function get_transition():Transition return getComponent();
-
-  var child:Null<Element> = null;
 
   public function new(transition:Transition) {
     super(transition);
