@@ -1,10 +1,8 @@
 package seed2.modal;
 
-import seed2.animation.TransitionGroup;
 import pine.*;
 import pine.html.*;
 import seed2.core.*;
-import seed2.animation.Transition;
 
 using Nuke;
 
@@ -18,8 +16,6 @@ class ModalContainer extends ImmutableComponent {
   @prop final styles:ClassName = null;
   @prop final children:HtmlChildren;
   @prop final size:ModalContainerSize = Md;
-  @prop final transition:TransitionGroup = { property: 'margin-top', start: '-100px', end: '0' };
-  @prop final transitionSpeed:Int = 200;
 
   function getContainerSize() {
     return switch size {
@@ -41,27 +37,24 @@ class ModalContainer extends ImmutableComponent {
   }
 
   public function render(context:Context) {
-    return new Transition({
-      transitions: transition,
-      speed: transitionSpeed,
-      child: new Box({
-        styles: Css.atoms({
-          width: 100.vw(),
-          marginLeft: theme(seed.grid.xGap),
-          marginRight: theme(seed.grid.xGap),
-          backgroundColor: theme(seed.modal.bgColor, theme(seed.color.light)),
-          color: theme(seed.modal.color, theme(seed.color.dark)),
-          borderRadius: theme(seed.modal.border.radius),
-          backgroundClip: 'padding-box'
-        }).with([
-          'seed-modal-container',
-          styles,
-          getContainerSize()
-        ]),
-        onClick: e -> e.stopPropagation(),
-        role: 'dialog',
-        children: children
-      })
+    // @todo: We need to give this box focus when it mounts.
+    return new Box({
+      styles: Css.atoms({
+        width: 100.vw(),
+        marginLeft: theme(seed.grid.xGap),
+        marginRight: theme(seed.grid.xGap),
+        backgroundColor: theme(seed.modal.bgColor, theme(seed.color.light)),
+        color: theme(seed.modal.color, theme(seed.color.dark)),
+        borderRadius: theme(seed.modal.border.radius),
+        backgroundClip: 'padding-box'
+      }).with([
+        'seed-modal-container',
+        styles,
+        getContainerSize()
+      ]),
+      onClick: e -> e.stopPropagation(),
+      role: 'dialog',
+      children: children
     });
   }
 }

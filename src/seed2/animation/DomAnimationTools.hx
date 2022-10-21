@@ -14,7 +14,7 @@ function registerAnimations(el:Element, keyframes:Array<Dynamic>, duration:Int, 
   // @todo: I don't think we want to trigger finished if we're canceling.
   // animation.addEventListener('cancel', onFinished, { once: true });
   animation.addEventListener('finish', onFinished, { once: true });
-  
+
   return animation;
 }
 

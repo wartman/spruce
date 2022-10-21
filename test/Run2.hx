@@ -199,6 +199,8 @@ class Toggle extends ObserverComponent {
           },
           duration: 300,
           onFinished: context -> {
+            // @todo: maybe automatically apply these styles
+            // as a part of the Animate component?
             var el:js.html.Element = context.getObject();
             el.style.opacity = toggle ? '0' : '1';
             el.style.width = toggle ? '0' : 100.vw();

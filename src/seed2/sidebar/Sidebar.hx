@@ -17,13 +17,16 @@ class Sidebar extends ImmutableComponent {
     return new Portal({
       target: PortalContext.from(context).getTarget(),
       child: new Layer({
-        showTransition: [
-          { property: 'opacity', start: '0', end: '1' },
-          { property: switch attachment {
-            case Left: 'margin-left';
-            case Right: 'margin-right';
-          }, start: '-500px', end: '0' }
-        ],
+        showAnimation: switch attachment {
+          case Left: [
+            { opacity: 0, margin: '0 0 0 -500px', offset: 0 },
+            { opacity: 1, margin: 0, offset: 1 }
+          ];
+          case Right: [
+            { opacity: 0, margin: '0 -500px 0 0', offset: 0 },
+            { opacity: 1, margin: 0, offset: 1 }
+          ];
+        },
         beforeShow: () -> {
           lockBody();
         },

@@ -23,9 +23,6 @@ class Modal extends ImmutableComponent {
         beforeShow: () -> {
           lockBody();
         },
-        onShow: () -> {
-          // @todo: give the modal focus
-        },
         onHide: () -> {
           unlockBody();
           onHide();

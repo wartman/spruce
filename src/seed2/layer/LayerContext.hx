@@ -1,7 +1,7 @@
 package seed2.layer;
 
 import pine.*;
-import seed2.animation.TransitionGroup;
+import seed2.animation.Keyframe;
 
 enum LayerContextStatus {
   Showing;
@@ -14,8 +14,8 @@ class LayerContext implements Record {
     return LayerContextProvider.from(context);
   }
   
-  @prop public final showTransition:TransitionGroup;
-  @prop public final hideTransition:TransitionGroup;
+  @prop public final showAnimation:(context:Context) -> Array<Keyframe>;
+  @prop public final hideAnimation:(context:Context) -> Array<Keyframe>;
   @prop public final transitionSpeed:Int;
   @prop public final onShow:()->Void = null;
   @prop public final onHide:()->Void = null;

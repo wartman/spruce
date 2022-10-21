@@ -13,13 +13,13 @@ class Animated extends Component {
   static final type = new UniqueId();
   
   public final dontAnimateInitial:Bool;
-  public final createKeyframes:(context:Context)->Array<Keyframe>;
+  public final createKeyframes:KeyframeFactory;
   public final child:Component;
   public final duration:Int;
   public final onFinished:Null<(context:Context)->Void>;
 
   public function new(props:{
-    createKeyframes:(context:Context)->Array<Keyframe>,
+    createKeyframes:KeyframeFactory,
     child:Component,
     duration:Int,
     ?dontAnimateInitial:Bool,

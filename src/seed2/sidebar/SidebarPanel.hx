@@ -17,7 +17,7 @@ class SidebarPanel extends ImmutableComponent {
         Css.atoms({
           backgroundColor: theme(seed.sidebar.bgColor, theme(seed.color.light)),
           color: theme(seed.sidebar.color, theme(seed.color.dark)),
-          overflowX: 'scroll',
+          overflowY: 'scroll',
           position: 'absolute',
           top: 0,
           bottom: 0,
