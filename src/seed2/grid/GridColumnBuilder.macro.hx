@@ -1,4 +1,4 @@
-package seed2.core;
+package seed2.grid;
 
 import haxe.macro.Expr;
 import haxe.macro.Context;

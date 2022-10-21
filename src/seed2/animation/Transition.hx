@@ -4,27 +4,28 @@ import pine.*;
 
 using Nuke;
 
+@:deprecated('Use Animated')
 class Transition extends Component {
+  static final type = new UniqueId();
+
   public final transitions:TransitionGroup;
   public final speed:Int;
   public final onTransition:Null<()->Void>;
-  public final render:()->Component;
+  public final child:Component;
 
   public function new(props:{
     transitions:TransitionGroup,
     speed:Int,
     ?onTransition:Null<()->Void>,
-    render:()->Component,
+    child:Component,
     ?key:Key
   }) {
     super(props.key);
     this.transitions = props.transitions;
     this.speed = props.speed;
     this.onTransition = props.onTransition;
-    this.render = props.render;
+    this.child = props.child;
   }
-
-  static final type = new UniqueId();
 
   public function getComponentType():UniqueId {
     return type;
@@ -47,7 +48,9 @@ class TransitionElement extends Element {
   }
 
   function performHydrate(cursor:HydrationCursor) {
-    child = hydrateElementForComponent(cursor, transition.render(), slot);
+    Debug.assert(!(transition.child is Fragment), 'Fragments will not work in transitions');
+
+    child = hydrateElementForComponent(cursor, transition.child, slot);
     
     #if (js && !nodejs)
     var el:js.html.Element = getObject();
@@ -60,7 +63,9 @@ class TransitionElement extends Element {
   }
 
   function performBuild(previousComponent:Null<Component>) {
-    child = updateChild(child, transition.render(), slot);
+    Debug.assert(!(transition.child is Fragment), 'Fragments will not work in transitions');
+
+    child = updateChild(child, transition.child, slot);
 
     if (previousComponent == null) {
       setup();

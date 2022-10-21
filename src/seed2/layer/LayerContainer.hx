@@ -1,5 +1,6 @@
 package seed2.layer;
 
+import seed2.animation.Animated;
 import seed2.animation.Transition;
 import pine.*;
 import pine.html.*;
@@ -16,20 +17,41 @@ class LayerContainer extends ObserverComponent {
     var layer = LayerContext.from(context);
     var status = layer.status;
 
-    return new Transition({
-      transitions: switch status {
-        case Showing: layer.showTransition;
-        case Hiding: layer.hideTransition;
+    return new Animated({
+      createKeyframes: switch status { 
+        case Showing: _ -> [
+          { opacity: 0, offset: 0 },
+          { opacity: 1, offset: 1 }
+        ];
+        case Hiding: _ -> [
+          { opacity: 1, offset: 0 },
+          { opacity: 0, offset: 1 }
+        ];
       },
-      speed: layer.transitionSpeed,
-      onTransition: () -> switch status {
+      duration: layer.transitionSpeed,
+      onFinished: _ -> switch status {
         case Showing:
           if (layer.onShow != null) layer.onShow();
         case Hiding:
           if (layer.onHide != null) layer.onHide();
       },
-      render: () -> renderContent(context)
+      child: renderContent(context)
     });
+
+    // return new Transition({
+    //   transitions: switch status {
+    //     case Showing: layer.showTransition;
+    //     case Hiding: layer.hideTransition;
+    //   },
+    //   speed: layer.transitionSpeed,
+    //   onTransition: () -> switch status {
+    //     case Showing:
+    //       if (layer.onShow != null) layer.onShow();
+    //     case Hiding:
+    //       if (layer.onHide != null) layer.onHide();
+    //   },
+    //   child: renderContent(context)
+    // });
   }
 
   inline function renderContent(context:Context) {

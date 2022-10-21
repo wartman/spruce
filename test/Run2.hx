@@ -1,5 +1,6 @@
 import js.Browser;
 import pine.*;
+import pine.html.*;
 import pine.html.dom.DomBootstrap;
 import seed2.animation.*;
 import seed2.core.Box;
@@ -7,6 +8,8 @@ import seed2.core.PortalContext;
 import seed2.button.Button;
 import seed2.modal.*;
 import seed2.sidebar.*;
+import seed2.collapse.*;
+import seed2.grid.*;
 import seed2.layer.LayerContext;
 
 using Nuke;
@@ -146,36 +149,61 @@ class App extends ImmutableComponent {
       children: [
         new Toggle({}),
         new ShowModal({}),
-        new ShowSidebar({})
+        new ShowSidebar({}),
+        new Grid<4>({
+          children: [
+            new GridColumn<1>({
+              children: [
+                new Collapse({
+                  styles: [
+                    Css.atoms({
+                      background: 'red'
+                    })
+                  ],
+                  children: [
+                    new CollapseHeader({
+                      child: 'Test'
+                    }),
+                    new CollapseBody({
+                      children: new Html<'p'>({
+                        children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.'
+                      })
+                    })
+                  ]
+                })
+              ]
+            })
+          ]
+        })
       ]
     });
   }
 }
 
 class Toggle extends ObserverComponent {
-  static final transition:TransitionGroup = [
-    {
-      property: 'opacity',
-      start: '1',
-      end: '0'
-    },
-    {
-      property: 'width',
-      start: '300px',
-      end: '100px'
-    }
-  ];
-
   @track var toggle:Bool = false;
 
   function render(context:Context) {
     return new Fragment({
       children: [
-        new Transition({
-          transitions: toggle ? transition : transition.invert(),
-          speed: 500,
-          onTransition: () -> trace('changed'),
-          render: () -> new Box({
+        new Animated({
+          createKeyframes: switch toggle {
+            case true: _ -> [
+              { opacity: 1, width: 100.vw() },
+              { opacity: 0, width: 0 }
+            ];
+            case false: _ -> [
+              { opacity: 0, width: 0 },
+              { opacity: 1, width: 100.vw() }
+            ];
+          },
+          duration: 300,
+          onFinished: context -> {
+            var el:js.html.Element = context.getObject();
+            el.style.opacity = toggle ? '0' : '1';
+            el.style.width = toggle ? '0' : 100.vw();
+          },
+          child: new Box({
             styles: Css.atoms({
               width: 200.px(),
               height: 200.px(),
