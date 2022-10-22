@@ -13,6 +13,7 @@ import seed2.grid.*;
 import seed2.dropdown.*;
 import seed2.menu.*;
 import seed2.layer.LayerContext;
+import seed2.accordian.Accordian;
 
 using Nuke;
 
@@ -195,6 +196,70 @@ class App extends ImmutableComponent {
                       })
                     ]
                   })
+                })
+              ]
+            }),
+            new GridColumn<1>({
+              children: [
+                new Accordian({
+                  children: [
+                    // new CardHeader({
+                    //   children: [
+                    //     new Heading({
+                    //       level: 5,
+                    //       children: 'Accordian Example'
+                    //     })
+                    //   ]
+                    // }),
+                    new Collapse({
+                      children: [
+                        new CollapseHeader({
+                          child: 'One' 
+                        }),
+                        new CollapseBody({
+                          children: new Html<'p'>({ 
+                            children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                          })
+                        }),
+                      ]
+                    }),
+                    new Collapse({
+                      children: [
+                        new CollapseHeader({
+                          child: 'Two' 
+                        }),
+                        new CollapseBody({
+                          children: new Html<'p'>({ 
+                            children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                          })
+                        }),
+                      ]
+                    }),
+                    new Collapse({
+                      children: [
+                        new CollapseHeader({
+                          child: 'Three' 
+                        }),
+                        new CollapseBody({
+                          children: new Html<'p'>({ 
+                            children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                          })
+                        }),
+                      ]
+                    }),
+                    new Collapse({
+                      children: [
+                        new CollapseHeader({
+                          child: 'Four' 
+                        }),
+                        new CollapseBody({
+                          children: new Html<'p'>({ 
+                            children: 'Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.' 
+                          })
+                        }),
+                      ]
+                    }),
+                  ]
                 })
               ]
             })
