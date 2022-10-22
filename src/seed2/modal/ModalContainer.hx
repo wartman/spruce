@@ -1,5 +1,6 @@
 package seed2.modal;
 
+import seed2.focus.FocusOn;
 import pine.*;
 import pine.html.*;
 import seed2.core.*;
@@ -37,8 +38,7 @@ class ModalContainer extends ImmutableComponent {
   }
 
   public function render(context:Context) {
-    // @todo: We need to give this box focus when it mounts.
-    return new Box({
+    var box = new Box({
       styles: Css.atoms({
         width: 100.vw(),
         marginLeft: theme(seed.grid.xGap),
@@ -56,5 +56,7 @@ class ModalContainer extends ImmutableComponent {
       role: 'dialog',
       children: children
     });
+
+    return new FocusOn({ child: box });
   }
 }

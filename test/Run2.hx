@@ -10,6 +10,8 @@ import seed2.modal.*;
 import seed2.sidebar.*;
 import seed2.collapse.*;
 import seed2.grid.*;
+import seed2.dropdown.*;
+import seed2.menu.*;
 import seed2.layer.LayerContext;
 
 using Nuke;
@@ -170,6 +172,29 @@ class App extends ImmutableComponent {
                       })
                     })
                   ]
+                })
+              ]
+            }),
+            new GridColumn<2>({
+              children: [
+                new DropdownButton({
+                  label: 'A dropdown!',
+                  child: new DropdownMenu({
+                    children: [
+                      new MenuItem({ 
+                        child: new DropdownMenuLink({
+                          kind: Action(() -> trace('bar')),
+                          child: 'Bar!'
+                        }) 
+                      }),
+                      new MenuItem({ 
+                        child: new DropdownMenuLink({
+                          kind: Action(() -> trace('foop')),
+                          child: 'Foober!'
+                        }) 
+                      })
+                    ]
+                  })
                 })
               ]
             })

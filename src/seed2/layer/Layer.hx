@@ -14,10 +14,8 @@ class Layer extends ImmutableComponent {
   @prop final hideOnEscape:Bool = true;
   @prop final child:HtmlChild;
   @prop final transitionSpeed:Int = 300;
-  @prop final showAnimation:Keyframes = [
-    { opacity: 0, offset: 0 },
-    { opacity: 1, offset: 1 }
-  ];
+  @prop final styles:ClassName = null;
+  @prop final showAnimation:Keyframes = [ { opacity: 0 }, { opacity: 1 } ];
   @prop final hideAnimation:Keyframes = null;
 
   override function init(context:InitContext) {
@@ -37,6 +35,7 @@ class Layer extends ImmutableComponent {
       }),
       dispose: layer -> layer.dispose(),
       render: layer -> new LayerContainer({
+        styles: styles,
         hideOnClick: hideOnClick,
         child: child
       })

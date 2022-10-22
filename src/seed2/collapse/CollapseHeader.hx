@@ -46,7 +46,7 @@ class CollapseHeader extends ObserverComponent {
               height: 1.em(),
               transition: [ 'transform', collapse.duration.ms(), 'ease-in-out' ]
             }),
-            if (collapse.status == Collapsed) Css.atoms({
+            if (collapse.status == Expanded) Css.atoms({
               transform: rotate((-180).deg())
             }) else null
           ],
