@@ -2,29 +2,29 @@ import js.Browser;
 import pine.*;
 import pine.html.*;
 import pine.html.dom.DomBootstrap;
-import seed2.animation.*;
-import seed2.core.Box;
-import seed2.core.PortalContext;
-import seed2.button.Button;
-import seed2.modal.*;
-import seed2.sidebar.*;
-import seed2.collapse.*;
-import seed2.grid.*;
-import seed2.dropdown.*;
-import seed2.menu.*;
-import seed2.tab.*;
-import seed2.layer.LayerContext;
-import seed2.accordian.Accordian;
+import spruce.animation.*;
+import spruce.core.Box;
+import spruce.core.PortalContext;
+import spruce.button.Button;
+import spruce.modal.*;
+import spruce.sidebar.*;
+import spruce.collapse.*;
+import spruce.grid.*;
+import spruce.dropdown.*;
+import spruce.menu.*;
+import spruce.tab.*;
+import spruce.layer.LayerContext;
+import spruce.accordian.Accordian;
 
 using Nuke;
 
 function main() {
-  Seed.useBaseStyles();
+  Spruce.useBaseStyles();
 
   // @todo: (for Nuke) we need a way to scope Theme with
   // media queries.
   Theme.global({
-    seed: {
+    spruce: {
       font: {
         family: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"'
       },
@@ -42,30 +42,30 @@ function main() {
       },
       priority: {
         primary: {
-          bgColor: theme(seed.color.primary),
-          color: theme(seed.color.light)
+          bgColor: theme(spruce.color.primary),
+          color: theme(spruce.color.light)
         },
         secondary: {
           bgColor: 'transparent',
-          border: [ 1.px(), 'solid', theme(seed.color.secondary) ]
+          border: [ 1.px(), 'solid', theme(spruce.color.secondary) ]
         },
         info: {
-          bgColor: theme(seed.color.info),
-          color: theme(seed.color.dark)
+          bgColor: theme(spruce.color.info),
+          color: theme(spruce.color.dark)
         },
         warning: {
-          bgColor: theme(seed.color.warning),
-          color: theme(seed.color.dark)
+          bgColor: theme(spruce.color.warning),
+          color: theme(spruce.color.dark)
         },
         // etc
       },
       spinner: {
         track: {
           width: .25.em(), 
-          color: theme(seed.color.dark)
+          color: theme(spruce.color.dark)
         },
         indicator: {
-          color: theme(seed.color.info)
+          color: theme(spruce.color.info)
         }
       },
       box: {
@@ -94,7 +94,7 @@ function main() {
       },
       button: {
         border: {
-          radius: theme(seed.rounded.border.radius)
+          radius: theme(spruce.rounded.border.radius)
         },
         padding: {
           y: .50.rem(),
@@ -108,39 +108,44 @@ function main() {
       },
       grid: {
         gap: 1.5.rem(),
-        yGap: theme(seed.grid.gap),
-        xGap: theme(seed.grid.gap) * .5
+        yGap: theme(spruce.grid.gap),
+        xGap: theme(spruce.grid.gap) * .5
       },
       card: {
         border: {
-          appearance: theme(seed.priority.secondary.border),
-          radius: theme(seed.rounded.border.radius)
+          appearance: theme(spruce.priority.secondary.border),
+          radius: theme(spruce.rounded.border.radius)
         },
         padding: {
           y: 1.rem(),
           x: 1.rem()
         },
-        shadow: [ 0, 0, 0, 1.px(), theme(seed.color.secondary) ]
+        shadow: [ 0, 0, 0, 1.px(), theme(spruce.color.secondary) ]
       },
       dropdownMenu: {
-        bgColor: theme(seed.color.light),
-        color: theme(seed.color.dark),
+        bgColor: theme(spruce.color.light),
+        color: theme(spruce.color.dark),
         margin: .25.em(),
         border: {
-          appearance: theme(seed.priority.secondary.border),
-          radius: theme(seed.rounded.border.radius)
+          appearance: theme(spruce.priority.secondary.border),
+          radius: theme(spruce.rounded.border.radius)
         },
         padding: {
-          x: theme(seed.rounded.padding.x),
-          y: theme(seed.rounded.padding.y)
+          x: theme(spruce.rounded.padding.x),
+          y: theme(spruce.rounded.padding.y)
         },
         hilightBgColor: rgba(0,0,0,0.2),
       },
       tab: {
         nav: {
-          track: {
-            width: .15.em(),
-            color: theme(seed.color.secondary)
+          button: {
+            padding: {
+              y: 1.rem(),
+              x: 1.rem()
+            },
+            color: {
+              active: theme(spruce.color.primary)
+            }
           }
         }
       }
