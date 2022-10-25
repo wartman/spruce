@@ -2,7 +2,6 @@ package spruce.tab;
 
 import pine.*;
 import spruce.menu.*;
-import spruce.core.*;
 
 using Nuke;
 
