@@ -12,6 +12,7 @@ import seed2.collapse.*;
 import seed2.grid.*;
 import seed2.dropdown.*;
 import seed2.menu.*;
+import seed2.tab.*;
 import seed2.layer.LayerContext;
 import seed2.accordian.Accordian;
 
@@ -134,6 +135,14 @@ function main() {
           y: theme(seed.rounded.padding.y)
         },
         hilightBgColor: rgba(0,0,0,0.2),
+      },
+      tab: {
+        nav: {
+          track: {
+            width: .15.em(),
+            color: theme(seed.color.secondary)
+          }
+        }
       }
     }
   });
@@ -196,7 +205,8 @@ class App extends ImmutableComponent {
                       })
                     ]
                   })
-                })
+                }),
+                new TabExample({})
               ]
             }),
             new GridColumn<1>({
@@ -384,5 +394,22 @@ class ShowSidebar extends ObserverComponent {
         sidebar
       ]
     });
+  }
+}
+
+class TabExample extends ImmutableComponent {
+  function render(context:Context) {
+    return new TabGroup({
+      tabs: [
+        new Tab({
+          label: 'One',
+          child: 'Hello World'
+        }),
+        new Tab({
+          label: 'Two',
+          child: 'Hello Other World'
+        })
+      ]
+    });  
   }
 }

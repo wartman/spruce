@@ -22,7 +22,10 @@ class DropdownButton extends ImmutableComponent {
       create: () -> new DropdownContext({ status: Closed, attachment: attachment }),
       dispose: dropdown -> dropdown.dispose(),
       render: dropdown -> new Button({
-        styles: styles,
+        styles: [
+          styles,
+          Css.atoms({ alignItems: 'center' })
+        ],
         layout: Horizontal,
         onClick: _ -> dropdown.toggle(),
         children: [

@@ -69,8 +69,8 @@ class PositionedElement extends Element {
       registered = true;
       js.Browser.window.addEventListener('resize', positionElement);
       js.Browser.window.addEventListener('scroll', positionElement);
+      setupElement();
     }
-    setupElement();
     positionElement();
     #end
   }

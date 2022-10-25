@@ -11,7 +11,7 @@ using Nuke;
 
 class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr & HtmlEvents> {
   public static final baseStyles = Css.atoms({
-    display: 'inline-block',
+    // display: 'inline-block',
     outline: 'none',
     border: 'none',
     fontFamily: theme(seed.button.font.family, theme(seed.font.family)),

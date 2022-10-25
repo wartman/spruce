@@ -13,7 +13,7 @@ class Layer extends ImmutableComponent {
   @prop final hideOnClick:Bool = true;
   @prop final hideOnEscape:Bool = true;
   @prop final child:HtmlChild;
-  @prop final transitionSpeed:Int = 300;
+  @prop final transitionSpeed:Int = 150;
   @prop final styles:ClassName = null;
   @prop final showAnimation:Keyframes = [ { opacity: 0 }, { opacity: 1 } ];
   @prop final hideAnimation:Keyframes = null;
