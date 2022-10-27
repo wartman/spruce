@@ -15,6 +15,7 @@ class MenuLink extends ImmutableComponent {
   public static final baseStyles = Css.atoms({
     display: 'block',
     color: theme(spruce.menu.link.color, theme(spruce.link.color)),
+    textDecoration: 'none',
     padding: [
       theme(spruce.menu.link.padding.y),
       theme(spruce.menu.link.padding.x)
@@ -35,7 +36,7 @@ class MenuLink extends ImmutableComponent {
         .with('spruce-menu-link'),
       href: switch kind {
         case Link(url): url;
-        default: null;
+        default: '#'; // Required to allow tabbing.
       },
       role: switch kind {
         case Action(_): 'button';

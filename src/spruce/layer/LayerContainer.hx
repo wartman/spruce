@@ -52,7 +52,7 @@ class LayerContainer extends ObserverComponent {
         'spruce-layer',
         styles
       ]),
-      onClick: e -> if (hideOnClick) {
+      onclick: e -> if (hideOnClick) {
         e.preventDefault();
         LayerContext.from(context).hide();
       },

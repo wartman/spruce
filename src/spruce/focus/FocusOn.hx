@@ -25,11 +25,11 @@ class FocusOn extends Component {
   }
 
   public function createElement():Element {
-    return new FocusableElement(this);
+    return new FocusOnElement(this);
   }
 }
 
-class FocusableElement extends Element {
+class FocusOnElement extends Element {
   var child:Null<Element>;
   var focusable(get, never):FocusOn;
   inline function get_focusable():FocusOn return getComponent();
@@ -41,8 +41,11 @@ class FocusableElement extends Element {
   function performBuild(previousComponent:Null<Component>) {
     child = updateChild(child, focusable.child, slot);
     #if (js && !nodejs)
-    var el:js.html.Element = Portal.getObjectMaybeInPortal(this);
-    el.focus();
+    Process.from(this).defer(() -> {
+      var el:js.html.Element = Portal.getObjectMaybeInPortal(this);
+      el.focus();
+      trace(el);
+    });
     #end
   }
 

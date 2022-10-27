@@ -1,5 +1,6 @@
 package spruce.sidebar;
 
+import spruce.focus.FocusOn;
 import pine.*;
 import pine.html.HtmlChildren;
 import spruce.core.Box;
@@ -11,8 +12,8 @@ class SidebarPanel extends ImmutableComponent {
   @prop final attachment:SidebarAttachment;
 
   public function render(context:Context) {
-    return new Box({
-      onClick: e -> e.stopPropagation(),
+    var panel = new Box({
+      onclick: e -> e.stopPropagation(),
       styles: [
         Css.atoms({
           backgroundColor: theme(spruce.sidebar.bgColor, theme(spruce.color.light)),
@@ -32,7 +33,12 @@ class SidebarPanel extends ImmutableComponent {
         },
         'spruce-sidebar'
       ],
+      ariaModal: 'true',
+      tabIndex: -1,
+      role: 'dialog',
       children: children
     });
+    
+    return new FocusOn({ child: panel });
   }
 }

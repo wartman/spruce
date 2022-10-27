@@ -7,17 +7,14 @@ import pine.html.HtmlEvents;
 import pine.html.TagTypes.getTypeForTag;
 
 using Nuke;
+using Reflect;
 
 typedef BoxProps = {
   ?tag:BoxTag,
   ?styles:ClassName,
   ?layout:Layout,
-  ?role:String,
   ?children:HtmlChildren,
-  ?onClick:EventListener,
-  ?onKeyUp:EventListener,
-  ?onDblClick:EventListener
-};
+} & AriaAttributes & GlobalAttr & HtmlEvents;
 
 class Box extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
   final type:UniqueId;
@@ -25,22 +22,24 @@ class Box extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
   public function new(props:BoxProps) {
     var tag:BoxTag = props.tag == null ? Div : props.tag;
     var layout:Layout = props.layout == null ? Auto : props.layout;
+    var children = props.children == null ? [] : props.children;
 
     type = getTypeForTag(tag);
+    
+    props.className = ClassName.ofArray([
+      props.styles,
+      layout.toStyle()
+    ]);
+
+    props.deleteField('tag');
+    props.deleteField('styles');
+    props.deleteField('children');
+    props.deleteField('layout');
 
     super({
       tag: tag,
-      attrs: {
-        className: ClassName.ofArray([
-          props.styles,
-          layout.toStyle()
-        ]),
-        role: props.role,
-        onclick: props.onClick,
-        ondblclick: props.onDblClick,
-        onkeyup: props.onKeyUp
-      },
-      children: props.children == null ? [] : props.children
+      attrs: props,
+      children: children
     });
   }
 

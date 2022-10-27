@@ -39,20 +39,23 @@ class ModalContainer extends ImmutableComponent {
 
   public function render(context:Context) {
     var box = new Box({
-      styles: Css.atoms({
-        width: 100.vw(),
-        marginLeft: theme(spruce.grid.xGap),
-        marginRight: theme(spruce.grid.xGap),
-        backgroundColor: theme(spruce.modal.bgColor, theme(spruce.color.light)),
-        color: theme(spruce.modal.color, theme(spruce.color.dark)),
-        borderRadius: theme(spruce.modal.border.radius),
-        backgroundClip: 'padding-box'
-      }).with([
+      styles: [
         'spruce-modal-container',
+        Css.atoms({
+          width: 100.vw(),
+          marginLeft: theme(spruce.grid.xGap),
+          marginRight: theme(spruce.grid.xGap),
+          backgroundColor: theme(spruce.modal.bgColor, theme(spruce.color.light)),
+          color: theme(spruce.modal.color, theme(spruce.color.dark)),
+          borderRadius: theme(spruce.modal.border.radius),
+          backgroundClip: 'padding-box'
+        }),
         styles,
         getContainerSize()
-      ]),
-      onClick: e -> e.stopPropagation(),
+      ],
+      onclick: e -> e.stopPropagation(),
+      ariaModal: 'true',
+      tabIndex: -1,
       role: 'dialog',
       children: children
     });

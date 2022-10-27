@@ -20,6 +20,8 @@ using Nuke;
 
 function main() {
   Spruce.useBaseStyles();
+  Spruce.useDefaultColors();
+  Spruce.useDarkMode();
 
   // @todo: (for Nuke) we need a way to scope Theme with
   // media queries.

@@ -14,7 +14,7 @@ class CollapseHeader extends ObserverComponent {
     backgroundColor: theme(spruce.collapse.bgColor, 'transparent'),
     fontFamily: theme(spruce.collapse.header.font.family, 'inherit'), 
     fontSize: theme(spruce.collapse.header.font.size, 'inherit'),
-    fontColor: theme(spruce.collapse.header.font.color, 'inherit'),
+    color: theme(spruce.collapse.header.font.color, 'inherit'),
     outline: 0
   });
   
@@ -33,7 +33,7 @@ class CollapseHeader extends ObserverComponent {
         styles
       ],
       layout: Horizontal,
-      onClick: _ -> collapse.toggle(),
+      onclick: _ -> collapse.toggle(),
       children: [
         new Box({
           styles: Css.atoms({ marginRight: 'auto' }),

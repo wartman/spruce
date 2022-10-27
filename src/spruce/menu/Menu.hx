@@ -12,12 +12,14 @@ class Menu extends ImmutableComponent {
   @prop final styles:ClassName = null;
   @prop final onClick:EventListener = null;
   @prop final children:HtmlChildren;
+  @prop final role:String = null;
 
   public function render(context:Context) {
     return new Box({
       tag: UnorderedList,
-      onClick: onClick,
+      onclick: onClick,
       layout: layout,
+      role: role,
       styles: Css.atoms({
         listStyle: 'none',
         padding: 0,

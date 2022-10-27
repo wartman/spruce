@@ -13,8 +13,10 @@ class DropdownMenu extends ImmutableComponent {
 
   public function render(context:Context) {
     // @todo: We need to be able to tab through these
+    // @todo: We need to focus on the first item when shown.
     return new Menu({
       layout: layout,
+      role: 'menu',
       styles: [
         Css.atoms({
           border: theme(spruce.dropdownMenu.border.appearance),
@@ -33,9 +35,7 @@ class DropdownMenu extends ImmutableComponent {
           }
         })
       ],
-      onClick: e -> {
-        e.stopPropagation();
-      },
+      onClick: e -> e.stopPropagation(),
       children: children
     });
   }

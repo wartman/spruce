@@ -67,6 +67,7 @@ class ControlButton extends ImmutableComponent {
       role: 'button',
       ariaLabel: ariaLabel,
       disabled: disabled,
+      tabIndex: 0,
       className: baseStyles.with([
         'spruce-control-button',
         if (disabled) baseDisabledStyles else null,

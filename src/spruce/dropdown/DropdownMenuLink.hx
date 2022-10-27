@@ -13,19 +13,24 @@ class DropdownMenuLink extends ImmutableComponent {
 
   public function render(context:Context) {
     return new MenuLink({
-      styles: Css.atoms({
-        padding: [
-          0.px(),
-          theme(spruce.dropdownMenu.padding.x)
-        ],
-        ':hover': {
-          backgroundColor: theme(spruce.dropdownMenu.hilightBgColor),
-          color: theme(spruce.dropdownMenu.hilightColor, theme(spruce.dropdownMenu.color))
-        }
-      }).with([
+      styles: [
         'spruce-dropdown-menu-link',
+        Css.atoms({
+          padding: [
+            0.px(),
+            theme(spruce.dropdownMenu.padding.x)
+          ],
+          ':hover': {
+            backgroundColor: theme(spruce.dropdownMenu.hilightBgColor),
+            color: theme(spruce.dropdownMenu.hilightColor, theme(spruce.dropdownMenu.color))
+          },
+          ':focus': {
+            backgroundColor: theme(spruce.dropdownMenu.hilightBgColor),
+            color: theme(spruce.dropdownMenu.hilightColor, theme(spruce.dropdownMenu.color))
+          }
+        }),
         styles
-      ]),
+      ],
       kind: kind,
       child: child
     });
