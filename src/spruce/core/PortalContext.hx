@@ -8,6 +8,7 @@ class PortalContext {
   public static function from(context:Context):PortalContext {
     return switch PortalContextProvider.maybeFrom(context) {
       case Some(portal): portal;
+      // @todo: Create a default portal if none exists.
       case None: Debug.error('No PortalContext was found');
     }
   }

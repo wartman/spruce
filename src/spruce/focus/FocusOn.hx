@@ -4,8 +4,6 @@ import pine.*;
 
 // @todo: Make this robust. It should return focus to the
 // previous item, etc. 
-//
-// Or just work. I don't think this works yet.
 
 class FocusOn extends Component {
   public static final type = new UniqueId();
@@ -44,7 +42,6 @@ class FocusOnElement extends Element {
     Process.from(this).defer(() -> {
       var el:js.html.Element = Portal.getObjectMaybeInPortal(this);
       el.focus();
-      trace(el);
     });
     #end
   }
