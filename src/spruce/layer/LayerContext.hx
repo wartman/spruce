@@ -3,6 +3,8 @@ package spruce.layer;
 import pine.*;
 import spruce.animation.Keyframe;
 
+typedef LayerContextProvider = Provider<LayerContext>;
+
 enum LayerContextStatus {
   Showing;
   Hiding;

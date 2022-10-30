@@ -42,7 +42,7 @@ class DropdownButton extends ImmutableComponent {
           }),
           new Isolate({
             wrap: context -> switch dropdown.status {
-              case Open: new DropdownPanel({
+              case Open: new DropdownContainer({
                 onHide: () -> dropdown.close(),
                 child: new Popover({
                   attachment: attachment,

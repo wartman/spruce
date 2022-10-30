@@ -7,7 +7,7 @@ import pine.Portal;
 
 using pine.Cast;
 
-class DropdownPanel extends Component {
+class DropdownContainer extends Component {
   final type = new UniqueId();
   
   public final child:Component;
@@ -28,26 +28,26 @@ class DropdownPanel extends Component {
   }
 
   public function createElement():Element {
-    return new DropdownPanelElement(this);
+    return new DropdownContainerElement(this);
   }
 }
 
-class DropdownPanelElement extends Element {
+class DropdownContainerElement extends Element {
   var child:Null<Element>;
-  var panel(get, never):DropdownPanel;
-  inline function get_panel():DropdownPanel return getComponent();
+  var container(get, never):DropdownContainer;
+  inline function get_container():DropdownContainer return getComponent();
 
-  public function new(panel:DropdownPanel) {
-    super(panel);
+  public function new(container:DropdownContainer) {
+    super(container);
   }
 
   function performHydrate(cursor:HydrationCursor) {
-    child = hydrateElementForComponent(cursor, panel.child, slot);
+    child = hydrateElementForComponent(cursor, container.child, slot);
     giveFocusAndSetupListeners(); 
   }
 
   function performBuild(previousComponent:Null<Component>) {
-    child = updateChild(child, panel.child, slot);
+    child = updateChild(child, container.child, slot);
     if (previousComponent == null) giveFocusAndSetupListeners(); 
   }
 
@@ -81,7 +81,7 @@ class DropdownPanelElement extends Element {
   function hide(e:js.html.Event) { 
     e.stopPropagation();
     e.preventDefault();
-    panel.onHide();
+    container.onHide();
   }
 
   function onKeyPress(event:js.html.KeyboardEvent) {

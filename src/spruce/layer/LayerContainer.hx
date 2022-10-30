@@ -1,62 +1,82 @@
 package spruce.layer;
 
 import pine.*;
-import pine.html.*;
-import spruce.core.Box;
-import spruce.animation.Animated;
+import spruce.focus.FocusContext;
 
 using Nuke;
 
-class LayerContainer extends ObserverComponent {
-  @prop final styles:ClassName = null;
-  @prop final child:HtmlChild;
-  @prop final hideOnClick:Bool = true;
+class LayerContainer extends Component {
+  static final type = new UniqueId();
 
-  public function render(context:Context) {
-    var layer = LayerContext.from(context);
-    var status = layer.status;
+  public final child:Component;
+  public final hideOnEscape:Bool;
 
-    return new Animated({
-      createKeyframes: switch status { 
-        case Showing: layer.showAnimation;
-        case Hiding: layer.hideAnimation;
-      },
-      duration: layer.transitionSpeed,
-      onFinished: _ -> switch status {
-        case Showing:
-          if (layer.onShow != null) layer.onShow();
-        case Hiding:
-          if (layer.onHide != null) layer.onHide();
-      },
-      child: renderContent(context)
-    });
+  public function new(props) {
+    super(null);
+    this.child = props.child;
+    this.hideOnEscape = props.hideOnEscape;
   }
 
-  inline function renderContent(context:Context) {
-    return new Box({
-      styles: Css.atoms({
-        position: 'fixed',
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        alignItems: 'center',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        overflowX: 'hidden',
-        overflowY: 'scroll',
-        backgroundColor: theme(spruce.layer.bgColor, theme(spruce.color.scrim)),
-        zIndex: 9999
-      }).with([
-        'spruce-layer',
-        styles
-      ]),
-      onclick: e -> if (hideOnClick) {
-        e.preventDefault();
-        LayerContext.from(context).hide();
-      },
-      children: [ child ]
-    });
+  public function getComponentType():UniqueId {
+    return type;
   }
+
+  public function createElement():Element {
+    return new LayerContainerElement(this);
+  }
+}
+
+class LayerContainerElement extends Element {
+  var child:Null<Element> = null;
+  var container(get, never):LayerContainer;
+  inline function get_container():LayerContainer return getComponent();
+
+  function performHydrate(cursor:HydrationCursor) {
+    child = hydrateElementForComponent(cursor, container.child, slot);
+    giveFocusAndSetupListeners();
+  }
+
+  function performBuild(previousComponent:Null<Component>) {
+    child = updateChild(child, container.child, slot);
+    if (previousComponent == null) giveFocusAndSetupListeners();
+  }
+
+  function giveFocusAndSetupListeners() {
+    #if (js && !nodejs)
+    var el = getPossiblePortalElement();
+    el.ownerDocument.addEventListener('keydown', onKeyPress);
+    FocusContext.from(this).focus(el);
+    #end
+  }
+
+  function performDispose() {
+    #if (js && !nodejs)
+    var el = getPossiblePortalElement();
+    el.ownerDocument.removeEventListener('keydown', onKeyPress);
+    FocusContext.from(this).returnFocus();
+    #end
+  }
+
+  public function visitChildren(visitor:ElementVisitor) {
+    if (child != null) visitor.visit(child);
+  }
+
+  #if (js && !nodejs)
+  inline function getPossiblePortalElement() {
+    var el:js.html.Element = Portal.getObjectMaybeInPortal(this);
+    return el;
+  }
+
+  function hide(e:js.html.Event) { 
+    e.preventDefault();
+    LayerContext.from(this).hide();
+  }
+
+  function onKeyPress(event:js.html.KeyboardEvent) {
+    switch event.key {
+      case 'Escape' if (container.hideOnEscape): hide(event);
+      default:
+    }
+  }
+  #end
 }

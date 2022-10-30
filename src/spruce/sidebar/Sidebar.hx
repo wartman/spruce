@@ -12,11 +12,13 @@ class Sidebar extends ImmutableComponent {
   @prop final onHide:()->Void;
   @prop final children:HtmlChildren;
   @prop final attachment:SidebarAttachment = Left;
+  @prop final hideOnEscape:Bool = true;
   
   function render(context:Context) {
     return new Portal({
       target: PortalContext.from(context).getTarget(),
       child: new Layer({
+        hideOnEscape: hideOnEscape,
         showAnimation: switch attachment {
           case Left: [
             { opacity: 0, margin: '0 0 0 -500px', offset: 0 },
