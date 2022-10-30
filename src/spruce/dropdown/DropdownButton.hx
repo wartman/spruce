@@ -7,7 +7,6 @@ import spruce.core.*;
 import spruce.position.Popover;
 import spruce.dropdown.DropdownContext;
 import spruce.icon.Icon;
-import spruce.focus.EscapableFocus;
 
 using Nuke;
 
@@ -43,22 +42,18 @@ class DropdownButton extends ImmutableComponent {
           }),
           new Isolate({
             wrap: context -> switch dropdown.status {
-              case Open: renderPopover(dropdown);
+              case Open: new DropdownPanel({
+                onHide: () -> dropdown.close(),
+                child: new Popover({
+                  attachment: attachment,
+                  child: child
+                }) 
+              });
               case Closed: null;
             }
           })
         ]
       })
-    });
-  }
-
-  function renderPopover(dropdown:DropdownContext) {
-    return new EscapableFocus({
-      onLoseFocus: () -> dropdown.close(),
-      child: new Popover({
-        attachment: attachment,
-        child: child
-      }) 
     });
   }
 }

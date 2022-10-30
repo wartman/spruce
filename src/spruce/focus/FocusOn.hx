@@ -41,12 +41,14 @@ class FocusOnElement extends Element {
     #if (js && !nodejs)
     Process.from(this).defer(() -> {
       var el:js.html.Element = Portal.getObjectMaybeInPortal(this);
-      el.focus();
+      FocusContext.from(this).focus(el);
     });
     #end
   }
 
-  function performDispose() {}
+  function performDispose() {
+    FocusContext.from(this).returnFocus();
+  }
 
   public function visitChildren(visitor:ElementVisitor) {
     if (child != null) visitor.visit(child);
