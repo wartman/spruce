@@ -2,7 +2,7 @@ package spruce.nav;
 
 import pine.*;
 import pine.html.*;
-import spruce.style.*;
+import spruce.core.*;
 import spruce.control.*;
 import spruce.icon.Icon;
 import spruce.sidebar.*;

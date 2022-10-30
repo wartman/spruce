@@ -27,15 +27,7 @@ class Layer extends ImmutableComponent {
 
   public function render(context:Context):Component {
     return new LayerContextProvider({
-      create: () -> new LayerContext({
-        showAnimation: showAnimation,
-        hideAnimation: hideAnimation == null
-          ? showAnimation.invert()
-          : hideAnimation,
-        transitionSpeed: transitionSpeed,
-        onHide: onHide,
-        onShow: onShow
-      }),
+      create: () -> new LayerContext({}),
       dispose: layer -> layer.dispose(),
       render: layer -> new Isolate({
         wrap: _ -> {
@@ -67,15 +59,17 @@ class Layer extends ImmutableComponent {
           });
           var animation = new Animated({
             createKeyframes: switch status { 
-              case Showing: layer.showAnimation;
-              case Hiding: layer.hideAnimation;
+              case Showing: showAnimation;
+              case Hiding: hideAnimation == null
+                ? showAnimation.invert()
+                : hideAnimation;
             },
-            duration: layer.transitionSpeed,
+            duration: transitionSpeed,
             onFinished: _ -> switch status {
               case Showing:
-                if (layer.onShow != null) layer.onShow();
+                if (onShow != null) onShow();
               case Hiding:
-                if (layer.onHide != null) layer.onHide();
+                if (onHide != null) onHide();
             },
             child: body
           });

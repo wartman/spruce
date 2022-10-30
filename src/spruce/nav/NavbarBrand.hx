@@ -34,7 +34,7 @@ class NavbarBrand extends ImmutableComponent {
     });
 
     return new Box({
-      onClick: onClick,
+      onclick: onClick,
       styles: navbarBrandStyle,
       children: [ child ]
     });

@@ -1,7 +1,6 @@
 package spruce.layer;
 
 import pine.*;
-import spruce.animation.Keyframe;
 
 typedef LayerContextProvider = Provider<LayerContext>;
 
@@ -16,11 +15,6 @@ class LayerContext implements Record {
     return LayerContextProvider.from(context);
   }
   
-  @prop public final showAnimation:(context:Context) -> Array<Keyframe>;
-  @prop public final hideAnimation:(context:Context) -> Array<Keyframe>;
-  @prop public final transitionSpeed:Int;
-  @prop public final onShow:()->Void = null;
-  @prop public final onHide:()->Void = null;
   @track public var status:LayerContextStatus = Showing;
 
   public function hide():Void {
