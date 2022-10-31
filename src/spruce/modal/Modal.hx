@@ -1,10 +1,9 @@
 package spruce.modal;
 
-import spruce.layer.LayerContainer;
 import pine.*;
 import pine.html.*;
 import spruce.core.*;
-import spruce.layer.Layer;
+import spruce.layer.*;
 import spruce.dom.DomTools;
 
 using Nuke;
@@ -56,7 +55,7 @@ class Modal extends ImmutableComponent {
           unlockBody();
           onHide();
         },
-        child: body
+        child: new LayerTarget({ child: body })
       })
     });
   }

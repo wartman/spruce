@@ -1,69 +1,21 @@
 package spruce.position;
 
 import pine.*;
-import spruce.core.Attachment;
+import spruce.core.*;
 
-class Positioned extends Component {
-  public static final type = new UniqueId();
-
-  public final getTarget:()->Dynamic;
-  public final attachment:Attachment;
-  public final child:Component;
-  
-  public function new(props:{
-    attachment:Attachment,
-    child:Component,
-    getTarget:()->Dynamic,
-    ?key:Key
-  }) {
-    super(props.key);
-    this.child = props.child;
-    this.getTarget = props.getTarget;
-    this.attachment = props.attachment;
-  }
-
-  public function getComponentType():UniqueId {
-    return type;
-  }
+class Positioned extends HookComponent {
+  @prop public final getTarget:()->Dynamic;
+  @prop public final attachment:Attachment;
 
   public function createElement():Element {
     return new PositionedElement(this);
   }
 }
 
-class PositionedElement extends Element {
-  var positioned(get, never):Positioned;
-  inline function get_positioned():Positioned return getComponent();
-
-  var child:Null<Element> = null;
+class PositionedElement extends HookElement<Positioned> {
   var registered:Bool = false;
-
-  public function new(positioned:Positioned) {
-    super(positioned);
-  }
-
-  function performHydrate(cursor:HydrationCursor) {
-    child = hydrateElementForComponent(cursor, positioned.child, slot);
-    position();
-  }
-
-  function performBuild(previousComponent:Null<Component>) {
-    child = updateChild(child, positioned.child, slot);
-    position();
-  }
-
-  function performDispose() {
-    #if (js && !nodejs)
-    js.Browser.window.removeEventListener('resize', positionElement);
-    js.Browser.window.removeEventListener('scroll', positionElement);
-    #end
-  }
-
-  public function visitChildren(visitor:ElementVisitor) {
-    if (child != null) visitor.visit(child);
-  }
   
-  public function position() {
+  public function onUpdate(_) {
     #if (js && !nodejs)
     if (!registered) {
       registered = true;
@@ -72,6 +24,13 @@ class PositionedElement extends Element {
       setupElement();
     }
     positionElement();
+    #end
+  }
+
+  function performDispose() {
+    #if (js && !nodejs)
+    js.Browser.window.removeEventListener('resize', positionElement);
+    js.Browser.window.removeEventListener('scroll', positionElement);
     #end
   }
 
@@ -84,11 +43,11 @@ class PositionedElement extends Element {
 
   function positionElement() {
     var el:js.html.Element = getObject();
-    var target:js.html.Element = positioned.getTarget();
+    var target:js.html.Element = hook.getTarget();
     var targetRect = target.getBoundingClientRect();
     var container = getContainerSize();
-    var vAttachment = positioned.attachment.v;
-    var hAttachment = positioned.attachment.h;
+    var vAttachment = hook.attachment.v;
+    var hAttachment = hook.attachment.h;
     var top = switch vAttachment {
       case Top: 
         (targetRect.top) - el.offsetHeight;

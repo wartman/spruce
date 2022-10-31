@@ -1,54 +1,34 @@
 package spruce.dropdown;
 
-import spruce.focus.FocusContext;
 import haxe.ds.Option;
 import pine.*;
 import pine.Portal;
+import spruce.core.*;
+import spruce.focus.FocusContext;
 
 using pine.Cast;
 
-class DropdownContainer extends Component {
-  final type = new UniqueId();
-  
-  public final child:Component;
-  public final onHide:()->Void;
-  
-  public function new(props:{
-    child:Component,
-    onHide:()->Void,
-    ?key:Key
-  }) {
-    super(props.key);
-    this.onHide = props.onHide;
-    this.child = props.child;
-  }
-
-  public function getComponentType():UniqueId {
-    return type;
-  }
+class DropdownContainer extends HookComponent {
+  @prop public final onHide:()->Void;
 
   public function createElement():Element {
     return new DropdownContainerElement(this);
   }
 }
 
-class DropdownContainerElement extends Element {
-  var child:Null<Element>;
-  var container(get, never):DropdownContainer;
-  inline function get_container():DropdownContainer return getComponent();
+class DropdownContainerElement extends HookElement<DropdownContainer> {
 
-  public function new(container:DropdownContainer) {
-    super(container);
-  }
+  function onUpdate(previousComponent:Null<Component>) {
+    #if (js && !nodejs)
+    if (previousComponent != null) return;
 
-  function performHydrate(cursor:HydrationCursor) {
-    child = hydrateElementForComponent(cursor, container.child, slot);
-    giveFocusAndSetupListeners(); 
-  }
+    var el = getPossiblePortalElement();
 
-  function performBuild(previousComponent:Null<Component>) {
-    child = updateChild(child, container.child, slot);
-    if (previousComponent == null) giveFocusAndSetupListeners(); 
+    el.ownerDocument.addEventListener('click', hide);
+    el.ownerDocument.addEventListener('keydown', onKeyPress);
+
+    maybeFocusFirst();
+    #end
   }
 
   function performDispose() {
@@ -62,26 +42,11 @@ class DropdownContainerElement extends Element {
     #end
   }
 
-  public function visitChildren(visitor:ElementVisitor) {
-    if (child != null) visitor.visit(child);
-  }
-
-  function giveFocusAndSetupListeners() {
-    #if (js && !nodejs)
-    var el = getPossiblePortalElement();
-
-    el.ownerDocument.addEventListener('click', hide);
-    el.ownerDocument.addEventListener('keydown', onKeyPress);
-
-    maybeFocusFirst();
-    #end
-  }
-
   #if (js && !nodejs)
   function hide(e:js.html.Event) { 
     e.stopPropagation();
     e.preventDefault();
-    container.onHide();
+    hook.onHide();
   }
 
   function onKeyPress(event:js.html.KeyboardEvent) {
