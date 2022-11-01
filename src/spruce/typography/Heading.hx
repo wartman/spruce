@@ -1,4 +1,4 @@
-package spruce.text;
+package spruce.typography;
 
 import pine.*;
 import pine.html.*;

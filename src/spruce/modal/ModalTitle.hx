@@ -2,7 +2,7 @@ package spruce.modal;
 
 import pine.*;
 import pine.html.*;
-import spruce.text.Heading;
+import spruce.typography.Heading;
 
 using Nuke;
 
