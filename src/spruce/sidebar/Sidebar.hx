@@ -39,11 +39,9 @@ class Sidebar extends ImmutableComponent {
           unlockBody();
           onHide();
         },
-        child: new LayerTarget({
-          child: new SidebarPanel({
-            children: children,
-            attachment: attachment
-          })
+        child: new SidebarPanel({
+          children: children,
+          attachment: attachment
         })
       })
     });

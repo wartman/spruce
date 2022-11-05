@@ -11,7 +11,7 @@ using Nuke;
 
 class ModalHeader extends ImmutableComponent {
   @prop final styles:ClassName = null;
-  @prop final priority:Priority = null;
+  // @prop final priority:Priority = null;
   @prop final child:HtmlChild;
 
   public function render(context:Context) {
@@ -20,14 +20,13 @@ class ModalHeader extends ImmutableComponent {
       layout: Horizontal,
       styles: Css.atoms({
         alignItems: 'center',
-        // backgroundColor: theme(spruce.modalHeader.bgColor),
-        // color: theme(spruce.modalHeader.color),
-        borderTopLeftRadius: theme(spruce.modal.border.radius),
-        borderTopRightRadius: theme(spruce.modal.border.radius),
-        padding: [ theme(spruce.modal.padding.y), theme(spruce.modal.padding.x) ],
+        padding: [ 
+          theme(spruce.modal.padding.y), 
+          theme(spruce.modal.padding.x) 
+        ],
       }).with([
         'spruce-modal-header',
-        if (priority != null) priority.toStyle() else null,
+        // if (priority != null) priority.toStyle() else null,
         styles
       ]),
       children: [

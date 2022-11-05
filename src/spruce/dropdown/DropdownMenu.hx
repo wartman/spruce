@@ -4,6 +4,7 @@ import pine.*;
 import pine.html.*;
 import spruce.menu.*;
 import spruce.core.Layout;
+import spruce.paper.Paper;
 
 using Nuke;
 
@@ -14,19 +15,10 @@ class DropdownMenu extends ImmutableComponent {
   public function render(context:Context) {
     // @todo: We need to be able to tab through these
     // @todo: We need to focus on the first item when shown.
-    return new Menu({
+    var body = new Menu({
       layout: layout,
       role: 'menu',
       styles: [
-        Css.atoms({
-          border: theme(spruce.dropdownMenu.border.appearance),
-          borderRadius: theme(spruce.dropdownMenu.border.radius),
-          padding: [ theme(spruce.dropdownMenu.padding.y), 0.px() ],
-          margin: theme(spruce.dropdownMenu.margin, 0),
-          backgroundColor: theme(spruce.dropdownMenu.bgColor),
-          minWidth: theme(spruce.dropdownMenu.minWidth, 10.rem()),
-          color: theme(spruce.dropdownMenu.color)
-        }),
         Theme.define({
           spruce: {
             grid: {
@@ -37,6 +29,12 @@ class DropdownMenu extends ImmutableComponent {
       ],
       onClick: e -> e.stopPropagation(),
       children: children
+    });
+
+    return new Paper({
+      // styles: [],
+      onClick: e -> e.stopPropagation(),
+      children: body
     });
   }
 }

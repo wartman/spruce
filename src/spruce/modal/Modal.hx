@@ -4,6 +4,7 @@ import pine.*;
 import pine.html.*;
 import spruce.core.*;
 import spruce.layer.*;
+import spruce.paper.Paper;
 import spruce.dom.DomTools;
 
 using Nuke;
@@ -22,24 +23,15 @@ class Modal extends ImmutableComponent {
   @prop final hideOnEscape:Bool = true;
 
   public function render(context:Context):Component {
-    var body = new Box({
+    var paper = new Paper({
       styles: [
-        'spruce-modal-container',
-        Css.atoms({
-          width: 100.vw(),
-          marginLeft: theme(spruce.grid.xGap),
-          marginRight: theme(spruce.grid.xGap),
-          backgroundColor: theme(spruce.modal.bgColor, theme(spruce.color.light)),
-          color: theme(spruce.modal.color, theme(spruce.color.dark)),
-          borderRadius: theme(spruce.modal.border.radius),
-          backgroundClip: 'padding-box'
-        }),
+        'seed-modal-container',
         styles,
+        Css.atoms({ width: 100.vw() }),
         getContainerSize()
       ],
-      onclick: e -> e.stopPropagation(),
-      ariaModal: 'true',
-      tabIndex: -1,
+      onClick: e -> e.stopPropagation(),
+      focusable: true,
       role: 'dialog',
       children: children
     });
@@ -55,7 +47,7 @@ class Modal extends ImmutableComponent {
           unlockBody();
           onHide();
         },
-        child: new LayerTarget({ child: body })
+        child: paper
       })
     });
   }

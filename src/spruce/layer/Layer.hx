@@ -55,7 +55,7 @@ class Layer extends ImmutableComponent {
               e.preventDefault();
               layer.hide();
             },
-            children: [ child ]
+            children: new LayerTarget({ child: child })
           });
           var animation = new Animated({
             createKeyframes: switch status { 

@@ -1,5 +1,0 @@
-package seed;
-
-class ButtonGroup {
-  
-}

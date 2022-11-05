@@ -30,6 +30,10 @@ function main() {
       font: {
         family: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"'
       },
+      focus: {
+        ring: [ 3.px(), 'solid', theme(spruce.color.primary) ],
+        offset: 1.px()
+      },
       color: {
         // Stolen from bootstrap atm
         primary: rgb(13, 110, 253),
@@ -78,7 +82,7 @@ function main() {
       },
       rounded: {
         border: {
-          radius: .75.rem()
+          radius: .25.rem()
         },
         padding: {
           y: .75.rem(),
@@ -137,6 +141,19 @@ function main() {
           y: theme(spruce.rounded.padding.y)
         },
         hilightBgColor: rgba(0,0,0,0.2),
+      },
+      paper: {
+        bgColor: theme(spruce.color.light),
+        color: theme(spruce.color.dark),
+        border: {
+          // appearance: theme(spruce.priority.secondary.border),
+          radius: theme(spruce.rounded.border.radius)
+        },
+        shadow: [ 0.px(), 0.px(), 10.px(), rgba(0, 0, 0, 0.5) ],
+        padding: {
+          x: theme(spruce.rounded.padding.x),
+          y: theme(spruce.rounded.padding.y)
+        },
       },
       tab: {
         nav: {
@@ -343,8 +360,7 @@ class ShowModal extends ObserverComponent {
         if (isOpen) new Modal({
           onHide: () -> isOpen = false,
           children: [
-            new ModalHeader({ 
-              priority: Warning,
+            new ModalHeader({
               child: new ModalTitle({ child: 'Test' }) 
             }),
             new ModalBody({ children: [ 'This should work' ] }),

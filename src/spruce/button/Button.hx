@@ -11,7 +11,6 @@ using Nuke;
 
 class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr & HtmlEvents> {
   public static final baseStyles = Css.atoms({
-    // display: 'inline-block',
     outline: 'none',
     border: 'none',
     fontFamily: theme(spruce.button.font.family, theme(spruce.font.family)),
@@ -23,16 +22,11 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
     boxSizing: theme(spruce.box.sizing, 'border-box'),
     padding: [ theme(spruce.button.padding.y), theme(spruce.button.padding.x) ],
     borderRadius: theme(spruce.button.border.radius),
-    // borderWidth: theme(spruce.button.border.width),
-    // borderStyle: theme(spruce.button.border.style),
   });
   public static final focusStyles = Css.atoms({
-    ':focus': {
-      boxShadow: theme(
-        spruce.button.focus.shadow,
-        // @todo: this needs some work:
-        [ 0, 0, 0, .25.rem(), rgba(0, 0, 0, .25) ]
-      )
+    ':focus-visible': {
+      outline: theme(spruce.focus.ring),
+      outlineOffset: theme(spruce.focus.offset)
     }
   });
 

@@ -29,7 +29,8 @@ class Icon extends ImmutableComponent {
       height: '32',
       viewBox: '0 0 16 16',
       className: Css.atoms({
-        fill: 'currentColor'
+        fill: 'currentColor',
+        display: 'block'
       }).with(styles),
       children: switch kind {
         case Close:
