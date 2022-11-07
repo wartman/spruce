@@ -13,7 +13,10 @@ class Paper extends ImmutableComponent {
     border: theme(spruce.paper.border.appearance),
     borderRadius: theme(spruce.paper.border.radius),
     boxShadow: theme(spruce.paper.shadow),
-    backgroundClip: 'padding-box'
+    backgroundClip: 'padding-box',
+    ':focus-visible': {
+      outline: 'none'
+    }
   });
 
   @prop final styles:ClassName = null;

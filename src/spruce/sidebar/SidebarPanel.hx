@@ -1,9 +1,8 @@
 package spruce.sidebar;
 
-import spruce.focus.FocusOn;
 import pine.*;
 import pine.html.HtmlChildren;
-import spruce.core.Box;
+import spruce.paper.Paper;
 
 using Nuke;
 
@@ -12,12 +11,12 @@ class SidebarPanel extends ImmutableComponent {
   @prop final attachment:SidebarAttachment;
 
   public function render(context:Context) {
-    var panel = new Box({
-      onclick: e -> e.stopPropagation(),
+    return new Paper({
+      onClick: e -> e.stopPropagation(),
       styles: [
         Css.atoms({
-          backgroundColor: theme(spruce.sidebar.bgColor, theme(spruce.color.light)),
-          color: theme(spruce.sidebar.color, theme(spruce.color.dark)),
+          // backgroundColor: theme(spruce.sidebar.bgColor, theme(spruce.color.light)),
+          // color: theme(spruce.sidebar.color, theme(spruce.color.dark)),
           overflowY: 'scroll',
           position: 'absolute',
           top: 0,
@@ -27,18 +26,24 @@ class SidebarPanel extends ImmutableComponent {
             width: 100.vw()
           }
         }),
+        Theme.define({
+          spruce: {
+            paper: {
+              border: {
+                radius: 0.px()
+              }
+            }
+          }
+        }),
         switch attachment {
           case Left: Css.atoms({ left: 0 });
           case Right: Css.atoms({ right: 0 });
         },
         'spruce-sidebar'
       ],
-      ariaModal: 'true',
-      tabIndex: -1,
+      focusable: true,
       role: 'dialog',
       children: children
     });
-    
-    return new FocusOn({ child: panel });
   }
 }

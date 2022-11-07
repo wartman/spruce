@@ -27,7 +27,8 @@ class DropdownMenuLink extends ImmutableComponent {
           ':focus': {
             backgroundColor: theme(spruce.dropdownMenu.hilightBgColor),
             color: theme(spruce.dropdownMenu.hilightColor, theme(spruce.dropdownMenu.color))
-          }
+          },
+          borderRadius: theme(spruce.dropdownMenu.border.radius)
         }),
         styles
       ],

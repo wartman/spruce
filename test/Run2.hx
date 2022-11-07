@@ -132,6 +132,9 @@ function main() {
         bgColor: theme(spruce.color.light),
         color: theme(spruce.color.dark),
         margin: .25.em(),
+        grid: {
+          gap: .5.em()
+        },
         border: {
           appearance: theme(spruce.priority.secondary.border),
           radius: theme(spruce.rounded.border.radius)

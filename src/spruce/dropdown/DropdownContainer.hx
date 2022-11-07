@@ -17,13 +17,13 @@ class DropdownContainer extends HookComponent {
 }
 
 class DropdownContainerElement extends HookElement<DropdownContainer> {
-
   function onUpdate(previousComponent:Null<Component>) {
     #if (js && !nodejs)
     if (previousComponent != null) return;
 
     var el = getPossiblePortalElement();
 
+    el.addEventListener('click', syncClicksWithActiveElement);
     el.ownerDocument.addEventListener('click', hide);
     el.ownerDocument.addEventListener('keydown', onKeyPress);
 
@@ -35,6 +35,7 @@ class DropdownContainerElement extends HookElement<DropdownContainer> {
     #if (js && !nodejs)
     var el = getPossiblePortalElement();
 
+    el.removeEventListener('click', syncClicksWithActiveElement);
     el.ownerDocument.removeEventListener('click', hide);
     el.ownerDocument.removeEventListener('keypress', onKeyPress);
 
@@ -49,7 +50,21 @@ class DropdownContainerElement extends HookElement<DropdownContainer> {
     hook.onHide();
   }
 
+  function syncClicksWithActiveElement(event:js.html.Event) {
+    var target = event.target.as(js.html.Element);
+    switch getMenu() {
+      case Some(el): switch el.queryFirstChild(child -> child.getObject() == target) {
+        case Some(el):
+          current = el;
+        case None:
+      }
+      case None:
+    }
+  }
+
   function onKeyPress(event:js.html.KeyboardEvent) {
+    if (status == Building || status == Disposed) return;
+
     switch event.key {
       case 'Escape': 
         hide(event);
@@ -57,6 +72,12 @@ class DropdownContainerElement extends HookElement<DropdownContainer> {
         focusPrevious(event);
       case 'ArrowDown':
         focusNext(event);
+      case 'Tab' if (event.getModifierState('Shift')):
+        focusPrevious(event, true);
+      case 'Tab':
+        focusNext(event, true);
+      case 'Home': // ??
+        maybeFocusFirst();
       default:
     }
   }
@@ -75,20 +96,24 @@ class DropdownContainerElement extends HookElement<DropdownContainer> {
     }
   }
 
-  function focusNext(e:js.html.KeyboardEvent) {
+  function focusNext(e:js.html.KeyboardEvent, hideIfLast:Bool = false) {
     e.preventDefault();
     switch getNextFocusedChild(1) {
       case Some(item): 
         item.getObject().as(js.html.Element).focus();
+      case None if (hideIfLast): 
+        hide(e);
       case None:
     }
   }
 
-  function focusPrevious(e:js.html.KeyboardEvent) {
+  function focusPrevious(e:js.html.KeyboardEvent, hideIfFirst:Bool = false) {
     e.preventDefault();
     switch getNextFocusedChild(-1) {
       case Some(item): 
         item.getObject().as(js.html.Element).focus();
+      case None if (hideIfFirst): 
+        hide(e);
       case None:
     }
   }
@@ -101,8 +126,7 @@ class DropdownContainerElement extends HookElement<DropdownContainer> {
         return child.getComponent().getComponentType() == DropdownMenuLink.componentType;
       }) {
         case Some(items):
-          var index = items.indexOf(current) + offset;
-          index = Math.ceil(Math.max(0, Math.min(index, items.length)));
+          var index = Math.ceil(items.indexOf(current) + offset);
           var item = items[index];
           if (item != null) {
             current = item;

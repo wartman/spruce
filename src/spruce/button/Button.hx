@@ -77,7 +77,7 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
         type: switch tag {
           case Button: props.kind;
           default: null;
-        },
+      },
         className: baseStyles.with([
           'spruce-button',
           'spruce-button-${priority.toString()}',
