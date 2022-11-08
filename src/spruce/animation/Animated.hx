@@ -14,7 +14,8 @@ class Animated extends HookComponent {
   @prop public final dontAnimateInitial:Bool = false;
   @prop public final createKeyframes:KeyframeFactory;
   @prop public final duration:Int;
-  @prop public final onFinished:Null<(context:Context)->Void>;
+  @prop public final onFinished:(context:Context)->Void = null;
+  @prop public final onDispose:(context:Context)->Void = null;
 
   public function createElement():Element {
     return new AnimatedElement(this);
@@ -37,6 +38,7 @@ class AnimatedElement extends HookElement<Animated> {
       currentAnimation = null;
     }
     #end
+    if (hook.onDispose != null) hook.onDispose(this);
   }
 
   #if (js && !nodejs)

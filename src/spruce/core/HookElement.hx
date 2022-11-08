@@ -2,6 +2,7 @@ package spruce.core;
 
 import pine.*;
 
+// @todo: Rework this to use the new @component meta?
 abstract class HookElement<T:HookComponent> extends Element {
   var child:Null<Element> = null;
   var hook(get, never):T;

@@ -23,8 +23,6 @@ function main() {
   Spruce.useDefaultColors();
   Spruce.useDarkMode();
 
-  // @todo: (for Nuke) we need a way to scope Theme with
-  // media queries.
   Theme.global({
     spruce: {
       font: {
@@ -132,9 +130,6 @@ function main() {
         bgColor: theme(spruce.color.light),
         color: theme(spruce.color.dark),
         margin: .25.em(),
-        grid: {
-          gap: .5.em()
-        },
         border: {
           appearance: theme(spruce.priority.secondary.border),
           radius: theme(spruce.rounded.border.radius)
@@ -228,6 +223,18 @@ class App extends ImmutableComponent {
                         child: new DropdownMenuLink({
                           kind: Action(() -> trace('foop')),
                           child: 'Foober!'
+                        }) 
+                      }),
+                      new MenuItem({ 
+                        child: new DropdownMenuLink({
+                          kind: Action(() -> trace('foop')),
+                          child: 'Flop!'
+                        }) 
+                      }),
+                      new MenuItem({ 
+                        child: new DropdownMenuLink({
+                          kind: Action(() -> trace('foop')),
+                          child: 'Frodge!'
                         }) 
                       })
                     ]

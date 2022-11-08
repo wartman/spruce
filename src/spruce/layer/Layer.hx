@@ -71,6 +71,7 @@ class Layer extends ImmutableComponent {
               case Hiding:
                 if (onHide != null) onHide();
             },
+            onDispose: _ -> if (onHide != null) onHide(),
             child: body
           });
 
