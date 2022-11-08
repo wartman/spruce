@@ -22,7 +22,8 @@ class Animated extends HookComponent {
   }
 }
 
-class AnimatedElement extends HookElement<Animated> {
+@component(Animated)
+class AnimatedElement extends HookElement {
   function onUpdate(previousComponent:Null<Component>) {
     #if (js && !nodejs)
     if (previousComponent == null || component != previousComponent) {
@@ -38,7 +39,7 @@ class AnimatedElement extends HookElement<Animated> {
       currentAnimation = null;
     }
     #end
-    if (hook.onDispose != null) hook.onDispose(this);
+    if (animated.onDispose != null) animated.onDispose(this);
   }
 
   #if (js && !nodejs)
@@ -48,15 +49,15 @@ class AnimatedElement extends HookElement<Animated> {
     if (currentAnimation != null) currentAnimation.cancel();
     
     var el:DomElement = getObject();
-    var duration = first && hook.dontAnimateInitial ? 0 : hook.duration;
-    var keyframes = hook.createKeyframes(this);
+    var duration = first && animated.dontAnimateInitial ? 0 : animated.duration;
+    var keyframes = animated.createKeyframes(this);
 
     currentAnimation = el.registerAnimations(keyframes, duration, onFinished);
   }
 
   function onFinished() {
     if (currentAnimation != null) currentAnimation = null;
-    if (hook.onFinished != null) hook.onFinished(this);
+    if (animated.onFinished != null) animated.onFinished(this);
   }
   #end
 }

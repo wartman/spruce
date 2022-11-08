@@ -15,7 +15,8 @@ class LayerContainer extends HookComponent {
   }
 }
 
-class LayerContainerElement extends HookElement<LayerContainer> {
+@component(LayerContainer)
+class LayerContainerElement extends HookElement {
   function onUpdate(previousComponent:Null<Component>) {
     #if (js && !nodejs)
     if (previousComponent != null) return;
@@ -50,7 +51,7 @@ class LayerContainerElement extends HookElement<LayerContainer> {
 
   function onKeyPress(event:js.html.KeyboardEvent) {
     switch event.key {
-      case 'Escape' if (hook.hideOnEscape): hide(event);
+      case 'Escape' if (layerContainer.hideOnEscape): hide(event);
       default:
     }
   }

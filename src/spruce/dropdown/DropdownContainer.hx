@@ -16,7 +16,8 @@ class DropdownContainer extends HookComponent {
   }
 }
 
-class DropdownContainerElement extends HookElement<DropdownContainer> {
+@component(DropdownContainer)
+class DropdownContainerElement extends HookElement {
   function onUpdate(previousComponent:Null<Component>) {
     #if (js && !nodejs)
     if (previousComponent != null) return;
@@ -47,7 +48,7 @@ class DropdownContainerElement extends HookElement<DropdownContainer> {
   function hide(e:js.html.Event) { 
     e.stopPropagation();
     e.preventDefault();
-    hook.onHide();
+    dropdownContainer.onHide();
   }
 
   function syncClicksWithActiveElement(event:js.html.Event) {

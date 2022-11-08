@@ -12,7 +12,8 @@ class Positioned extends HookComponent {
   }
 }
 
-class PositionedElement extends HookElement<Positioned> {
+@component(Positioned)
+class PositionedElement extends HookElement {
   var registered:Bool = false;
   
   public function onUpdate(_) {
@@ -43,11 +44,11 @@ class PositionedElement extends HookElement<Positioned> {
 
   function positionElement() {
     var el:js.html.Element = getObject();
-    var target:js.html.Element = hook.getTarget();
+    var target:js.html.Element = positioned.getTarget();
     var targetRect = target.getBoundingClientRect();
     var container = getContainerSize();
-    var vAttachment = hook.attachment.v;
-    var hAttachment = hook.attachment.h;
+    var vAttachment = positioned.attachment.v;
+    var hAttachment = positioned.attachment.h;
     var top = switch vAttachment {
       case Top: 
         (targetRect.top) - el.offsetHeight;
