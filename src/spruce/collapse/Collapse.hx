@@ -9,6 +9,14 @@ import spruce.accordian.AccordianContext;
 using Nuke;
 
 class Collapse extends ImmutableComponent {
+  public static final baseStyles = Css.atoms({
+    borderStyle: 'solid',
+    borderWidth: 1.px(),
+    borderRadius: theme(spruce.border.radius.medium),
+    borderColor: theme(spruce.color.neutral300),
+    backgroundColor: theme(spruce.color.neutral0),
+  });
+
   @prop final styles:ClassName = null;
   @prop final children:HtmlChildren;
   @prop final duration:Int = 200;
@@ -36,6 +44,7 @@ class Collapse extends ImmutableComponent {
       render: collapse -> new Box({
         styles: [
           'spruce-collapse',
+          baseStyles,
           styles
         ],
         children: children

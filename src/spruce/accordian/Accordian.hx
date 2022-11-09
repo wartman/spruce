@@ -18,8 +18,11 @@ class Accordian extends ImmutableComponent {
       dispose: accordian -> accordian.dispose(),
       render: accordian -> new Box({
         styles: [
+          'spruce-accordian',
           styles,
-          'spruce-accordian'
+          Css.atoms({
+            gap: theme(spruce.spacing.medium)
+          })
         ],
         layout: Vertical, // todo: make configurable
         children: children

@@ -4,7 +4,7 @@ import pine.*;
 import pine.html.*;
 import spruce.menu.*;
 import spruce.core.Layout;
-import spruce.paper.Paper;
+import spruce.panel.Panel;
 
 using Nuke;
 using pine.Cast;
@@ -41,13 +41,19 @@ class DropdownMenu extends ImmutableComponent {
     var width = 'auto';
     #end
 
-    return new Paper({
+    return new Panel({
       styles: [
         Css.atoms({ 
           width: width,
-          maxWidth: 100.vw(),
-          padding: [ theme(spruce.paper.padding.y), theme(spruce.paper.padding.x) ]
+          maxWidth: 100.vw()
         }),
+        Theme.define({
+          spruce: {
+            spacing: {
+              medium: 0
+            }
+          }
+        })
       ],
       onClick: e -> e.stopPropagation(),
       children: body

@@ -7,16 +7,22 @@ import spruce.core.Box;
 using Nuke;
 
 class ModalFooter extends ImmutableComponent {
+  @prop final styles:ClassName = null;
   @prop final children:HtmlChildren;
 
   public function render(context:Context) {
     return new Box({
-      styles: Css.atoms({
-        padding: [ theme(spruce.modal.padding.y), theme(spruce.modal.padding.x) ],
-        justifyContent: 'flex-end'
-      }).with([
-        'spruce-modal-footer'
-      ]),
+      styles: [
+        'spruce-modal-footer',
+        Css.atoms({
+          padding: [ 
+            theme(spruce.spacing.medium),
+            theme(spruce.spacing.medium) 
+          ],
+          justifyContent: 'flex-end'
+        }),
+        styles
+      ],
       layout: Horizontal,
       children: children
     });

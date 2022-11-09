@@ -13,20 +13,24 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
   public static final baseStyles = Css.atoms({
     outline: 'none',
     border: 'none',
-    fontFamily: theme(spruce.button.font.family, theme(spruce.font.family)),
-    fontSize: theme(spruce.button.font.size, theme(spruce.font.size)),
-    fontWeight: theme(spruce.button.font.weight),
+    fontFamily: 'inherit',
+    fontSize: theme(spruce.button.font.size.medium),
+    fontWeight: theme(spruce.font.weight.semibold),
+    lineHeight: theme(spruce.input.height.medium),
+    height: theme(spruce.input.height.medium),
     textAlign: 'center',
     textDecoration: 'none',
     verticalAlign: 'middle',
-    boxSizing: theme(spruce.box.sizing, 'border-box'),
-    padding: [ theme(spruce.button.padding.y), theme(spruce.button.padding.x) ],
-    borderRadius: theme(spruce.button.border.radius),
+    boxSizing: 'border-box',
+    padding: [ 0, theme(spruce.spacing.medium)],
+    borderRadius: theme(spruce.input.border.radius.medium),
+    borderWidth: theme(spruce.input.border.width),
+    borderStyle: 'solid'
   });
   public static final focusStyles = Css.atoms({
     ':focus-visible': {
       outline: theme(spruce.focus.ring),
-      outlineOffset: theme(spruce.focus.offset)
+      outlineOffset: theme(spruce.focus.ring.offset)
     }
   });
 
@@ -37,6 +41,7 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
     ?priority:Priority,
     ?layout:Layout,
     ?kind:ButtonKind,
+    ?size:ButtonSize,
     ?styles:ClassName,
     ?href:String,
     ?onClick:EventListener,
@@ -48,11 +53,14 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
         ? Button
         : props.tag;
     var priority:Priority = props.priority == null
-      ? Secondary
+      ? Neutral
       : props.priority;
     var layout:Layout = props.layout == null
       ? Auto
       : props.layout;
+    var size:ButtonSize = props.size == null
+      ? Md
+      : props.size;
 
     type = getTypeForTag(tag);
 
@@ -72,7 +80,7 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
         },
         role: switch tag {
           case Button: null;
-          default: 'button';         
+          default: 'button';
         },
         type: switch tag {
           case Button: props.kind;
@@ -81,6 +89,7 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
         className: baseStyles.with([
           'spruce-button',
           'spruce-button-${priority.toString()}',
+          'spruce-button-${size}',
           focusStyles,
           priority.toStyle(),
           layout.toStyle(),

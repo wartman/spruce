@@ -10,16 +10,18 @@ enum MenuLinkKind {
   Action(action:()->Void);
 }
 
-// @todo: These need to be tabbed into with keyboard input.
 class MenuLink extends ImmutableComponent {
   public static final baseStyles = Css.atoms({
     display: 'block',
-    color: theme(spruce.menu.link.color, theme(spruce.link.color)),
     textDecoration: 'none',
     padding: [
       theme(spruce.menu.link.padding.y),
       theme(spruce.menu.link.padding.x)
-    ]
+    ],
+    ':focus-visible': {
+      outline: theme(spruce.focus.ring),
+      outlineOffset: theme(spruce.focus.ring.offset)
+    }
   });
 
   @prop final kind:MenuLinkKind;
@@ -30,10 +32,12 @@ class MenuLink extends ImmutableComponent {
 
   public function render(context:Context) {
     return new Html<'a'>({
-      className: baseStyles
-        .with(styles)
-        .with(selected ? selectedStyles : null)
-        .with('spruce-menu-link'),
+      className: ClassName.ofArray([
+        'spruce-menu-link',
+        baseStyles,
+        styles,
+        selected ? selectedStyles : null
+      ]),
       href: switch kind {
         case Link(url): url;
         default: '#'; // Required to allow tabbing.

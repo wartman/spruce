@@ -13,11 +13,11 @@ class PaperContent extends ImmutableComponent {
   function render(context:Context) {
     return new Box({
       styles: [
-        'spruce-page-content',
+        'spruce-paper-content',
         Css.atoms({
           padding: [
-            theme(spruce.paper.padding.y),
-            theme(spruce.paper.padding.x)
+            theme(spruce.spacing.small),
+            theme(spruce.spacing.medium)
           ]
         }),
         styles

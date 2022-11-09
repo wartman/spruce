@@ -21,8 +21,8 @@ class ModalHeader extends ImmutableComponent {
       styles: Css.atoms({
         alignItems: 'center',
         padding: [ 
-          theme(spruce.modal.padding.y), 
-          theme(spruce.modal.padding.x) 
+          theme(spruce.spacing.medium), 
+          theme(spruce.spacing.medium) 
         ],
       }).with([
         'spruce-modal-header',

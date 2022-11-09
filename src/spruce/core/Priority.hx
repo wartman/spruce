@@ -4,6 +4,7 @@ using Nuke;
 
 @:using(spruce.core.Priority.PriorityTools)
 enum Priority {
+  Neutral;
   Primary;
   Secondary;
   Success;
@@ -15,15 +16,46 @@ enum Priority {
 class PriorityTools {
   public static function toStyle(priority:Priority) {
     return switch priority {
+      case Neutral: Css.atoms({ 
+        backgroundColor: theme(spruce.color.neutral0),
+        borderColor: theme(spruce.color.neutral300),
+        color: theme(spruce.color.neutral700),
+        ':hover': {
+          backgroundColor: theme(spruce.color.primary50),
+          borderColor: theme(spruce.color.primary300),
+          color: theme(spruce.color.primary700),
+        },
+        ':active': {
+          backgroundColor: theme(spruce.color.primary100),
+          borderColor: theme(spruce.color.primary400),
+          color: theme(spruce.color.primary700),
+        }
+      });
       case Primary: Css.atoms({ 
-        backgroundColor: theme(spruce.priority.primary.bgColor),
-        color: theme(spruce.priority.primary.color),
-        border: theme(spruce.priority.primary.border)
+        backgroundColor: theme(spruce.color.primary600),
+        borderColor: theme(spruce.color.primary600),
+        color: theme(spruce.color.neutral0),
+        ':hover': {
+          backgroundColor: theme(spruce.color.primary500),
+          borderColor: theme(spruce.color.primary500),
+        },
+        ':active': {
+          backgroundColor: theme(spruce.color.primary600),
+          borderColor: theme(spruce.color.primary600),
+        }
       });
       case Secondary: Css.atoms({ 
-        backgroundColor: theme(spruce.priority.secondary.bgColor),
-        color: theme(spruce.priority.secondary.color),
-        border: theme(spruce.priority.secondary.border)
+        backgroundColor: theme(spruce.color.secondary600),
+        color: theme(spruce.color.neutral0),
+        borderColor: theme(spruce.color.secondary600),
+        ':hover': {
+          backgroundColor: theme(spruce.color.secondary500),
+          borderColor: theme(spruce.color.secondary500),
+        },
+        ':active': {
+          backgroundColor: theme(spruce.color.secondary600),
+          color: theme(spruce.color.neutral0),
+        }
       });
       case Success: Css.atoms({ 
         backgroundColor: theme(spruce.priority.success.bgColor),
@@ -50,6 +82,7 @@ class PriorityTools {
 
   public static function toString(priority:Priority):String {
     return switch priority {
+      case Neutral: 'default';
       case Primary: 'primary';
       case Secondary: 'secondary';
       case Success: 'success';

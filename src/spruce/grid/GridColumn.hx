@@ -27,10 +27,11 @@ abstract class GridColumnBase extends ProxyComponent {
 
   public function render(context:Context) {
     return new Box({
-      styles: getStyles().with([
+      styles: [
         'spruce-grid-column',
+        getStyles(),
         styles
-      ]),
+      ],
       children: children
     });
   }

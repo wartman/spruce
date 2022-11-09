@@ -1,4 +1,4 @@
-package spruce.paper;
+package spruce.panel;
 
 import pine.*;
 import pine.html.*;
@@ -7,11 +7,14 @@ import spruce.core.*;
 
 using Nuke;
 
-class Paper extends ImmutableComponent {
+class Panel extends ImmutableComponent {
   public static final baseStyles = Css.atoms({
     backgroundColor: theme(spruce.paper.background.color),
     borderRadius: theme(spruce.border.radius.medium),
     boxShadow: theme(spruce.shadow.medium),
+    borderStyle: 'solid',
+    borderWidth: theme(spruce.panel.border.width),
+    borderColor: theme(spruce.panel.border.color),
     backgroundClip: 'padding-box',
     ':focus-visible': {
       outline: 'none'
@@ -28,9 +31,9 @@ class Paper extends ImmutableComponent {
   function render(context:Context) {
     return new Box({  
       styles: [
-        'spruce-paper',
-         baseStyles,
-         styles
+        'spruce-panel',
+        baseStyles,
+        styles
       ],
       layout: layout,
       ariaModal: focusable ? 'true' : null,

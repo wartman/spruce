@@ -38,7 +38,15 @@ class CollapseBody extends ObserverComponent {
       duration: collapse.duration,
       child: new Box({
         styles: [
-          Css.atoms({ overflow: 'hidden', height: 0 }),
+          Css.atoms({ 
+            overflow: 'hidden', 
+            height: 0,
+            padding: [
+              0,
+              theme(spruce.spacing.medium)
+            ],
+            margin: 0,
+          }),
           styles
         ],
         children: children

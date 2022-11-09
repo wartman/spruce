@@ -45,7 +45,7 @@ class Layer extends ImmutableComponent {
               right: 0,
               overflowX: 'hidden',
               overflowY: 'scroll',
-              backgroundColor: theme(spruce.layer.bgColor, theme(spruce.color.scrim)),
+              backgroundColor: theme(spruce.layer.background.color),
               zIndex: 9999
             }).with([
               'spruce-layer',

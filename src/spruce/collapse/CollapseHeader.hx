@@ -11,11 +11,10 @@ class CollapseHeader extends ObserverComponent {
   public static final baseStyles = Css.atoms({
     display: 'flex',
     width: 100.pct(),
-    backgroundColor: theme(spruce.collapse.bgColor, 'transparent'),
-    fontFamily: theme(spruce.collapse.header.font.family, 'inherit'), 
-    fontSize: theme(spruce.collapse.header.font.size, 'inherit'),
-    color: theme(spruce.collapse.header.font.color, 'inherit'),
-    outline: 0
+    padding: theme(spruce.spacing.medium),
+    cursor: 'pointer',
+    outline: 0,
+    alignItems: 'center'
   });
   
   @prop final styles:ClassName = null;
@@ -25,7 +24,7 @@ class CollapseHeader extends ObserverComponent {
     var collapse = CollapseContext.from(context);
 
     return new Box({
-      tag: Button,
+      tag: Header,
       styles: [
         'spruce-collapse-header',
         baseStyles,
@@ -34,6 +33,15 @@ class CollapseHeader extends ObserverComponent {
       ],
       layout: Horizontal,
       onclick: _ -> collapse.toggle(),
+      onkeydown: e -> {
+        var event:js.html.KeyboardEvent = cast e;
+        switch event.key {
+          case 'Enter': collapse.toggle();
+          default:
+        }
+      },
+      role: 'button',
+      tabIndex: 0,
       children: [
         new Box({
           styles: Css.atoms({ marginRight: 'auto' }),

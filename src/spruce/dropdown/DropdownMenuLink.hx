@@ -17,18 +17,16 @@ class DropdownMenuLink extends ImmutableComponent {
         'spruce-dropdown-menu-link',
         Css.atoms({
           padding: [
-            0.px(),
-            theme(spruce.dropdownMenu.padding.x)
+            0,
+            theme(spruce.spacing.small)
           ],
           ':hover': {
-            backgroundColor: theme(spruce.dropdownMenu.hilightBgColor),
-            color: theme(spruce.dropdownMenu.hilightColor, theme(spruce.dropdownMenu.color))
+            backgroundColor: theme(spruce.color.primary600),
+            color: theme(spruce.color.neutral0)
           },
-          ':focus': {
-            backgroundColor: theme(spruce.dropdownMenu.hilightBgColor),
-            color: theme(spruce.dropdownMenu.hilightColor, theme(spruce.dropdownMenu.color))
-          },
-          borderRadius: theme(spruce.dropdownMenu.border.radius)
+          borderRadius: theme(spruce.border.radius.small),
+          height: theme(spruce.input.height.medium),
+          lineHeight: theme(spruce.input.height.medium)
         }),
         styles
       ],

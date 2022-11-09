@@ -31,11 +31,11 @@ private final vertical = Css.atoms({
   display: 'flex',
   flexDirection: 'column',
   // flex: ['1', '1', 'auto'],
-  gap: theme(spruce.stack.gap, theme(spruce.grid.gap))
+  gap: theme(spruce.spacing.medium)
 });
 
 private final horizontal = Css.atoms({
   display: 'flex',
   flexDirection: 'row',
-  gap: theme(spruce.stack.gap, theme(spruce.grid.gap))
+  gap: theme(spruce.spacing.medium)
 });

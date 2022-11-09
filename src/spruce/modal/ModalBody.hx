@@ -12,7 +12,10 @@ class ModalBody extends ImmutableComponent {
   public function render(context:Context) {
     return new Box({
       styles: Css.atoms({
-        padding: [ theme(spruce.paper.padding.y), theme(spruce.paper.padding.x) ]
+        padding: [ 
+          theme(spruce.spacing.medium),
+          theme(spruce.spacing.medium) 
+        ]
       }).with([
         'spruce-modal-body'
       ]),
