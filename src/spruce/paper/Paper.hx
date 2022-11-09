@@ -10,8 +10,6 @@ using Nuke;
 class Paper extends ImmutableComponent {
   public static final baseStyles = Css.atoms({
     backgroundColor: theme(spruce.paper.background.color),
-    borderRadius: theme(spruce.border.radius.medium),
-    boxShadow: theme(spruce.shadow.medium),
     backgroundClip: 'padding-box',
     ':focus-visible': {
       outline: 'none'
@@ -21,6 +19,8 @@ class Paper extends ImmutableComponent {
   @prop final styles:ClassName = null;
   @prop final children:HtmlChildren;
   @prop final layout:Layout = Auto;
+  @prop final borderRadius:BorderRadius = Medium;
+  @prop final shadow:Shadow = Medium;
   @prop final focusable:Bool = false;
   @prop final role:String = null;
   @prop final onClick:EventListener = null;
@@ -33,6 +33,8 @@ class Paper extends ImmutableComponent {
          styles
       ],
       layout: layout,
+      shadow: shadow,
+      borderRadius: borderRadius,
       ariaModal: focusable ? 'true' : null,
       tabIndex: focusable ? -1 : null,
       role: role == null 

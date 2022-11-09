@@ -23,7 +23,6 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
     verticalAlign: 'middle',
     boxSizing: 'border-box',
     padding: [ 0, theme(spruce.spacing.medium)],
-    borderRadius: theme(spruce.input.border.radius.medium),
     borderWidth: theme(spruce.input.border.width),
     borderStyle: 'solid'
   });
@@ -40,6 +39,8 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
     ?tag:ButtonTag,
     ?priority:Priority,
     ?layout:Layout,
+    ?spacing:Spacing,
+    ?borderRadius:BorderRadius,
     ?kind:ButtonKind,
     ?size:ButtonSize,
     ?styles:ClassName,
@@ -58,6 +59,12 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
     var layout:Layout = props.layout == null
       ? Auto
       : props.layout;
+    var spacing:Spacing = props.spacing == null
+      ? None
+      : props.spacing;
+    var radius:BorderRadius = props.borderRadius == null
+      ? Medium
+      : props.borderRadius;
     var size:ButtonSize = props.size == null
       ? Md
       : props.size;
@@ -93,6 +100,8 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
           focusStyles,
           priority.toStyle(),
           layout.toStyle(),
+          spacing.toStyle(),  
+          radius.toStyle(),
           props.styles
         ])
       },

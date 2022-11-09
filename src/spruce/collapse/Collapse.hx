@@ -3,6 +3,7 @@ package spruce.collapse;
 import pine.*;
 import pine.html.*;
 import spruce.core.Box;
+import spruce.core.BorderRadius;
 import spruce.collapse.CollapseContext;
 import spruce.accordian.AccordianContext;
 
@@ -12,13 +13,13 @@ class Collapse extends ImmutableComponent {
   public static final baseStyles = Css.atoms({
     borderStyle: 'solid',
     borderWidth: 1.px(),
-    borderRadius: theme(spruce.border.radius.medium),
     borderColor: theme(spruce.color.neutral300),
     backgroundColor: theme(spruce.color.neutral0),
   });
 
   @prop final styles:ClassName = null;
   @prop final children:HtmlChildren;
+  @prop final borderRadius:BorderRadius = Medium;
   @prop final duration:Int = 200;
 
   function render(context:Context) {
@@ -47,6 +48,7 @@ class Collapse extends ImmutableComponent {
           baseStyles,
           styles
         ],
+        borderRadius: borderRadius,
         children: children
       })
     });

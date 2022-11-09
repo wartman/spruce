@@ -29,13 +29,10 @@ class LayoutTools {
 
 private final vertical = Css.atoms({
   display: 'flex',
-  flexDirection: 'column',
-  // flex: ['1', '1', 'auto'],
-  gap: theme(spruce.spacing.medium)
+  flexDirection: 'column'
 });
 
 private final horizontal = Css.atoms({
   display: 'flex',
-  flexDirection: 'row',
-  gap: theme(spruce.spacing.medium)
+  flexDirection: 'row'
 });

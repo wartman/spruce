@@ -10,8 +10,6 @@ using Nuke;
 class Panel extends ImmutableComponent {
   public static final baseStyles = Css.atoms({
     backgroundColor: theme(spruce.paper.background.color),
-    borderRadius: theme(spruce.border.radius.medium),
-    boxShadow: theme(spruce.shadow.medium),
     borderStyle: 'solid',
     borderWidth: theme(spruce.panel.border.width),
     borderColor: theme(spruce.panel.border.color),
@@ -24,6 +22,8 @@ class Panel extends ImmutableComponent {
   @prop final styles:ClassName = null;
   @prop final children:HtmlChildren;
   @prop final layout:Layout = Auto;
+  @prop final shadow:Shadow = Medium;
+  @prop final borderRadius:BorderRadius = Medium;
   @prop final focusable:Bool = false;
   @prop final role:String = null;
   @prop final onClick:EventListener = null;
@@ -36,6 +36,8 @@ class Panel extends ImmutableComponent {
         styles
       ],
       layout: layout,
+      shadow: shadow,
+      borderRadius: borderRadius,
       ariaModal: focusable ? 'true' : null,
       tabIndex: focusable ? -1 : null,
       role: role == null 

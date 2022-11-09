@@ -20,11 +20,12 @@ class Container extends ImmutableComponent {
     marginLeft: 'auto',
     marginRight: 'auto',
     width: 100.pct(),
-    paddingLeft: theme(spruce.container.padding.x, theme(spruce.grid.xGap)),
-    paddingRight: theme(spruce.container.padding.x, theme(spruce.grid.xGap)),
+    paddingLeft: theme(spruce.spacing.large),
+    paddingRight: theme(spruce.spacing.large),
   });
 
   @prop final kind:ContainerKind = Fluid;
+  @prop final spacing:Spacing = None;
   @prop final layout:Layout = Auto;
   @prop final styles:ClassName = null;
   @prop final children:HtmlChildren;
@@ -41,9 +42,10 @@ class Container extends ImmutableComponent {
           case Lg: Css.atoms({ maxWidth: Constants.breakpointLg });
           case Xl: Css.atoms({ maxWidth: Constants.breakpointXl });
         },
-        layout.toStyle(),
         styles
       ],
+      spacing: spacing,
+      layout: layout,
       children: children
     });
   }

@@ -17,10 +17,7 @@ class SidebarHeader extends ImmutableComponent {
     return new Box({
       tag: Header,
       styles: Css.atoms({
-        padding: [
-          theme(spruce.sidebar.padding.y, theme(spruce.box.padding.y)),
-          theme(spruce.sidebar.padding.x, theme(spruce.box.padding.x))
-        ],
+        padding: theme(spruce.spacing.medium),
       }).with([
         'spruce-sidebar-header',
         Layout.Horizontal.toStyle(),

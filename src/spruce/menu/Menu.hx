@@ -9,6 +9,7 @@ using Nuke;
 
 class Menu extends ImmutableComponent {
   @prop final layout:Layout = Horizontal;
+  @prop final spacing:Spacing = Small;
   @prop final styles:ClassName = null;
   @prop final onClick:EventListener = null;
   @prop final children:HtmlChildren;
@@ -19,6 +20,7 @@ class Menu extends ImmutableComponent {
       tag: UnorderedList,
       onclick: onClick,
       layout: layout,
+      spacing: spacing,
       role: role,
       styles: Css.atoms({
         listStyle: 'none',

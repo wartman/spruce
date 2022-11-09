@@ -1,5 +1,7 @@
 package spruce.core;
 
+import spruce.core.BorderRadius;
+import spruce.core.Shadow;
 import pine.*;
 import pine.html.*;
 import pine.html.HtmlAttributes;
@@ -13,6 +15,9 @@ typedef BoxProps = {
   ?tag:BoxTag,
   ?styles:ClassName,
   ?layout:Layout,
+  ?spacing:Spacing,
+  ?shadow:Shadow,
+  ?borderRadius:BorderRadius,
   ?children:HtmlChildren,
 } & AriaAttributes & GlobalAttr & HtmlEvents;
 
@@ -22,19 +27,28 @@ class Box extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
   public function new(props:BoxProps) {
     var tag:BoxTag = props.tag == null ? Div : props.tag;
     var layout:Layout = props.layout == null ? Auto : props.layout;
+    var spacing:Spacing = props.spacing == null ? None : props.spacing;
+    var shadow:Shadow = props.shadow == null ? None : props.shadow;
+    var borderRadius:BorderRadius = props.borderRadius == null ? None : props.borderRadius;
     var children = props.children == null ? [] : props.children;
 
     type = getTypeForTag(tag);
     
     props.className = ClassName.ofArray([
       props.styles,
-      layout.toStyle()
+      layout.toStyle(),
+      spacing.toStyle(),
+      shadow.toStyle(),
+      borderRadius.toStyle()
     ]);
 
     props.deleteField('tag');
     props.deleteField('styles');
     props.deleteField('children');
     props.deleteField('layout');
+    props.deleteField('spacing');
+    props.deleteField('shadow');
+    props.deleteField('borderRadius');
 
     super({
       tag: tag,

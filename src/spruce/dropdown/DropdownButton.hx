@@ -26,6 +26,7 @@ class DropdownButton extends ImmutableComponent {
           Css.atoms({ alignItems: 'center' })
         ],
         layout: Horizontal,
+        spacing: Small,
         onClick: _ -> dropdown.toggle(),
         children: [
           new Box({

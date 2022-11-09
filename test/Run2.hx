@@ -1,7 +1,9 @@
+import spruce.typography.Heading;
 import js.Browser;
 import pine.*;
 import pine.html.*;
 import pine.html.dom.DomBootstrap;
+import spruce.layout.*;
 import spruce.animation.*;
 import spruce.core.Box;
 import spruce.core.PortalContext;
@@ -13,6 +15,7 @@ import spruce.grid.*;
 import spruce.dropdown.*;
 import spruce.menu.*;
 import spruce.tab.*;
+import spruce.nav.*;
 import spruce.layer.LayerContext;
 import spruce.accordian.Accordian;
 
@@ -33,14 +36,22 @@ function main() {
 
 class App extends ImmutableComponent {
   function render(context:Context) {
-    return new Fragment({
+    var box = new Box({
+      layout: Vertical,
+      spacing: Large,
       children: [
         new Toggle({}),
-        new ShowModal({}),
-        new ShowSidebar({}),
+        new Box({
+          layout: Horizontal,
+          spacing: Small,
+          children: [
+            new ShowModal({}),
+            new ShowSidebar({})
+          ]
+        }),
         new Grid<4>({
           children: [
-            new GridColumn<1>({
+            new GridColumn<4, 'md:1'>({
               children: [
                 new Collapse({
                   children: [
@@ -56,7 +67,7 @@ class App extends ImmutableComponent {
                 })
               ]
             }),
-            new GridColumn<2>({
+            new GridColumn<4, 'md:2'>({
               children: [
                 new DropdownButton({
                   label: 'A dropdown!',
@@ -92,7 +103,7 @@ class App extends ImmutableComponent {
                 new TabExample({})
               ]
             }),
-            new GridColumn<1>({
+            new GridColumn<4, 'md:1'>({
               children: [
                 new Accordian({
                   children: [
@@ -117,6 +128,7 @@ class App extends ImmutableComponent {
                       ]
                     }),
                     new Collapse({
+                      borderRadius: Large,
                       children: [
                         new CollapseHeader({
                           child: 'Two' 
@@ -160,6 +172,37 @@ class App extends ImmutableComponent {
         })
       ]
     });
+
+
+    var nav = new Navbar({
+      spacing: Small,
+      styles: Css.atoms({
+        backgroundColor: theme(spruce.color.neutral900),
+        color: theme(spruce.color.neutral0),
+      }),
+      children: [
+        new NavbarMobile({
+          children: 'test'
+        }),
+        new NavbarBrand({
+          child: new Heading({
+            level: 2,
+            children: 'Test'
+          })
+        })
+      ]
+    });
+    var body = new Container({
+      kind: Lg,
+      children: box
+    });
+
+    return new Fragment({
+      children: [
+        nav,
+        body
+      ]
+    });
   }
 }
 
@@ -167,17 +210,25 @@ class Toggle extends ObserverComponent {
   @track var toggle:Bool = false;
 
   function render(context:Context) {
-    return new Fragment({
+    return new Box({
+      styles: [
+        Css.atoms({ 
+          width: 100.pct(),
+          overflow: ' '
+        })
+      ],
+      layout: Vertical,
+      spacing: Small,
       children: [
         new Animated({
           createKeyframes: switch toggle {
             case true: _ -> [
-              { opacity: 1, width: 100.vw() },
+              { opacity: 1, width: 100.pct() },
               { opacity: 0, width: 0 }
             ];
             case false: _ -> [
               { opacity: 0, width: 0 },
-              { opacity: 1, width: 100.vw() }
+              { opacity: 1, width: 100.pct() }
             ];
           },
           duration: 300,
@@ -186,7 +237,7 @@ class Toggle extends ObserverComponent {
             // as a part of the Animate component?
             var el:js.html.Element = context.getObject();
             el.style.opacity = toggle ? '0' : '1';
-            el.style.width = toggle ? '0' : 100.vw();
+            el.style.width = toggle ? '0' : 100.pct();
           },
           child: new Box({
             styles: Css.atoms({
@@ -196,9 +247,13 @@ class Toggle extends ObserverComponent {
             })
           })
         }),
-        new Button({
-          onClick: _ -> toggle = !toggle,
-          children: [ 'Flip' ]
+        new Box({
+          children: [
+            new Button({
+              onClick: _ -> toggle = !toggle,
+              children: [ 'Flip' ]
+            })
+          ]
         })
       ]
     });
@@ -269,6 +324,7 @@ class ShowSidebar extends ObserverComponent {
       children: [
         new Button({
           priority: Primary,
+          borderRadius: Pill,
           onClick: _ -> isOpen = true,
           children: [ 'Sidebar' ]
         }),

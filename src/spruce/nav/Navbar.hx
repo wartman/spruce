@@ -3,6 +3,7 @@ package spruce.nav;
 import pine.*;
 import pine.html.*;
 import spruce.core.Box;
+import spruce.core.Spacing;
 import spruce.layout.Container;
 
 using Nuke;
@@ -15,6 +16,7 @@ enum abstract NavbarTag(BoxTag) to BoxTag {
 class Navbar extends ImmutableComponent {
   @prop final tag:NavbarTag = Nav;
   @prop final kind:ContainerKind = Lg;
+  @prop final spacing:Spacing = None;
   @prop final styles:ClassName = null;
   @prop final children:HtmlChildren;
 
@@ -23,22 +25,15 @@ class Navbar extends ImmutableComponent {
       tag: tag,
       styles: [
         'spruce-navbar',
-        Css.atoms({
-          backgroundColor: theme(spruce.navbar.bgColor),
-          color: theme(spruce.navbar.color),
-        }),
         styles
       ],
       children: [
         new Container({
           kind: kind,
+          spacing: spacing,
           layout: Horizontal,
           styles: Css.atoms({
-            alignItems: 'center',
-            padding: [
-              theme(spruce.navbar.padding.y, theme(spruce.box.padding.y)),
-              theme(spruce.navbar.padding.x, theme(spruce.box.padding.x))
-            ]
+            alignItems: 'center'
           }),
           children: children
         })

@@ -24,6 +24,7 @@ class ModalFooter extends ImmutableComponent {
         styles
       ],
       layout: Horizontal,
+      spacing: Small,
       children: children
     });
   }

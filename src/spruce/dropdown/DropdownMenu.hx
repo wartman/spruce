@@ -16,6 +16,7 @@ class DropdownMenu extends ImmutableComponent {
   public function render(context:Context) {
     var body = new Menu({
       layout: layout,
+      spacing: None,
       role: 'menu',
       styles: [
         Theme.define({
@@ -46,13 +47,6 @@ class DropdownMenu extends ImmutableComponent {
         Css.atoms({ 
           width: width,
           maxWidth: 100.vw()
-        }),
-        Theme.define({
-          spruce: {
-            spacing: {
-              medium: 0
-            }
-          }
         })
       ],
       onClick: e -> e.stopPropagation(),

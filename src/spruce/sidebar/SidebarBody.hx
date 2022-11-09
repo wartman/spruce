@@ -12,10 +12,7 @@ class SidebarBody extends ImmutableComponent {
   public function render(context:Context) {
     return new Box({
       styles: Css.atoms({
-        padding: [
-          theme(spruce.sidebar.padding.y, theme(spruce.box.padding.y)),
-          theme(spruce.sidebar.padding.x, theme(spruce.box.padding.x))
-        ]
+        padding: theme(spruce.spacing.medium)
       }).with([
         'spruce-sidebar-body'
       ]),

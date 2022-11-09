@@ -12,27 +12,16 @@ class SidebarPanel extends ImmutableComponent {
 
   public function render(context:Context) {
     return new Paper({
+      borderRadius: None,
       onClick: e -> e.stopPropagation(),
       styles: [
         Css.atoms({
-          // backgroundColor: theme(spruce.sidebar.bgColor, theme(spruce.color.light)),
-          // color: theme(spruce.sidebar.color, theme(spruce.color.dark)),
-          overflowY: 'scroll',
           position: 'absolute',
           top: 0,
           bottom: 0,
           width: 250.px(), // @todo: make configurable?
           '@media screen and (max-width: 250px)': {
             width: 100.vw()
-          }
-        }),
-        Theme.define({
-          spruce: {
-            paper: {
-              border: {
-                radius: 0.px()
-              }
-            }
           }
         }),
         switch attachment {
