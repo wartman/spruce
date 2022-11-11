@@ -9,6 +9,7 @@ class TabContext implements Record {
     return TabContextProvider.from(context);
   }
 
+  @prop public final variant:TabVariant;
   @track public var tabs:Array<Tab>;
   @track public var activeTab:Tab;
 

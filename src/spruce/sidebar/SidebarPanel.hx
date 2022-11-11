@@ -18,7 +18,7 @@ class SidebarPanel extends ImmutableComponent {
         Css.atoms({
           position: 'absolute',
           top: 0,
-          bottom: 0,
+          minHeight: 100.vh(),
           width: 250.px(), // @todo: make configurable?
           '@media screen and (max-width: 250px)': {
             width: 100.vw()

@@ -100,7 +100,7 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
           focusStyles,
           priority.toStyle(),
           layout.toStyle(),
-          spacing.toStyle(),  
+          spacing.toGap(),  
           radius.toStyle(),
           props.styles
         ])

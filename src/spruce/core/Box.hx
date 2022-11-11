@@ -19,6 +19,7 @@ typedef BoxProps = {
   ?shadow:Shadow,
   ?borderRadius:BorderRadius,
   ?children:HtmlChildren,
+  ?key:Key,
 } & AriaAttributes & GlobalAttr & HtmlEvents;
 
 class Box extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
@@ -31,13 +32,14 @@ class Box extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
     var shadow:Shadow = props.shadow == null ? None : props.shadow;
     var borderRadius:BorderRadius = props.borderRadius == null ? None : props.borderRadius;
     var children = props.children == null ? [] : props.children;
+    var key = props.key;
 
     type = getTypeForTag(tag);
     
     props.className = ClassName.ofArray([
       props.styles,
       layout.toStyle(),
-      spacing.toStyle(),
+      spacing.toGap(),
       shadow.toStyle(),
       borderRadius.toStyle()
     ]);
@@ -49,11 +51,13 @@ class Box extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
     props.deleteField('spacing');
     props.deleteField('shadow');
     props.deleteField('borderRadius');
+    props.deleteField('key');
 
     super({
       tag: tag,
       attrs: props,
-      children: children
+      children: children,
+      key: key
     });
   }
 

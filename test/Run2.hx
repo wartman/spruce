@@ -173,7 +173,6 @@ class App extends ImmutableComponent {
       ]
     });
 
-
     var nav = new Navbar({
       spacing: Small,
       styles: Css.atoms({
@@ -192,6 +191,7 @@ class App extends ImmutableComponent {
         })
       ]
     });
+
     var body = new Container({
       kind: Lg,
       children: box
@@ -334,9 +334,12 @@ class ShowSidebar extends ObserverComponent {
   }
 }
 
-class TabExample extends ImmutableComponent {
+class TabExample extends ObserverComponent {
+  @track var variant:TabVariant = Underline;
+
   function render(context:Context) {
-    return new TabGroup({
+    var tabs = new TabGroup({
+      variant: variant,
       tabs: [
         new Tab({
           label: 'One',
@@ -347,6 +350,45 @@ class TabExample extends ImmutableComponent {
           child: 'Hello Other World'
         })
       ]
-    });  
+    });
+
+    var dropdown = new DropdownButton({
+      label: switch variant {
+        case Underline: 'Underline';
+        case Pill: 'Pill';
+        default: 'Wtf';
+      },
+      status: Closed,
+      child: new DropdownMenu({
+        children: [
+          new MenuItem({
+            child: new DropdownMenuLink({
+              kind: Action(() -> variant = Underline),
+              child: 'Underline'
+            })
+          }),
+          new MenuItem({
+            child: new DropdownMenuLink({
+              kind: Action(() -> variant = Pill),
+              child: 'Pill'
+            })
+          })
+        ]
+      })
+    });
+
+    return new Box({
+      key: 'this one',
+      spacing: Medium,
+      layout: Vertical,
+      children: [
+        new Box({
+          children: [
+            dropdown
+          ]
+        }),
+        tabs
+      ]
+    });
   }
 }

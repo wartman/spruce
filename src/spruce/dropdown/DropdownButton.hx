@@ -15,10 +15,11 @@ class DropdownButton extends ImmutableComponent {
   @prop final styles:ClassName = null;
   @prop final label:HtmlChild;
   @prop final child:HtmlChild;
+  @prop final status:DropdownStatus = Closed;
 
   function render(context:Context) {
     return new DropdownContextProvider({
-      create: () -> new DropdownContext({ status: Closed, attachment: attachment }),
+      create: () -> new DropdownContext({ status: status, attachment: attachment }),
       dispose: dropdown -> dropdown.dispose(),
       render: dropdown -> new Button({
         styles: [

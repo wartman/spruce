@@ -45,7 +45,7 @@ class DropdownMenu extends ImmutableComponent {
     return new Panel({
       styles: [
         Css.atoms({ 
-          width: width,
+          minWidth: width,
           maxWidth: 100.vw()
         })
       ],

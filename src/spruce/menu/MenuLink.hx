@@ -14,10 +14,6 @@ class MenuLink extends ImmutableComponent {
   public static final baseStyles = Css.atoms({
     display: 'block',
     textDecoration: 'none',
-    padding: [
-      theme(spruce.menu.link.padding.y),
-      theme(spruce.menu.link.padding.x)
-    ],
     ':focus-visible': {
       outline: theme(spruce.focus.ring),
       outlineOffset: theme(spruce.focus.ring.offset)

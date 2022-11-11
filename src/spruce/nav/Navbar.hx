@@ -32,8 +32,10 @@ class Navbar extends ImmutableComponent {
           kind: kind,
           spacing: spacing,
           layout: Horizontal,
-          styles: Css.atoms({
-            alignItems: 'center'
+          styles: Css.atoms({ 
+            alignItems: 'center',
+            paddingTop: theme(spruce.spacing.small),
+            paddingBottom: theme(spruce.spacing.small)
           }),
           children: children
         })

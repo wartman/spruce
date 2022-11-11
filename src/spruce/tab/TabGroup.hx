@@ -10,6 +10,7 @@ using Lambda;
 class TabGroup extends ImmutableComponent {
   @prop final styles:ClassName = null;
   @prop final tabs:Array<Tab>;
+  @prop final variant:TabVariant = Underline;
 
   public function render(context:Context) {
     Debug.assert(tabs.length > 0, 'At least one tab is required');
@@ -17,6 +18,7 @@ class TabGroup extends ImmutableComponent {
     return new TabContextProvider({
       create: () -> new TabContext({
         tabs: tabs,
+        variant: variant,
         activeTab: tabs[0]
       }),
       dispose: tabs -> tabs.dispose(),

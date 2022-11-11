@@ -24,6 +24,7 @@ class NavbarMobile extends ObserverComponent {
               onClick: _ -> isOpen = true,
               ariaLabel: 'Open Main Menu',
               child: new Icon({
+                // @todo: Replace with Small, Medium and Large for icon size
                 styles: Css.atoms({
                   height: 2.em(),
                   width: 2.em()
