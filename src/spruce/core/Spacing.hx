@@ -41,17 +41,17 @@ class SpacingTools {
     }
   }
 
-  public static function toMargin(spacing:Spacing):ClassName {
+  public static function toBottomMargin(spacing:Spacing):ClassName {
     return switch spacing {
       case None: '';
       case Small: Css.atoms({
-        margin: theme(spruce.spacing.small)
+        marginBottom: theme(spruce.spacing.small)
       });
       case Medium: Css.atoms({
-        margin: theme(spruce.spacing.medium)
+        marginBottom: theme(spruce.spacing.medium)
       });
       case Large: Css.atoms({
-        margin: theme(spruce.spacing.large)
+        marginBottom: theme(spruce.spacing.large)
       });
     }
   }

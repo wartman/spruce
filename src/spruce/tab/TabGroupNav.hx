@@ -9,6 +9,7 @@ using Nuke;
 
 class TabGroupNav extends ImmutableComponent {
   @prop final children:HtmlChildren;
+  @prop final spacingBottom:Spacing = Medium;
 
   function render(context:Context) {
     var tabs = TabContext.from(context);
@@ -16,7 +17,10 @@ class TabGroupNav extends ImmutableComponent {
     return new Box({
       tag: Nav,
       styles: [
-        Css.atoms({ width: 100.pct() }),
+        Css.atoms({ 
+          width: 100.pct()
+        }),
+        spacingBottom.toBottomMargin(),
         getTabSTyle(tabs)
       ],
       children: new Menu({

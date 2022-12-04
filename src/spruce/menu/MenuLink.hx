@@ -2,6 +2,7 @@ package spruce.menu;
 
 import pine.*;
 import pine.html.*;
+import pine.html.HtmlEvents;
 
 using Nuke;
 
@@ -25,6 +26,7 @@ class MenuLink extends ImmutableComponent {
   @prop final selectedStyles:ClassName = null;
   @prop final selected:Bool = false;
   @prop final child:HtmlChild;
+  @prop final onClick:EventListener = null;
 
   public function render(context:Context) {
     return new Html<'a'>({
@@ -46,8 +48,10 @@ class MenuLink extends ImmutableComponent {
         case Action(action): 
           e -> {
             e.preventDefault();
+            if (onClick != null) onClick(e);
             action();
           }
+        case Link(_) if (onClick != null): onClick;
         default: null;
       },
       children: [ child ]

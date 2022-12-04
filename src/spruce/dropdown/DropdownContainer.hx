@@ -26,7 +26,7 @@ class DropdownContainerElement extends HookElement {
 
     el.addEventListener('click', syncClicksWithActiveElement);
     el.ownerDocument.addEventListener('click', hide);
-    el.ownerDocument.addEventListener('keydown', onKeyPress);
+    el.ownerDocument.addEventListener('keydown', onKeyDown);
 
     maybeFocusFirst();
     #end
@@ -38,7 +38,7 @@ class DropdownContainerElement extends HookElement {
 
     el.removeEventListener('click', syncClicksWithActiveElement);
     el.ownerDocument.removeEventListener('click', hide);
-    el.ownerDocument.removeEventListener('keypress', onKeyPress);
+    el.ownerDocument.removeEventListener('keydown', onKeyDown);
 
     FocusContext.from(this).returnFocus();
     #end
@@ -63,7 +63,7 @@ class DropdownContainerElement extends HookElement {
     }
   }
 
-  function onKeyPress(event:js.html.KeyboardEvent) {
+  function onKeyDown(event:js.html.KeyboardEvent) {
     if (status == Building || status == Disposed) return;
 
     switch event.key {

@@ -21,7 +21,7 @@ class LayerContainerElement extends HookElement {
     #if (js && !nodejs)
     if (previousComponent != null) return;
     var el = getTargetElement();
-    el.ownerDocument.addEventListener('keydown', onKeyPress);
+    el.ownerDocument.addEventListener('keydown', onKeyDown);
     FocusContext.from(this).focus(el);
     #end
   }
@@ -29,7 +29,7 @@ class LayerContainerElement extends HookElement {
   function performDispose() {
     #if (js && !nodejs)
     var el = getTargetElement();
-    el.ownerDocument.removeEventListener('keydown', onKeyPress);
+    el.ownerDocument.removeEventListener('keydown', onKeyDown);
     FocusContext.from(this).returnFocus();
     #end
   }
@@ -49,7 +49,7 @@ class LayerContainerElement extends HookElement {
     LayerContext.from(this).hide();
   }
 
-  function onKeyPress(event:js.html.KeyboardEvent) {
+  function onKeyDown(event:js.html.KeyboardEvent) {
     switch event.key {
       case 'Escape' if (layerContainer.hideOnEscape): hide(event);
       default:

@@ -80,13 +80,13 @@ class TabButton extends ImmutableComponent {
           borderBottom: [ 
             'solid', 
             2.px(), 
-            theme(spruce.color.primary700)
+            theme(spruce.color.primary600)
           ],
         });
       case Pill:
         Css.atoms({
-          backgroundColor: theme(spruce.color.primary700),
-          borderColor: theme(spruce.color.primary700),
+          backgroundColor: theme(spruce.color.primary600),
+          borderColor: theme(spruce.color.primary600),
           color: theme(spruce.color.neutral0),
           ':hover': {
             backgroundColor: theme(spruce.color.primary500),

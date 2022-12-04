@@ -10,6 +10,7 @@ class DropdownMenuLink extends ImmutableComponent {
   @prop final styles:ClassName = null;
   @prop final child:HtmlChild;
   @prop final kind:MenuLinkKind;
+  @prop final closeOnClick:Bool = true;
 
   public function render(context:Context) {
     return new MenuLink({
@@ -30,6 +31,9 @@ class DropdownMenuLink extends ImmutableComponent {
         }),
         styles
       ],
+      onClick: if (closeOnClick) _ -> {
+        DropdownContext.from(context).close();
+      } else null,
       kind: kind,
       child: child
     });
