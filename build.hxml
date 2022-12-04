@@ -1,8 +1,9 @@
--cp src
+-cp refactor
 -cp test
 
 -lib nuke
 -lib pine
+-lib evergreen
 
 -D debug
 # -D nuke.output=style.css
@@ -10,5 +11,5 @@
 -D analyzer-optimize
 -dce full
 
--main Run2
+-main Run3
 -js dist/test.js

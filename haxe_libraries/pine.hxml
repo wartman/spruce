@@ -1,2 +1,2 @@
--cp ../pine-ui/src
+-cp ../pine-ui/refactor
 -D pine=0.0.1
