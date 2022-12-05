@@ -71,8 +71,10 @@ class App extends AutoComponent {
             }),
             new GridColumn<4, 'md:2'>({
               children: [
-                new DropdownButton({
-                  label: 'A dropdown!',
+                new Dropdown({
+                  toggle: new DropdownButton({
+                    child: 'A dropdown!'
+                  }),
                   child: new DropdownMenu({
                     children: [
                       new MenuItem({ 
@@ -354,13 +356,14 @@ class TabExample extends AutoComponent {
       ]
     });
 
-    var dropdown = new DropdownButton({
-      label: switch variant {
-        case Underline: 'Underline';
-        case Pill: 'Pill';
-        default: 'Wtf';
-      },
-      status: Closed,
+    var dropdown = new Dropdown({
+      toggle: new DropdownButton({
+        child: switch variant {
+          case Underline: 'Underline';
+          case Pill: 'Pill';
+          default: 'Wtf';
+        }
+      }),
       child: new DropdownMenu({
         children: [
           new MenuItem({
