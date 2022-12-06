@@ -1,7 +1,5 @@
 using Nuke;
 
-// @todo: Stealing from this, mostly: 
-// https://github.com/twbs/bootstrap/blob/main/dist/css/bootstrap-reboot.css
 function useBaseStyles() {
   Css.global({
     '*, *::before, *::after': {
