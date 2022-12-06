@@ -6,10 +6,10 @@ import spruce.typography.Heading;
 
 using Nuke;
 
-class ModalTitle extends ImmutableComponent {
-  @prop final styles:ClassName = null;
-  @prop final level:Int = 5;
-  @prop final child:HtmlChild;
+class ModalTitle extends AutoComponent {
+  final styles:ClassName = null;
+  final level:Int = 5;
+  final child:HtmlChild;
 
   public function render(context:Context) {
     return new Heading({

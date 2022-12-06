@@ -1,16 +1,17 @@
 package spruce.tab;
 
 import pine.*;
+import pine.debug.Debug;
 import spruce.tab.TabContext;
 import spruce.core.Box;
 
 using Nuke;
 using Lambda;
 
-class TabGroup extends ImmutableComponent {
-  @prop final styles:ClassName = null;
-  @prop final tabs:Array<Tab>;
-  @prop final variant:TabVariant = Underline;
+class TabGroup extends AutoComponent {
+  final styles:ClassName = null;
+  final tabs:Array<Tab>;
+  final variant:TabVariant = Underline;
 
   public function render(context:Context) {
     Debug.assert(tabs.length > 0, 'At least one tab is required');
@@ -22,8 +23,8 @@ class TabGroup extends ImmutableComponent {
         activeTab: tabs[0]
       }),
       dispose: tabs -> tabs.dispose(),
-      render: tabs -> new Isolate({
-        wrap: _ -> new Box({
+      render: tabs -> new Scope({
+        render: _ -> new Box({
           styles: [
             'spruce-tab-group',
             styles

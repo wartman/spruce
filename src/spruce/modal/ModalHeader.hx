@@ -4,15 +4,15 @@ import pine.*;
 import pine.html.*;
 import spruce.core.*;
 import spruce.control.*;
-import spruce.layer.LayerContext;
 import spruce.icon.Icon;
+import eg.LayerContext;
 
 using Nuke;
 
-class ModalHeader extends ImmutableComponent {
-  @prop final styles:ClassName = null;
-  // @prop final priority:Priority = null;
-  @prop final child:HtmlChild;
+class ModalHeader extends AutoComponent {
+  final styles:ClassName = null;
+  // final priority:Priority = null;
+  final child:HtmlChild;
 
   public function render(context:Context) {
     return new Box({

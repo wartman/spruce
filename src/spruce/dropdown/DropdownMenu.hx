@@ -5,13 +5,14 @@ import pine.html.*;
 import spruce.menu.*;
 import spruce.core.Layout;
 import spruce.panel.Panel;
+import eg.DropdownToggle;
 
 using Nuke;
-using pine.Cast;
+using pine.core.OptionTools;
 
-class DropdownMenu extends ImmutableComponent {
-  @prop final children:HtmlChildren; 
-  @prop final layout:Layout = Vertical;
+class DropdownMenu extends AutoComponent {
+  final children:HtmlChildren; 
+  final layout:Layout = Vertical;
 
   public function render(context:Context) {
     var body = new Menu({
@@ -32,12 +33,12 @@ class DropdownMenu extends ImmutableComponent {
     });
 
     #if (js && !nodejs)
-    // @todo: This feels super hacky, especially if we're using dropdowns
-    // outside of DropdownButtons.
-    var width = switch context.queryAncestors(el -> el.getComponent().getComponentType() == DropdownButton.componentType) {
-      case Some(el): el.getObject().as(js.html.Element).offsetWidth.px();
-      case None: 'auto';
-    }
+    var width = context
+      .queryAncestors()
+      .ofType(Dropdown)
+      .map(element -> element.queryChildren().findOfType(DropdownToggle, true))
+      .map(element -> Some((element.getObject():js.html.Element).offsetWidth.px()))
+      .or('auto');
     #else
     var width = 'auto';
     #end
@@ -54,4 +55,3 @@ class DropdownMenu extends ImmutableComponent {
     });
   }
 }
-

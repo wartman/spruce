@@ -9,9 +9,9 @@ class TabContext implements Record {
     return TabContextProvider.from(context);
   }
 
-  @prop public final variant:TabVariant;
-  @track public var tabs:Array<Tab>;
-  @track public var activeTab:Tab;
+  public final variant:TabVariant;
+  public var tabs:Array<Tab>;
+  public var activeTab:Tab;
 
   public function isActive(tab:Tab) {
     return activeTab == tab;

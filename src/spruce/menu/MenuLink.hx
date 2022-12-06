@@ -11,7 +11,7 @@ enum MenuLinkKind {
   Action(action:()->Void);
 }
 
-class MenuLink extends ImmutableComponent {
+class MenuLink extends AutoComponent {
   public static final baseStyles = Css.atoms({
     display: 'block',
     textDecoration: 'none',
@@ -21,12 +21,12 @@ class MenuLink extends ImmutableComponent {
     }
   });
 
-  @prop final kind:MenuLinkKind;
-  @prop final styles:ClassName = null;
-  @prop final selectedStyles:ClassName = null;
-  @prop final selected:Bool = false;
-  @prop final child:HtmlChild;
-  @prop final onClick:EventListener = null;
+  final kind:MenuLinkKind;
+  final styles:ClassName = null;
+  final selectedStyles:ClassName = null;
+  final selected:Bool = false;
+  final child:HtmlChild;
+  final onClick:EventListener = null;
 
   public function render(context:Context) {
     return new Html<'a'>({

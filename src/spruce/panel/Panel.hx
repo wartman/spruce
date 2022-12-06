@@ -7,7 +7,7 @@ import spruce.core.*;
 
 using Nuke;
 
-class Panel extends ImmutableComponent {
+class Panel extends AutoComponent {
   public static final baseStyles = Css.atoms({
     backgroundColor: theme(spruce.paper.background.color),
     borderStyle: 'solid',
@@ -19,14 +19,14 @@ class Panel extends ImmutableComponent {
     }
   });
 
-  @prop final styles:ClassName = null;
-  @prop final children:HtmlChildren;
-  @prop final layout:Layout = Auto;
-  @prop final shadow:Shadow = Medium;
-  @prop final borderRadius:BorderRadius = Medium;
-  @prop final focusable:Bool = false;
-  @prop final role:String = null;
-  @prop final onClick:EventListener = null;
+  final styles:ClassName = null;
+  final children:HtmlChildren;
+  final layout:Layout = Auto;
+  final shadow:Shadow = Medium;
+  final borderRadius:BorderRadius = Medium;
+  final focusable:Bool = false;
+  final role:String = null;
+  final onClick:EventListener = null;
 
   function render(context:Context) {
     return new Box({  

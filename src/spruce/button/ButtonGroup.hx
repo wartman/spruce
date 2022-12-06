@@ -7,7 +7,7 @@ import spruce.core.*;
 using Nuke;
 
 // @todo
-class ButtonGroup extends ImmutableComponent {
+class ButtonGroup extends AutoComponent {
   static final baseStyles = Css.atoms({
 
   }).with([

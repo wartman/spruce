@@ -6,9 +6,9 @@ import spruce.paper.Paper;
 
 using Nuke;
 
-class SidebarPanel extends ImmutableComponent {
-  @prop final children:HtmlChildren;
-  @prop final attachment:SidebarAttachment;
+class SidebarPanel extends AutoComponent {
+  final children:HtmlChildren;
+  final attachment:SidebarAttachment;
 
   public function render(context:Context) {
     return new Paper({

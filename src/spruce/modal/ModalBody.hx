@@ -6,8 +6,8 @@ import spruce.core.Box;
 
 using Nuke;
 
-class ModalBody extends ImmutableComponent {
-  @prop final children:HtmlChildren;
+class ModalBody extends AutoComponent {
+  final children:HtmlChildren;
 
   public function render(context:Context) {
     return new Box({

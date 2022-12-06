@@ -6,11 +6,11 @@ import spruce.core.Box;
 
 using Nuke;
 
-class Tab extends ImmutableComponent {
-  @prop public final label:HtmlChild;
-  @prop public final buttonStyles:ClassName = null;
-  @prop final child:HtmlChild;
-  @prop final styles:ClassName = null; 
+class Tab extends AutoComponent {
+  public final label:HtmlChild;
+  public final buttonStyles:ClassName = null;
+  final child:HtmlChild;
+  final styles:ClassName = null; 
 
   function render(context:Context) {
     return new Box({

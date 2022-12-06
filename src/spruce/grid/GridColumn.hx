@@ -1,8 +1,9 @@
 package spruce.grid;
 
 import pine.*;
+import pine.diffing.*;
 import pine.html.*;
-import spruce.core.Box;
+import spruce.core.*;
 
 using Nuke;
 

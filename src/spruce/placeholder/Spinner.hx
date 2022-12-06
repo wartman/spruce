@@ -21,9 +21,9 @@ enum SpinnerPosition {
   Inline; 
 }
 
-class Spinner extends ImmutableComponent {
-  @prop final styles:ClassName = null;
-  @prop final position:SpinnerPosition = Inline;
+class Spinner extends AutoComponent {
+  final styles:ClassName = null;
+  final position:SpinnerPosition = Inline;
 
   function render(context:Context) {
     return new Html<'div'>({

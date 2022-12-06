@@ -13,12 +13,12 @@ enum abstract NavbarTag(BoxTag) to BoxTag {
   final Header = BoxTag.Header;
 }
 
-class Navbar extends ImmutableComponent {
-  @prop final tag:NavbarTag = Nav;
-  @prop final kind:ContainerKind = Lg;
-  @prop final spacing:Spacing = None;
-  @prop final styles:ClassName = null;
-  @prop final children:HtmlChildren;
+class Navbar extends AutoComponent {
+  final tag:NavbarTag = Nav;
+  final kind:ContainerKind = Lg;
+  final spacing:Spacing = None;
+  final styles:ClassName = null;
+  final children:HtmlChildren;
 
   public function render(context:Context):Component {
     return new Box({

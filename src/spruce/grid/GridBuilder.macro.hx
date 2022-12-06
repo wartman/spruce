@@ -35,12 +35,6 @@ private function buildGrid(columns:Int, ?rows:Null<Int>) {
     var builder = new ClassBuilder([]);
     
     builder.add(macro class {
-      static final type = new pine.UniqueId();
-
-      public function getComponentType() {
-        return type;
-      }
-
       function getStyles():nuke.ClassName {
         return nuke.Theme.define({
           spruce: {
@@ -61,7 +55,12 @@ private function buildGrid(columns:Int, ?rows:Null<Int>) {
         pack: pack,
         name: 'Grid',
         sub: 'GridBase'
-      }, [], false, true, false),
+      }, [
+        {
+          pack: [ 'pine', 'core' ],
+          name: 'HasComponentType'
+        }
+      ], false, true, false),
       fields: builder.export()
     });
   }

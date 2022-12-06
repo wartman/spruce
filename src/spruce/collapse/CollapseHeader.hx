@@ -4,10 +4,11 @@ import pine.*;
 import pine.html.*;
 import spruce.core.Box;
 import spruce.icon.Icon;
+import eg.CollapseContext;
 
 using Nuke;
 
-class CollapseHeader extends ObserverComponent {
+class CollapseHeader extends AutoComponent {
   public static final baseStyles = Css.atoms({
     display: 'flex',
     width: 100.pct(),
@@ -17,8 +18,8 @@ class CollapseHeader extends ObserverComponent {
     alignItems: 'center'
   });
   
-  @prop final styles:ClassName = null;
-  @prop final child:HtmlChild;
+  final styles:ClassName = null;
+  final child:HtmlChild;
 
   function render(context:Context) {
     var collapse = CollapseContext.from(context);

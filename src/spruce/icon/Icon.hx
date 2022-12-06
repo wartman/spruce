@@ -6,6 +6,8 @@ import pine.html.*;
 using Nuke;
 
 // @todo: Using enums is a terrible way to handle icons.
+// @todo: Also we have some XML stuff from evergreen we can use
+// here now.
 enum IconKind {
   Close;
   Hamburger;
@@ -19,9 +21,9 @@ enum IconKind {
 
 // @todo: This just contains a few icons I stole from Bootstrap. This
 // isn't a great way to do this, but it'll let us test some things.
-class Icon extends ImmutableComponent {
-  @prop final kind:IconKind;
-  @prop final styles:ClassName = null;
+class Icon extends AutoComponent {
+  final kind:IconKind;
+  final styles:ClassName = null;
 
   function render(context:Context) {
     return new Svg<'svg'>({

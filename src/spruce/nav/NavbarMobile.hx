@@ -9,10 +9,10 @@ import spruce.sidebar.*;
 
 using Nuke;
 
-class NavbarMobile extends ObserverComponent {
-  @prop final children:HtmlChildren;
-  @prop final sidebarTitle:String = null;
-  @track var isOpen:Bool = false;
+class NavbarMobile extends AutoComponent {
+  final children:HtmlChildren;
+  final sidebarTitle:String = null;
+  var isOpen:Bool = false;
 
   function render(context:Context) {
     return new Fragment({

@@ -6,7 +6,7 @@ import spruce.core.Box;
 
 using Nuke;
 
-class MenuItem extends ImmutableComponent {
+class MenuItem extends AutoComponent {
   public static final baseStyles = Css.atoms({
     padding: [
       theme(spruce.menu.item.padding.y, 0.rem()),
@@ -14,8 +14,8 @@ class MenuItem extends ImmutableComponent {
     ]
   });
 
-  @prop final styles:ClassName = null;
-  @prop final child:HtmlChild;
+  final styles:ClassName = null;
+  final child:HtmlChild;
 
   public function render(context:Context) {
     return new Box({

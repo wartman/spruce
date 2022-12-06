@@ -12,10 +12,10 @@ enum TextKind {
   Italic;
 }
 
-class Text extends ImmutableComponent {
-  @prop final styles:ClassName = null;
-  @prop final content:String;
-  @prop final kind:TextKind = Normal;
+class Text extends AutoComponent {
+  final styles:ClassName = null;
+  final content:String;
+  final kind:TextKind = Normal;
 
   function render(context:Context):Component {
     return switch kind {

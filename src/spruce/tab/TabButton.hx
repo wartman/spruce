@@ -7,8 +7,8 @@ import spruce.menu.*;
 
 using Nuke;
 
-class TabButton extends ImmutableComponent {
-  @prop final tab:Tab;
+class TabButton extends AutoComponent {
+  final tab:Tab;
 
   public function render(context:Context) {
     var tabs = TabContext.from(context);

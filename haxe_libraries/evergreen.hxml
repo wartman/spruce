@@ -1,2 +1,2 @@
--cp ../evergreen/refactor
+-cp ../evergreen/src
 -D evergreen=0.0.1

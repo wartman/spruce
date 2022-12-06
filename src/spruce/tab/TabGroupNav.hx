@@ -7,9 +7,9 @@ import spruce.core.*;
 
 using Nuke;
 
-class TabGroupNav extends ImmutableComponent {
-  @prop final children:HtmlChildren;
-  @prop final spacingBottom:Spacing = Medium;
+class TabGroupNav extends AutoComponent {
+  final children:HtmlChildren;
+  final spacingBottom:Spacing = Medium;
 
   function render(context:Context) {
     var tabs = TabContext.from(context);

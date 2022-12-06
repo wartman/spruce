@@ -3,13 +3,14 @@ package spruce.collapse;
 import pine.*;
 import pine.html.*;
 import spruce.core.Box;
-import spruce.animation.Animated;
+import eg.Animated;
+import eg.CollapseContext;
 
 using Nuke;
 
-class CollapseBody extends ObserverComponent {
-  @prop final children:HtmlChildren;
-  @prop final styles:ClassName = null;
+class CollapseBody extends AutoComponent {
+  final children:HtmlChildren;
+  final styles:ClassName = null;
 
   function render(context:Context) {
     var collapse = CollapseContext.from(context);

@@ -6,9 +6,9 @@ import spruce.core.Box;
 
 using Nuke;
 
-class ControlGroup extends ImmutableComponent {
-  @prop final styles:ClassName = null;
-  @prop final controls:HtmlChildren;
+class ControlGroup extends AutoComponent {
+  final styles:ClassName = null;
+  final controls:HtmlChildren;
   
   public function render(context:Context) {
     return new Box({

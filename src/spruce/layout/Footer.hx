@@ -7,10 +7,10 @@ import spruce.layout.Container;
 
 using Nuke;
 
-class Footer extends ImmutableComponent {
-  @prop final styles:ClassName = null;
-  @prop final children:HtmlChildren;
-  @prop final kind:ContainerKind = Lg;
+class Footer extends AutoComponent {
+  final styles:ClassName = null;
+  final children:HtmlChildren;
+  final kind:ContainerKind = Lg;
 
   public function render(context:Context) {
     return new Box({

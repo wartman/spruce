@@ -5,9 +5,9 @@ import pine.html.*;
 
 using Nuke;
 
-class SidebarTitle extends ImmutableComponent {
-  @prop final styles:ClassName = null;
-  @prop final child:HtmlChild;
+class SidebarTitle extends AutoComponent {
+  final styles:ClassName = null;
+  final child:HtmlChild;
 
   public function render(context:Context) {
     return new Html<'h5'>({

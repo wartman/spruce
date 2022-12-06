@@ -6,12 +6,12 @@ import spruce.core.Box;
 
 using Nuke;
 
-class Breadcrumbs extends ImmutableComponent {
-  @prop final styles:ClassName = null;
-  @prop final prefix:HtmlChild = null;
-  @prop final suffix:HtmlChild = null;
-  @prop final separator:HtmlChild;
-  @prop final children:HtmlChildren;
+class Breadcrumbs extends AutoComponent {
+  final styles:ClassName = null;
+  final prefix:HtmlChild = null;
+  final suffix:HtmlChild = null;
+  final separator:HtmlChild;
+  final children:HtmlChildren;
 
   public function render(context:Context) {
     return new Box({

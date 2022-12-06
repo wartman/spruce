@@ -14,7 +14,7 @@ enum ContainerKind {
   Xl;
 }
 
-class Container extends ImmutableComponent {
+class Container extends AutoComponent {
   public static final baseStyles = Css.atoms({
     display: 'flex',
     marginLeft: 'auto',
@@ -24,11 +24,11 @@ class Container extends ImmutableComponent {
     paddingRight: theme(spruce.spacing.large),
   });
 
-  @prop final kind:ContainerKind = Fluid;
-  @prop final spacing:Spacing = None;
-  @prop final layout:Layout = Auto;
-  @prop final styles:ClassName = null;
-  @prop final children:HtmlChildren;
+  final kind:ContainerKind = Fluid;
+  final spacing:Spacing = None;
+  final layout:Layout = Auto;
+  final styles:ClassName = null;
+  final children:HtmlChildren;
 
   public function render(context:Context) {
     return new Box({

@@ -6,9 +6,9 @@ import spruce.core.Box;
 
 using Nuke;
 
-class ModalFooter extends ImmutableComponent {
-  @prop final styles:ClassName = null;
-  @prop final children:HtmlChildren;
+class ModalFooter extends AutoComponent {
+  final styles:ClassName = null;
+  final children:HtmlChildren;
 
   public function render(context:Context) {
     return new Box({

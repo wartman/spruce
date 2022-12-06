@@ -4,12 +4,12 @@ import pine.*;
 import pine.html.*;
 import spruce.core.Box;
 import spruce.core.BorderRadius;
-import spruce.collapse.CollapseContext;
-import spruce.accordian.AccordianContext;
+import eg.CollapseContext;
+import eg.AccordianContext;
 
 using Nuke;
 
-class Collapse extends ImmutableComponent {
+class Collapse extends AutoComponent {
   public static final baseStyles = Css.atoms({
     borderStyle: 'solid',
     borderWidth: 1.px(),
@@ -17,10 +17,10 @@ class Collapse extends ImmutableComponent {
     backgroundColor: theme(spruce.color.neutral0),
   });
 
-  @prop final styles:ClassName = null;
-  @prop final children:HtmlChildren;
-  @prop final borderRadius:BorderRadius = Medium;
-  @prop final duration:Int = 200;
+  final styles:ClassName = null;
+  final children:HtmlChildren;
+  final borderRadius:BorderRadius = Medium;
+  final duration:Int = 200;
 
   function render(context:Context) {
     return new CollapseContextProvider({

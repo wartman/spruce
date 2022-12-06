@@ -7,11 +7,11 @@ import spruce.core.Box;
 
 using Nuke;
 
-class NavbarBrand extends ImmutableComponent {
-  @prop final styles:ClassName = null;
-  @prop final child:HtmlChild;
-  @prop final onClick:(e:Event)->Void = null;
-  @prop final href:String = null;
+class NavbarBrand extends AutoComponent {
+  final styles:ClassName = null;
+  final child:HtmlChild;
+  final onClick:(e:Event)->Void = null;
+  final href:String = null;
 
   public function render(context:Context):Component {
     var navbarBrandStyle = Css.atoms({

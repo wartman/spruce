@@ -5,11 +5,11 @@ import pine.html.*;
 import spruce.core.*;
 import spruce.control.*;
 import spruce.icon.Icon;
-import spruce.layer.LayerContext;
+import eg.LayerContext;
 
 using Nuke;
 
-class SidebarHeader extends ImmutableComponent {
+class SidebarHeader extends AutoComponent {
   @prop final styles:ClassName = null;
   @prop final child:HtmlChild = null;
   

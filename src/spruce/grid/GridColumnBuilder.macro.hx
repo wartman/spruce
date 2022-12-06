@@ -38,12 +38,6 @@ private function buildGridColumn(infos:Array<GridColumnInfo>) {
     }
     
     builder.add(macro class {
-      static final type = new pine.UniqueId();
-
-      public function getComponentType() {
-        return type;
-      }
-
       function getStyles():nuke.ClassName {
         return $expr;
       }
@@ -58,7 +52,12 @@ private function buildGridColumn(infos:Array<GridColumnInfo>) {
         name: 'GridColumn',
         sub: 'GridColumnBase',
         params: []
-      }, [], false, true, false),
+      }, [
+        {
+          pack: [ 'pine', 'core' ],
+          name: 'HasComponentType'
+        }
+      ], false, true, false),
       fields: builder.export()
     });
   }

@@ -1,4 +1,4 @@
--cp refactor
+-cp src
 -cp test
 
 -lib nuke
@@ -11,5 +11,6 @@
 -D analyzer-optimize
 -dce full
 
--main Run3
+-main Run
+
 -js dist/test.js

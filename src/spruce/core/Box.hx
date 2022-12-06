@@ -2,6 +2,8 @@ package spruce.core;
 
 import pine.*;
 import pine.html.*;
+import pine.diffing.Key;
+import pine.internal.UniqueId;
 import pine.html.HtmlAttributes;
 import pine.html.HtmlEvents;
 import pine.html.TagTypes.getTypeForTag;
@@ -23,7 +25,7 @@ typedef BoxProps = {
 } & AriaAttributes & GlobalAttr & HtmlEvents;
 
 class Box extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
-  final type:UniqueId;
+  final componentType:UniqueId;
 
   public function new(props:BoxProps) {
     var tag:BoxTag = props.tag == null ? Div : props.tag;
@@ -34,7 +36,7 @@ class Box extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
     var children = props.children == null ? [] : props.children;
     var key = props.key;
 
-    type = getTypeForTag(tag);
+    componentType = getTypeForTag(tag);
     
     props.className = ClassName.ofArray([
       props.styles,
@@ -62,7 +64,7 @@ class Box extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
   }
 
   public function getComponentType():UniqueId {
-    return type;
+    return componentType;
   }
 }
 

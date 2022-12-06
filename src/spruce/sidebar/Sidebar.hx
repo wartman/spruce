@@ -2,18 +2,19 @@ package spruce.sidebar;
 
 import pine.*;
 import pine.html.*;
-import spruce.animation.Keyframes;
-import spruce.core.PortalContext;
-import spruce.dom.DomTools;
-import spruce.layer.*;
+import spruce.core.*;
+import eg.Keyframes;
+import eg.internal.DomTools;
+import eg.Layer;
+import eg.PortalContext;
 
 using Nuke;
 
-class Sidebar extends ImmutableComponent {
-  @prop final onHide:()->Void;
-  @prop final children:HtmlChildren;
-  @prop final attachment:SidebarAttachment = Left;
-  @prop final hideOnEscape:Bool = true;
+class Sidebar extends AutoComponent {
+  final onHide:()->Void;
+  final children:HtmlChildren;
+  final attachment:SidebarAttachment = Left;
+  final hideOnEscape:Bool = true;
   
   function render(context:Context) {
     var animation:Keyframes = switch attachment {
@@ -29,6 +30,10 @@ class Sidebar extends ImmutableComponent {
     return new Portal({
       target: PortalContext.from(context).getTarget(),
       child: new Layer({
+        styles: [
+          'spruce-overlay',
+          Overlay.baseStyles
+        ],
         hideOnEscape: hideOnEscape,
         showAnimation: animation,
         hideAnimation: animation.invert(),

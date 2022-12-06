@@ -3,17 +3,19 @@ package spruce.dropdown;
 import pine.*;
 import pine.html.*;
 import spruce.menu.MenuLink;
+import eg.DropdownContext;
+import eg.DropdownItem;
 
 using Nuke;
 
-class DropdownMenuLink extends ImmutableComponent {
+class DropdownMenuLink extends AutoComponent {
   @prop final styles:ClassName = null;
   @prop final child:HtmlChild;
   @prop final kind:MenuLinkKind;
   @prop final closeOnClick:Bool = true;
 
   public function render(context:Context) {
-    return new MenuLink({
+    var link = new MenuLink({
       styles: [
         'spruce-dropdown-menu-link',
         Css.atoms({
@@ -37,5 +39,7 @@ class DropdownMenuLink extends ImmutableComponent {
       kind: kind,
       child: child
     });
+
+    return new DropdownItem({ child: link });
   }
 }

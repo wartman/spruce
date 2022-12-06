@@ -7,13 +7,13 @@ import spruce.core.*;
 
 using Nuke;
 
-class Menu extends ImmutableComponent {
-  @prop final layout:Layout = Horizontal;
-  @prop final spacing:Spacing = Small;
-  @prop final styles:ClassName = null;
-  @prop final onClick:EventListener = null;
-  @prop final children:HtmlChildren;
-  @prop final role:String = null;
+class Menu extends AutoComponent {
+  final layout:Layout = Horizontal;
+  final spacing:Spacing = Small;
+  final styles:ClassName = null;
+  final onClick:EventListener = null;
+  final children:HtmlChildren;
+  final role:String = null;
 
   public function render(context:Context) {
     return new Box({

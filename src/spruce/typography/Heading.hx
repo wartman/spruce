@@ -1,10 +1,12 @@
 package spruce.typography;
 
 import pine.*;
+import pine.debug.Debug;
 import pine.html.*;
 import pine.html.HtmlAttributes;
 import pine.html.HtmlEvents;
 import pine.html.TagTypes.getTypeForTag;
+import pine.internal.UniqueId;
 
 using Nuke;
 
@@ -34,12 +36,12 @@ class Heading extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
     });
   }
 
+  public function getComponentType() {
+    return type;
+  }
+
   function getTag(level:Int):String {
     Debug.assert(level > 0 && level < 6);
     return 'h$level';
-  }
-
-  public function getComponentType():UniqueId {
-    return type;
   }
 }

@@ -7,7 +7,7 @@ import spruce.button.Button;
 
 using Nuke;
 
-class ControlButton extends ImmutableComponent {
+class ControlButton extends AutoComponent {
   public static final baseStyles = Css.atoms({
     outline: 'none',
     border: 'none',
@@ -26,13 +26,13 @@ class ControlButton extends ImmutableComponent {
     opacity: theme(spruce.controlButton.disabled.opacity, 0.4)
   });
 
-  @prop final onClick:EventListener = null;
-  @prop final href:String = null;
-  @prop final styles:ClassName = null;
-  @prop final disabledStyles:ClassName = null;
-  @prop final ariaLabel:String;
-  @prop final child:HtmlChild = null;
-  @prop final disabled:Bool = false;
+  final onClick:EventListener = null;
+  final href:String = null;
+  final styles:ClassName = null;
+  final disabledStyles:ClassName = null;
+  final ariaLabel:String;
+  final child:HtmlChild = null;
+  final disabled:Bool = false;
 
   public function render(context:Context):Component {
     var onClick = e -> {
