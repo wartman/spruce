@@ -7,7 +7,6 @@ import spruce.core.*;
 import spruce.icon.Icon;
 import eg.PositionedAttachment;
 import eg.DropdownContext;
-import eg.Dropdown;
 
 using Nuke;
 

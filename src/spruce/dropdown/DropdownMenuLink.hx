@@ -9,10 +9,10 @@ import eg.DropdownItem;
 using Nuke;
 
 class DropdownMenuLink extends AutoComponent {
-  @prop final styles:ClassName = null;
-  @prop final child:HtmlChild;
-  @prop final kind:MenuLinkKind;
-  @prop final closeOnClick:Bool = true;
+  final styles:ClassName = null;
+  final child:HtmlChild;
+  final kind:MenuLinkKind;
+  final closeOnClick:Bool = true;
 
   public function render(context:Context) {
     var link = new MenuLink({
