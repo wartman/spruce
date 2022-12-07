@@ -1,5 +1,6 @@
 package spruce.collapse;
 
+import eg.Keyframes;
 import pine.*;
 import pine.html.*;
 import spruce.core.Box;
@@ -17,15 +18,16 @@ class CollapseBody extends AutoComponent {
 
     return new Animated({
       dontAnimateInitial: true,
-      createKeyframes: switch collapse.status {
-        case Collapsed: context -> [
+      dontRepeatCurrentAnimation: true,
+      keyframes: switch collapse.status {
+        case Collapsed: new Keyframes('collapse', context -> [
           { height: getHeight(context), offset: 0 },
           { height: 0, offset: 1 }
-        ];
-        case Expanded: context -> [
+        ]);
+        case Expanded: new Keyframes('expand', context -> [
           { height: 0, offset: 0 },
           { height: getHeight(context), offset: 1 }
-        ];
+        ]);
       },
       onFinished: context -> {
         #if (js && !nodejs)

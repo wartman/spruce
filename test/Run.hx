@@ -1,3 +1,4 @@
+import eg.Keyframes;
 import js.Browser;
 import pine.*;
 import pine.html.*;
@@ -225,15 +226,15 @@ class Toggle extends AutoComponent {
       spacing: Small,
       children: [
         new Animated({
-          createKeyframes: switch toggle {
-            case true: _ -> [
+          keyframes: switch toggle {
+            case true: new Keyframes('in', _ -> [
               { opacity: 1, width: 100.pct() },
               { opacity: 0, width: 0 }
-            ];
-            case false: _ -> [
+            ]);
+            case false: new Keyframes('out', _ -> [
               { opacity: 0, width: 0 },
               { opacity: 1, width: 100.pct() }
-            ];
+            ]);
           },
           duration: 300,
           onFinished: context -> {

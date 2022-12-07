@@ -17,15 +17,25 @@ class Sidebar extends AutoComponent {
   final hideOnEscape:Bool = true;
   
   function render(context:Context) {
-    var animation:Keyframes = switch attachment {
-      case Left: [
+    var show = switch attachment {
+      case Left: new Keyframes('show:left', context -> [
         { opacity: 0, margin: '0 0 0 -500px' },
         { opacity: 1, margin: 0 }
-      ];
-      case Right: [
+      ]);
+      case Right: new Keyframes('show:right', context -> [
         { opacity: 0, margin: '0 -500px 0 0' },
         { opacity: 1, margin: 0 }
-      ];
+      ]);
+    };
+    var hide = switch attachment {
+      case Left: new Keyframes('hide:left', context -> [
+        { opacity: 1, margin: 0 },
+        { opacity: 0, margin: '0 0 0 -500px' }
+      ]);
+      case Right: new Keyframes('hide:right', context -> [
+        { opacity: 1, margin: 0 },
+        { opacity: 0, margin: '0 -500px 0 0' }
+      ]);
     };
     return new Portal({
       target: PortalContext.from(context).getTarget(),
@@ -35,8 +45,8 @@ class Sidebar extends AutoComponent {
           Overlay.baseStyles
         ],
         hideOnEscape: hideOnEscape,
-        showAnimation: animation,
-        hideAnimation: animation.invert(),
+        showAnimation: show,
+        hideAnimation: hide,
         beforeShow: () -> {
           lockBody();
         },
