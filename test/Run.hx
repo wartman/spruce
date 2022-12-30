@@ -110,7 +110,7 @@ class App extends AutoComponent {
             }),
             new GridColumn<4, 'md:1'>({
               children: [
-                new Accordian({
+                new Accordion({
                   children: [
                     // new CardHeader({
                     //   children: [

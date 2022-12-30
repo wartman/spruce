@@ -3,19 +3,19 @@ package spruce.accordian;
 import pine.*;
 import pine.html.*;
 import spruce.core.*;
-import eg.AccordianContext;
+import eg.AccordionContext;
 
 using Nuke;
 
-class Accordian extends AutoComponent {
+class Accordion extends AutoComponent {
   final styles:ClassName = null;
   final sticky:Bool = false;
   final children:HtmlChildren;
   final spacing:Spacing = Small;
 
   function render(context:Context) {
-    return new AccordianContextProvider({
-      create: () -> new AccordianContext({ sticky: sticky }),
+    return new AccordionContextProvider({
+      create: () -> new AccordionContext({ sticky: sticky }),
       dispose: accordian -> accordian.dispose(),
       render: accordian -> new Box({
         styles: [

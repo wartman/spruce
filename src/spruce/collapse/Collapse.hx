@@ -5,7 +5,7 @@ import pine.html.*;
 import spruce.core.Box;
 import spruce.core.BorderRadius;
 import eg.CollapseContext;
-import eg.AccordianContext;
+import eg.AccordionContext;
 
 using Nuke;
 
@@ -29,14 +29,14 @@ class Collapse extends AutoComponent {
           status: Collapsed,
           duration: duration
         });
-        switch AccordianContext.maybeFrom(context) {
+        switch AccordionContext.maybeFrom(context) {
           case Some(accordian): accordian.add(collapse);
           case None:
         }
         return collapse;
       },
       dispose: collapse -> {
-        switch AccordianContext.maybeFrom(context) {
+        switch AccordionContext.maybeFrom(context) {
           case Some(accordian): accordian.remove(collapse);
           case None:
         }

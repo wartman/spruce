@@ -10,8 +10,8 @@ import eg.LayerContext;
 using Nuke;
 
 class SidebarHeader extends AutoComponent {
-  @prop final styles:ClassName = null;
-  @prop final child:HtmlChild = null;
+  final styles:ClassName = null;
+  final child:HtmlChild = null;
   
   public function render(context:Context) {
     return new Box({

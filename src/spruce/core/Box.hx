@@ -3,7 +3,7 @@ package spruce.core;
 import pine.*;
 import pine.html.*;
 import pine.diffing.Key;
-import pine.internal.UniqueId;
+import pine.core.UniqueId;
 import pine.html.HtmlAttributes;
 import pine.html.HtmlEvents;
 import pine.html.TagTypes.getTypeForTag;

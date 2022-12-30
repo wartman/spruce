@@ -30,8 +30,8 @@ class ButtonGroup extends AutoComponent {
     })
   ]);
 
-  @prop final styles:ClassName = null;
-  @prop final children:HtmlChildren;
+  final styles:ClassName = null;
+  final children:HtmlChildren;
 
   function render(context:Context) {
     return new Box({

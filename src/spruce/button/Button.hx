@@ -1,7 +1,7 @@
 package spruce.button;
 
 import pine.*;
-import pine.internal.UniqueId;
+import pine.core.UniqueId;
 import pine.html.*;
 import pine.html.HtmlAttributes;
 import pine.html.HtmlEvents;
