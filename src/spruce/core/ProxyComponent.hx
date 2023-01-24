@@ -9,8 +9,7 @@ abstract class ProxyComponent extends Component {
   function createElement() {
     return new Element(
       this, 
-      useProxyElementEngine((element:ElementOf<ProxyComponent>) -> element.component.render(element)),
-      []
+      useProxyElementEngine((element:ElementOf<ProxyComponent>) -> element.component.render(element))
     );
   }
 }
