@@ -1,7 +1,6 @@
 package spruce.layout;
 
 import pine.*;
-import pine.html.*;
 import spruce.core.*;
 
 using Nuke;
@@ -28,7 +27,7 @@ class Container extends AutoComponent {
   final spacing:Spacing = None;
   final layout:Layout = Auto;
   final styles:ClassName = null;
-  final children:HtmlChildren;
+  final children:Children;
 
   public function render(context:Context) {
     return new Box({

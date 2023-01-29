@@ -1,12 +1,12 @@
 package spruce.typography;
 
 import pine.*;
+import pine.core.UniqueId;
 import pine.debug.Debug;
 import pine.html.*;
 import pine.html.HtmlAttributes;
 import pine.html.HtmlEvents;
 import pine.html.TagTypes.getTypeForTag;
-import pine.core.UniqueId;
 
 using Nuke;
 
@@ -15,7 +15,7 @@ typedef HeadingProps = {
   ?styles:ClassName,
   ?onClick:EventListener,
   ?role:String,
-  ?children:HtmlChildren
+  ?children:Children
 }
 
 class Heading extends HtmlElementComponent<GlobalAttr & HtmlEvents> {

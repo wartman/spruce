@@ -9,7 +9,7 @@ using Nuke;
 
 class NavbarBrand extends AutoComponent {
   final styles:ClassName = null;
-  final child:HtmlChild;
+  final child:Child;
   final onClick:(e:Event)->Void = null;
   final href:String = null;
 

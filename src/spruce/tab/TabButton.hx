@@ -1,8 +1,8 @@
 package spruce.tab;
 
-import spruce.core.BorderRadius;
-import spruce.button.Button;
 import pine.*;
+import spruce.button.Button;
+import spruce.core.BorderRadius;
 import spruce.menu.*;
 
 using Nuke;

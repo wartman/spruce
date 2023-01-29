@@ -1,7 +1,6 @@
 package spruce.button;
 
 import pine.*;
-import pine.html.*;
 import spruce.core.*;
 
 using Nuke;
@@ -31,7 +30,7 @@ class ButtonGroup extends AutoComponent {
   ]);
 
   final styles:ClassName = null;
-  final children:HtmlChildren;
+  final children:Children;
 
   function render(context:Context) {
     return new Box({

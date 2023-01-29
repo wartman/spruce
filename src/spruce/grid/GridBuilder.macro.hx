@@ -1,7 +1,7 @@
 package spruce.grid;
 
-import haxe.macro.Expr;
 import haxe.macro.Context;
+import haxe.macro.Expr;
 import pine.macro.ClassBuilder;
 
 using pine.macro.MacroTools;

@@ -1,7 +1,6 @@
 package spruce.menu;
 
 import pine.*;
-import pine.html.*;
 import pine.html.HtmlEvents;
 import spruce.core.*;
 
@@ -12,7 +11,7 @@ class Menu extends AutoComponent {
   final spacing:Spacing = Small;
   final styles:ClassName = null;
   final onClick:EventListener = null;
-  final children:HtmlChildren;
+  final children:Children;
   final role:String = null;
 
   public function render(context:Context) {

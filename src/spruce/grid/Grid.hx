@@ -2,7 +2,6 @@ package spruce.grid;
 
 import pine.*;
 import pine.diffing.*;
-import pine.html.*;
 import spruce.core.*;
 
 using Nuke;
@@ -12,11 +11,11 @@ class Grid<@:const Rest> {}
 
 abstract class GridBase extends ProxyComponent {
   final styles:Null<ClassName>;
-  final children:HtmlChildren;
+  final children:Children;
   final span:GridSpan;
 
   public function new(props:{
-    children:HtmlChildren,
+    children:Children,
     ?styles:ClassName,
     ?span:GridSpan,
     ?key:Key

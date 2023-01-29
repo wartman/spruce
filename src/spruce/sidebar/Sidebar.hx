@@ -1,18 +1,17 @@
 package spruce.sidebar;
 
-import pine.*;
-import pine.html.*;
-import spruce.core.*;
 import eg.Keyframes;
-import eg.internal.DomTools;
 import eg.Layer;
 import eg.PortalContext;
+import eg.internal.DomTools;
+import pine.*;
+import spruce.core.*;
 
 using Nuke;
 
 class Sidebar extends AutoComponent {
   final onHide:()->Void;
-  final children:HtmlChildren;
+  final children:Children;
   final attachment:SidebarAttachment = Left;
   final hideOnEscape:Bool = true;
   

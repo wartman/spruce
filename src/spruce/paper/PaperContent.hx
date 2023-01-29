@@ -2,13 +2,12 @@ package spruce.paper;
 
 import pine.*;
 import spruce.core.Box;
-import pine.html.HtmlChildren;
 
 using Nuke;
 
 class PaperContent extends AutoComponent {
   final styles:ClassName = null;
-  final children:HtmlChildren;
+  final children:Children;
 
   function render(context:Context) {
     return new Box({

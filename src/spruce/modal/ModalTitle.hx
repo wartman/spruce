@@ -1,7 +1,6 @@
 package spruce.modal;
 
 import pine.*;
-import pine.html.*;
 import spruce.typography.Heading;
 
 using Nuke;
@@ -9,7 +8,7 @@ using Nuke;
 class ModalTitle extends AutoComponent {
   final styles:ClassName = null;
   final level:Int = 5;
-  final child:HtmlChild;
+  final child:Child;
 
   public function render(context:Context) {
     return new Heading({

@@ -1,9 +1,9 @@
 package spruce.core;
 
 import pine.*;
-import pine.html.*;
-import pine.diffing.Key;
 import pine.core.UniqueId;
+import pine.diffing.Key;
+import pine.html.*;
 import pine.html.HtmlAttributes;
 import pine.html.HtmlEvents;
 import pine.html.TagTypes.getTypeForTag;
@@ -20,7 +20,7 @@ typedef BoxProps = {
   ?spacing:Spacing,
   ?shadow:Shadow,
   ?borderRadius:BorderRadius,
-  ?children:HtmlChildren,
+  ?children:Children,
   ?key:Key,
 } & AriaAttributes & GlobalAttr & HtmlEvents;
 

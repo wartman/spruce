@@ -1,10 +1,9 @@
 package spruce.collapse;
 
+import eg.CollapseContext;
 import pine.*;
-import pine.html.*;
 import spruce.core.Box;
 import spruce.icon.Icon;
-import eg.CollapseContext;
 
 using Nuke;
 
@@ -19,7 +18,7 @@ class CollapseHeader extends AutoComponent {
   });
   
   final styles:ClassName = null;
-  final child:HtmlChild;
+  final child:Child;
 
   function render(context:Context) {
     var collapse = CollapseContext.from(context);

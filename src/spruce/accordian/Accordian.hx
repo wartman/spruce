@@ -1,16 +1,15 @@
 package spruce.accordian;
 
-import pine.*;
-import pine.html.*;
-import spruce.core.*;
 import eg.AccordionContext;
+import pine.*;
+import spruce.core.*;
 
 using Nuke;
 
 class Accordion extends AutoComponent {
   final styles:ClassName = null;
   final sticky:Bool = false;
-  final children:HtmlChildren;
+  final children:Children;
   final spacing:Spacing = Small;
 
   function render(context:Context) {

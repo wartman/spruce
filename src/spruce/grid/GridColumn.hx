@@ -2,7 +2,6 @@ package spruce.grid;
 
 import pine.*;
 import pine.diffing.*;
-import pine.html.*;
 import spruce.core.*;
 
 using Nuke;
@@ -12,10 +11,10 @@ class GridColumn<@:const Rest> {}
 
 abstract class GridColumnBase extends ProxyComponent {
   final styles:Null<ClassName>;
-  final children:HtmlChildren;
+  final children:Children;
 
   public function new(props:{
-    children:HtmlChildren,
+    children:Children,
     ?styles:ClassName,
     ?key:Key
   }) {

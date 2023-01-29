@@ -47,7 +47,7 @@ class Button extends HtmlElementComponent<GlobalAttr & ButtonAttr & AnchorAttr &
     ?styles:ClassName,
     ?href:String,
     ?onClick:EventListener,
-    ?children:HtmlChildren
+    ?children:Children
   }) {
     var tag:ButtonTag = props.href != null 
       ? Anchor 

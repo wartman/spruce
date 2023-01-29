@@ -31,7 +31,7 @@ class ControlButton extends AutoComponent {
   final styles:ClassName = null;
   final disabledStyles:ClassName = null;
   final ariaLabel:String;
-  final child:HtmlChild = null;
+  final child:Child = null;
   final disabled:Bool = false;
 
   public function render(context:Context):Component {

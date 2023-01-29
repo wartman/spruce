@@ -1,11 +1,10 @@
 package spruce.collapse;
 
-import pine.*;
-import pine.html.*;
-import spruce.core.Box;
-import spruce.core.BorderRadius;
-import eg.CollapseContext;
 import eg.AccordionContext;
+import eg.CollapseContext;
+import pine.*;
+import spruce.core.BorderRadius;
+import spruce.core.Box;
 
 using Nuke;
 
@@ -18,7 +17,7 @@ class Collapse extends AutoComponent {
   });
 
   final styles:ClassName = null;
-  final children:HtmlChildren;
+  final children:Children;
   final borderRadius:BorderRadius = Medium;
   final duration:Int = 200;
 

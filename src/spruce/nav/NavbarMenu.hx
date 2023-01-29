@@ -1,14 +1,13 @@
 package spruce.nav;
 
 import pine.*;
-import pine.html.*;
 import spruce.menu.Menu;
 
 using Nuke;
 
 class NavbarMenu extends AutoComponent {
   final styles:ClassName = null;
-  final children:HtmlChildren;
+  final children:Children;
 
   public function render(context:Context) {
     return new Menu({

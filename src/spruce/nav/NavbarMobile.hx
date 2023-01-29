@@ -1,16 +1,15 @@
 package spruce.nav;
 
 import pine.*;
-import pine.html.*;
-import spruce.core.*;
 import spruce.control.*;
+import spruce.core.*;
 import spruce.icon.Icon;
 import spruce.sidebar.*;
 
 using Nuke;
 
 class NavbarMobile extends AutoComponent {
-  final children:HtmlChildren;
+  final children:Children;
   final sidebarTitle:String = null;
   var isOpen:Bool = false;
 

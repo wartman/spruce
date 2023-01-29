@@ -28,7 +28,7 @@ class Text extends AutoComponent {
       case Normal if (styles != null):
         new Html<'span'>({ className: styles, children: content });
       case Normal: 
-        new HtmlTextComponent({ content: content });
+        new pine.Text(content);
     }
   }
 }

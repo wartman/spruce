@@ -1,7 +1,6 @@
 package spruce.menu;
 
 import pine.*;
-import pine.html.*;
 import spruce.core.Box;
 
 using Nuke;
@@ -15,7 +14,7 @@ class MenuItem extends AutoComponent {
   });
 
   final styles:ClassName = null;
-  final child:HtmlChild;
+  final child:Child;
 
   public function render(context:Context) {
     return new Box({

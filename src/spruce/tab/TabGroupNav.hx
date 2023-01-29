@@ -1,14 +1,13 @@
 package spruce.tab;
 
 import pine.*;
-import pine.html.*;
-import spruce.menu.Menu;
 import spruce.core.*;
+import spruce.menu.Menu;
 
 using Nuke;
 
 class TabGroupNav extends AutoComponent {
-  final children:HtmlChildren;
+  final children:Children;
   final spacingBottom:Spacing = Medium;
 
   function render(context:Context) {

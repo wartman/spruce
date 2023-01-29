@@ -25,7 +25,7 @@ class MenuLink extends AutoComponent {
   final styles:ClassName = null;
   final selectedStyles:ClassName = null;
   final selected:Bool = false;
-  final child:HtmlChild;
+  final child:Child;
   final onClick:EventListener = null;
 
   public function render(context:Context) {

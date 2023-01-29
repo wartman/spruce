@@ -1,7 +1,6 @@
 package spruce.paper;
 
 import pine.*;
-import pine.html.*;
 import pine.html.HtmlEvents;
 import spruce.core.*;
 
@@ -17,7 +16,7 @@ class Paper extends AutoComponent {
   });
 
   final styles:ClassName = null;
-  final children:HtmlChildren;
+  final children:Children;
   final layout:Layout = Auto;
   final borderRadius:BorderRadius = Medium;
   final shadow:Shadow = Medium;

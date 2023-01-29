@@ -1,17 +1,16 @@
 package spruce.dropdown;
 
-import pine.*;
-import pine.html.*;
-import spruce.menu.*;
-import spruce.core.Layout;
-import spruce.panel.Panel;
 import eg.DropdownToggle;
+import pine.*;
+import spruce.core.Layout;
+import spruce.menu.*;
+import spruce.panel.Panel;
 
 using Nuke;
 using pine.core.OptionTools;
 
 class DropdownMenu extends AutoComponent {
-  final children:HtmlChildren; 
+  final children:Children; 
   final layout:Layout = Vertical;
 
   public function render(context:Context) {

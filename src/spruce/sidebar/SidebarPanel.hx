@@ -1,13 +1,12 @@
 package spruce.sidebar;
 
 import pine.*;
-import pine.html.HtmlChildren;
 import spruce.paper.Paper;
 
 using Nuke;
 
 class SidebarPanel extends AutoComponent {
-  final children:HtmlChildren;
+  final children:Children;
   final attachment:SidebarAttachment;
 
   public function render(context:Context) {

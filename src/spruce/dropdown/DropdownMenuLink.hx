@@ -1,16 +1,15 @@
 package spruce.dropdown;
 
-import pine.*;
-import pine.html.*;
-import spruce.menu.MenuLink;
 import eg.DropdownContext;
 import eg.DropdownItem;
+import pine.*;
+import spruce.menu.MenuLink;
 
 using Nuke;
 
 class DropdownMenuLink extends AutoComponent {
   final styles:ClassName = null;
-  final child:HtmlChild;
+  final child:Child;
   final kind:MenuLinkKind;
   final closeOnClick:Bool = true;
 

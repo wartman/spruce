@@ -1,13 +1,12 @@
 package spruce.modal;
 
 import pine.*;
-import pine.html.*;
 import spruce.core.Box;
 
 using Nuke;
 
 class ModalBody extends AutoComponent {
-  final children:HtmlChildren;
+  final children:Children;
 
   public function render(context:Context) {
     return new Box({

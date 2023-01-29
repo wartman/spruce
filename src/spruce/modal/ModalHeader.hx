@@ -1,18 +1,17 @@
 package spruce.modal;
 
-import pine.*;
-import pine.html.*;
-import spruce.core.*;
-import spruce.control.*;
-import spruce.icon.Icon;
 import eg.LayerContext;
+import pine.*;
+import spruce.control.*;
+import spruce.core.*;
+import spruce.icon.Icon;
 
 using Nuke;
 
 class ModalHeader extends AutoComponent {
   final styles:ClassName = null;
   // final priority:Priority = null;
-  final child:HtmlChild;
+  final child:Child;
 
   public function render(context:Context) {
     return new Box({

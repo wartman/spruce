@@ -1,17 +1,16 @@
 package spruce.sidebar;
 
-import pine.*;
-import pine.html.*;
-import spruce.core.*;
-import spruce.control.*;
-import spruce.icon.Icon;
 import eg.LayerContext;
+import pine.*;
+import spruce.control.*;
+import spruce.core.*;
+import spruce.icon.Icon;
 
 using Nuke;
 
 class SidebarHeader extends AutoComponent {
   final styles:ClassName = null;
-  final child:HtmlChild = null;
+  final child:Child = null;
   
   public function render(context:Context) {
     return new Box({

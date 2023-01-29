@@ -1,7 +1,6 @@
 package spruce.layout;
 
 import pine.*;
-import pine.html.*;
 import spruce.core.Box;
 import spruce.layout.Container;
 
@@ -9,7 +8,7 @@ using Nuke;
 
 class Footer extends AutoComponent {
   final styles:ClassName = null;
-  final children:HtmlChildren;
+  final children:Children;
   final kind:ContainerKind = Lg;
 
   public function render(context:Context) {

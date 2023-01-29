@@ -7,7 +7,7 @@ using Nuke;
 
 class SidebarTitle extends AutoComponent {
   final styles:ClassName = null;
-  final child:HtmlChild;
+  final child:Child;
 
   public function render(context:Context) {
     return new Html<'h5'>({

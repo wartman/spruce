@@ -1,7 +1,6 @@
 package spruce.nav;
 
 import pine.*;
-import pine.html.*;
 import spruce.core.Box;
 import spruce.core.Spacing;
 import spruce.layout.Container;
@@ -18,7 +17,7 @@ class Navbar extends AutoComponent {
   final kind:ContainerKind = Lg;
   final spacing:Spacing = None;
   final styles:ClassName = null;
-  final children:HtmlChildren;
+  final children:Children;
 
   public function render(context:Context):Component {
     return new Box({

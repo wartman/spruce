@@ -1,16 +1,15 @@
 package spruce.collapse;
 
-import eg.Keyframes;
-import pine.*;
-import pine.html.*;
-import spruce.core.Box;
 import eg.Animated;
 import eg.CollapseContext;
+import eg.Keyframes;
+import pine.*;
+import spruce.core.Box;
 
 using Nuke;
 
 class CollapseBody extends AutoComponent {
-  final children:HtmlChildren;
+  final children:Children;
   final styles:ClassName = null;
 
   function render(context:Context) {

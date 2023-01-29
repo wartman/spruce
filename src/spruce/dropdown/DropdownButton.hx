@@ -1,19 +1,18 @@
 package spruce.dropdown;
 
+import eg.DropdownContext;
+import eg.PositionedAttachment;
 import pine.*;
-import pine.html.*;
 import spruce.button.*;
 import spruce.core.*;
 import spruce.icon.Icon;
-import eg.PositionedAttachment;
-import eg.DropdownContext;
 
 using Nuke;
 
 class DropdownButton extends AutoComponent {
   public final attachment:PositionedAttachment = { h: Middle, v: Bottom };
   final styles:ClassName = null;
-  final child:HtmlChild;
+  final child:Child;
   final priority:Priority = Neutral;
   final layout:Layout = Horizontal;
   final spacing:Spacing = Small;

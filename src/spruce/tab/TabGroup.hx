@@ -2,11 +2,11 @@ package spruce.tab;
 
 import pine.*;
 import pine.debug.Debug;
-import spruce.tab.TabContext;
 import spruce.core.Box;
+import spruce.tab.TabContext;
 
-using Nuke;
 using Lambda;
+using Nuke;
 
 class TabGroup extends AutoComponent {
   final styles:ClassName = null;

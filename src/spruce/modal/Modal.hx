@@ -1,7 +1,6 @@
 package spruce.modal;
 
 import pine.*;
-import pine.html.*;
 import spruce.core.*;
 import spruce.paper.Paper;
 
@@ -16,7 +15,7 @@ enum ModalSize {
 class Modal extends AutoComponent {
   final styles:ClassName = null;
   final onHide:()->Void;
-  final children:HtmlChildren;
+  final children:Children;
   final size:ModalSize = Md;
   final hideOnEscape:Bool = true;
 
