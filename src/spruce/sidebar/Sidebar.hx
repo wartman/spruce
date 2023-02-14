@@ -3,11 +3,11 @@ package spruce.sidebar;
 import eg.Keyframes;
 import eg.Layer;
 import eg.PortalContext;
-import eg.internal.DomTools;
 import pine.*;
 import spruce.core.*;
 
 using Nuke;
+using eg.CoreHooks;
 
 class Sidebar extends AutoComponent {
   final onHide:()->Void;
@@ -16,6 +16,7 @@ class Sidebar extends AutoComponent {
   final hideOnEscape:Bool = true;
   
   function render(context:Context) {
+    context.useLockedDocumentBody();
     var show = switch attachment {
       case Left: new Keyframes('show:left', context -> [
         { opacity: 0, margin: '0 0 0 -500px' },
@@ -43,16 +44,10 @@ class Sidebar extends AutoComponent {
           'spruce-overlay',
           Overlay.baseStyles
         ],
+        onHide: onHide,
         hideOnEscape: hideOnEscape,
         showAnimation: show,
         hideAnimation: hide,
-        beforeShow: () -> {
-          lockBody();
-        },
-        onHide: () -> {
-          unlockBody();
-          onHide();
-        },
         child: new SidebarPanel({
           children: children,
           attachment: attachment
