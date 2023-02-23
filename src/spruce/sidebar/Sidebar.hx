@@ -3,11 +3,11 @@ package spruce.sidebar;
 import eg.Keyframes;
 import eg.Layer;
 import eg.PortalContext;
+import eg.ScrollLocked;
 import pine.*;
 import spruce.core.*;
 
 using Nuke;
-using eg.CoreHooks;
 
 class Sidebar extends AutoComponent {
   final onHide:()->Void;
@@ -16,7 +16,6 @@ class Sidebar extends AutoComponent {
   final hideOnEscape:Bool = true;
   
   function render(context:Context) {
-    context.useLockedDocumentBody();
     var show = switch attachment {
       case Left: new Keyframes('show:left', context -> [
         { opacity: 0, margin: '0 0 0 -500px' },
@@ -37,7 +36,7 @@ class Sidebar extends AutoComponent {
         { opacity: 0, margin: '0 -500px 0 0' }
       ]);
     };
-    return new Portal({
+    var portal = new Portal({
       target: PortalContext.from(context).getTarget(),
       child: new Layer({
         styles: [
@@ -54,5 +53,6 @@ class Sidebar extends AutoComponent {
         })
       })
     });
+    return new ScrollLocked({ child: portal });
   }
 }

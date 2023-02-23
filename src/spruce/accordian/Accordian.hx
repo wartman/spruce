@@ -15,10 +15,10 @@ class Accordion extends AutoComponent {
   function render(context:Context) {
     return new AccordionContextProvider({
       create: () -> new AccordionContext({ sticky: sticky }),
-      dispose: accordian -> accordian.dispose(),
-      render: accordian -> new Box({
+      dispose: accordion -> accordion.dispose(),
+      render: accordion -> new Box({
         styles: [
-          'spruce-accordian',
+          'spruce-accordion',
           styles
         ],
         spacing: spacing,
