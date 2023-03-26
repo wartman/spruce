@@ -3,6 +3,7 @@
 
 -lib nuke
 -lib pine
+-lib kit
 -lib evergreen
 
 -D debug

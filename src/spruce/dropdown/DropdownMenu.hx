@@ -7,7 +7,7 @@ import spruce.menu.*;
 import spruce.panel.Panel;
 
 using Nuke;
-using pine.core.OptionTools;
+using Kit;
 
 class DropdownMenu extends AutoComponent {
   final children:Children; 
@@ -35,8 +35,8 @@ class DropdownMenu extends AutoComponent {
     var width = context
       .queryAncestors()
       .ofType(Dropdown)
-      .map(element -> element.queryChildren().findOfType(DropdownToggle, true))
-      .map(element -> Some((element.getObject():js.html.Element).offsetWidth.px()))
+      .flatMap(element -> element.queryChildren().findOfType(DropdownToggle, true))
+      .map(element -> (element.getObject():js.html.Element).offsetWidth.px())
       .or('auto');
     #else
     var width = 'auto';
