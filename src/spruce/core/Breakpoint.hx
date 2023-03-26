@@ -7,7 +7,7 @@ macro function xs(expr) {
 macro function sm(expr) {
   return macro nuke.Css.mediaQuery({
     type: 'screen',
-    minWidth: Constants.breakpointSm
+    minWidth: spruce.core.Constants.breakpointSm
   }, $expr);
 }
 
