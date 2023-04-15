@@ -9,7 +9,7 @@ class FormControl extends AutoComponent {
   final styles:ClassName = null;
   final children:Children;
 
-  function render(context:Context) {
+  function build() {
     return new Box({
       styles: [
         styles

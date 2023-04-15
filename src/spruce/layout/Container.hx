@@ -29,7 +29,7 @@ class Container extends AutoComponent {
   final styles:ClassName = null;
   final children:Children;
 
-  public function render(context:Context) {
+  public function build() {
     return new Box({
       styles: [
         'spruce-container',

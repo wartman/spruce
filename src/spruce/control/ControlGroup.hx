@@ -9,7 +9,7 @@ class ControlGroup extends AutoComponent {
   final styles:ClassName = null;
   final controls:Children;
   
-  public function render(context:Context) {
+  public function build() {
     return new Box({
       styles: [
         'spruce-control-group',
@@ -20,4 +20,3 @@ class ControlGroup extends AutoComponent {
     });
   }
 }
-

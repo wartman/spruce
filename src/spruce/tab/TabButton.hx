@@ -4,14 +4,15 @@ import pine.*;
 import spruce.button.Button;
 import spruce.core.BorderRadius;
 import spruce.menu.*;
+import spruce.menu.MenuLink;
 
 using Nuke;
 
 class TabButton extends AutoComponent {
   final tab:Tab;
 
-  public function render(context:Context) {
-    var tabs = TabContext.from(context);
+  public function build() {
+    var tabs = TabContext.from(this);
 
     return new MenuItem({
       child: new MenuLink({
@@ -28,9 +29,9 @@ class TabButton extends AutoComponent {
           'spruce-tab-button--selected',
           getTabSelectedStyle(tabs)
         ],
-        selected: tabs.isActive(tab),
-        kind: Action(() -> tabs.setActiveTab(tab)),
-        child: tab.label
+        selected: tabs.activeTab.map(active -> active == tab),
+        kind: MenuLinkKind.Action(() -> tabs.setActiveTab(tab)),
+        child: tab.label(this)
       })
     });
   }

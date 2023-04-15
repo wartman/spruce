@@ -25,7 +25,7 @@ class Spinner extends AutoComponent {
   final styles:ClassName = null;
   final position:SpinnerPosition = Inline;
 
-  function render(context:Context) {
+  function build() {
     return new Html<'div'>({
       className: Css.atoms({
         borderWidth: theme(spruce.spinner.track.width),

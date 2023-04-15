@@ -12,7 +12,7 @@ class Form extends AutoComponent {
   final onSubmit:(e:Event)->Void = null;
   final children:Children;
 
-  function render(context:Context) {
+  function build() {
     return new Html<'form'>({
       action: action,
       method: method,

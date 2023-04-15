@@ -13,7 +13,7 @@ class NavbarBrand extends AutoComponent {
   final onClick:(e:Event)->Void = null;
   final href:String = null;
 
-  public function render(context:Context):Component {
+  public function build():Component {
     var navbarBrandStyle = Css.atoms({
       display: 'block',
       marginTop: 0,
@@ -28,13 +28,13 @@ class NavbarBrand extends AutoComponent {
 
     if (href != null) return new Html<'a'>({
       href: href,
-      onclick: onClick,
+      onClick: onClick,
       className: navbarBrandStyle,
       children: [ child ]
     });
 
     return new Box({
-      onclick: onClick,
+      onClick: onClick,
       styles: navbarBrandStyle,
       children: [ child ]
     });

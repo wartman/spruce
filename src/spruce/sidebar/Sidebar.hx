@@ -15,7 +15,7 @@ class Sidebar extends AutoComponent {
   final attachment:SidebarAttachment = Left;
   final hideOnEscape:Bool = true;
   
-  function render(context:Context) {
+  function build() {
     var show = switch attachment {
       case Left: new Keyframes('show:left', context -> [
         { opacity: 0, margin: '0 0 0 -500px' },
@@ -36,23 +36,20 @@ class Sidebar extends AutoComponent {
         { opacity: 0, margin: '0 -500px 0 0' }
       ]);
     };
-    var portal = new Portal({
-      target: PortalContext.from(context).getTarget(),
-      child: new Layer({
-        styles: [
-          'spruce-overlay',
-          Overlay.baseStyles
-        ],
-        onHide: onHide,
-        hideOnEscape: hideOnEscape,
-        showAnimation: show,
-        hideAnimation: hide,
-        child: new SidebarPanel({
-          children: children,
-          attachment: attachment
-        })
+    var portal = new Portal(PortalContext.from(this).getTarget(), () -> new Layer({
+      styles: [
+        'spruce-overlay',
+        Overlay.baseStyles
+      ],
+      onHide: onHide,
+      hideOnEscape: hideOnEscape,
+      showAnimation: show,
+      hideAnimation: hide,
+      child: new SidebarPanel({
+        children: children,
+        attachment: attachment
       })
-    });
+    }));
     return new ScrollLocked({ child: portal });
   }
 }

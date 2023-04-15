@@ -12,13 +12,13 @@ class CollapseBody extends AutoComponent {
   final children:Children;
   final styles:ClassName = null;
 
-  function render(context:Context) {
-    var collapse = CollapseContext.from(context);
+  function build() {
+    var collapse = CollapseContext.from(this);
 
     return new Animated({
       dontAnimateInitial: true,
       dontRepeatCurrentAnimation: true,
-      keyframes: switch collapse.status {
+      keyframes: compute(() -> switch collapse.status() {
         case Collapsed: new Keyframes('collapse', context -> [
           { height: getHeight(context), offset: 0 },
           { height: 0, offset: 1 }
@@ -27,11 +27,11 @@ class CollapseBody extends AutoComponent {
           { height: 0, offset: 0 },
           { height: getHeight(context), offset: 1 }
         ]);
-      },
+      }),
       onFinished: context -> {
         #if (js && !nodejs)
         var el:js.html.Element = context.getObject();
-        switch collapse.status {
+        switch collapse.status.peek() {
           case Collapsed: el.style.height = '0';
           case Expanded: el.style.height = 'auto';
         }
@@ -56,7 +56,7 @@ class CollapseBody extends AutoComponent {
     });
   }
 
-  function getHeight(context:Context) {
+  function getHeight(context:Component) {
     #if (js && !nodejs)
     var el:js.html.Element = context.getObject();
     return el.scrollHeight.px();

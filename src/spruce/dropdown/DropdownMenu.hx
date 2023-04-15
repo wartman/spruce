@@ -13,7 +13,7 @@ class DropdownMenu extends AutoComponent {
   final children:Children; 
   final layout:Layout = Vertical;
 
-  public function render(context:Context) {
+  public function build() {
     var body = new Menu({
       layout: layout,
       spacing: None,
@@ -32,11 +32,9 @@ class DropdownMenu extends AutoComponent {
     });
 
     #if (js && !nodejs)
-    var width = context
-      .queryAncestors()
-      .ofType(Dropdown)
-      .flatMap(element -> element.queryChildren().findOfType(DropdownToggle, true))
-      .map(element -> (element.getObject():js.html.Element).offsetWidth.px())
+    var width = findAncestorOfType(Dropdown)
+      .flatMap(component -> component.findChildOfType(DropdownToggle, true))
+      .map(component -> (component.getObject():js.html.Element).offsetWidth.px())
       .or('auto');
     #else
     var width = 'auto';

@@ -20,14 +20,16 @@ class DropdownButton extends AutoComponent {
   final kind:ButtonKind = null;
   final size:ButtonSize = Md;
 
-  function render(context:Context) {
+  function build() {
     return new Button({
       styles: [
         styles,
         Css.atoms({ alignItems: 'center' })
       ],
-      onClick: _ -> {
-        DropdownContext.from(context).toggle();
+      onClick: e -> {
+        e.preventDefault();
+        e.stopPropagation();
+        DropdownContext.from(this).toggle();
       },
       priority: priority,
       layout: layout,

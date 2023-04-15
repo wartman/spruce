@@ -19,7 +19,7 @@ class Modal extends AutoComponent {
   final size:ModalSize = Md;
   final hideOnEscape:Bool = true;
 
-  public function render(context:Context):Component {
+  public function build():Component {
     var paper = new Paper({
       styles: [
         'seed-modal-container',

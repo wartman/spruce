@@ -21,30 +21,30 @@ class MenuLink extends AutoComponent {
     }
   });
 
-  final kind:MenuLinkKind;
+  @:readonly final selected:Bool = false;
+  @:readonly final kind:MenuLinkKind;
   final styles:ClassName = null;
   final selectedStyles:ClassName = null;
-  final selected:Bool = false;
   final child:Child;
   final onClick:EventListener = null;
 
-  public function render(context:Context) {
+  public function build() {
     return new Html<'a'>({
-      className: ClassName.ofArray([
+      className: selected.map(selected -> ClassName.ofArray([
         'spruce-menu-link',
         baseStyles,
         styles,
         selected ? selectedStyles : null
-      ]),
-      href: switch kind {
+      ])),
+      href: kind.map(kind -> switch kind {
         case Link(url): url;
         default: '#'; // Required to allow tabbing.
-      },
-      role: switch kind {
+      }),
+      role: kind.map(kind -> switch kind {
         case Action(_): 'button';
         default: null;
-      },
-      onclick: switch kind {
+      }),
+      onClick: kind.map(kind -> switch kind {
         case Action(action): 
           e -> {
             e.preventDefault();
@@ -53,7 +53,7 @@ class MenuLink extends AutoComponent {
           }
         case Link(_) if (onClick != null): onClick;
         default: null;
-      },
+      }),
       children: [ child ]
     });
   } 

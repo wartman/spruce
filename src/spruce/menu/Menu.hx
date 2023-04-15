@@ -14,10 +14,10 @@ class Menu extends AutoComponent {
   final children:Children;
   final role:String = null;
 
-  public function render(context:Context) {
+  public function build() {
     return new Box({
       tag: UnorderedList,
-      onclick: onClick,
+      onClick: onClick,
       layout: layout,
       spacing: spacing,
       role: role,

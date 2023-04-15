@@ -2,7 +2,7 @@ import eg.Keyframes;
 import js.Browser;
 import pine.*;
 import pine.html.*;
-import pine.html.client.ClientRoot;
+import pine.html.client.Client;
 import eg.Animated;
 import eg.LayerContext;
 import spruce.layout.*;
@@ -18,7 +18,7 @@ import spruce.menu.*;
 import spruce.tab.*;
 import spruce.nav.*;
 import spruce.typography.*;
-import spruce.accordian.Accordian;
+import spruce.accordion.Accordion;
 
 using Nuke;
 
@@ -27,18 +27,17 @@ function main() {
   Spruce.useLightColors();
   Spruce.useDefaultTheme();
 
-  ClientRoot.mount(
+  mount(
     Browser.document.getElementById('root'),
-    new PortalContextProvider({
-      create: () -> new PortalContext(Browser.document.getElementById('portal')),
-      dispose: _ -> null,
-      render: _ -> new App({})
+    () -> new PortalContextProvider({
+      value: new PortalContext(Browser.document.getElementById('portal')),
+      build: _ -> new App({})
     })
   );
 }
 
 class App extends AutoComponent {
-  function render(context:Context) {
+  function build() {
     var box = new Box({
       layout: Vertical,
       spacing: Large,
@@ -73,10 +72,10 @@ class App extends AutoComponent {
             new GridColumn<4, 'md:2'>({
               children: [
                 new Dropdown({
-                  toggle: new DropdownButton({
+                  toggle: _ -> new DropdownButton({
                     child: 'A dropdown!'
                   }),
-                  child: new DropdownMenu({
+                  body: _ -> new DropdownMenu({
                     children: [
                       new MenuItem({ 
                         child: new DropdownMenuLink({
@@ -202,19 +201,17 @@ class App extends AutoComponent {
       children: box
     });
 
-    return new Fragment({
-      children: [
-        nav,
-        body
-      ]
-    });
+    return new Fragment([
+      nav,
+      body
+    ]);
   }
 }
 
 class Toggle extends AutoComponent {
-  var toggle:Bool = false;
+  @:signal final toggle:Bool = false;
 
-  function render(context:Context) {
+  function build() {
     return new Box({
       styles: [
         Css.atoms({ 
@@ -226,7 +223,7 @@ class Toggle extends AutoComponent {
       spacing: Small,
       children: [
         new Animated({
-          keyframes: switch toggle {
+          keyframes: compute(() -> switch toggle() {
             case true: new Keyframes('in', _ -> [
               { opacity: 1, width: 100.pct() },
               { opacity: 0, width: 0 }
@@ -235,14 +232,14 @@ class Toggle extends AutoComponent {
               { opacity: 0, width: 0 },
               { opacity: 1, width: 100.pct() }
             ]);
-          },
+          }),
           duration: 300,
           onFinished: context -> {
             // @todo: maybe automatically apply these styles
             // as a part of the Animate component?
             var el:js.html.Element = context.getObject();
-            el.style.opacity = toggle ? '0' : '1';
-            el.style.width = toggle ? '0' : 100.pct();
+            el.style.opacity = toggle.peek() ? '0' : '1';
+            el.style.width = toggle.peek() ? '0' : 100.pct();
           },
           child: new Box({
             styles: Css.atoms({
@@ -255,7 +252,7 @@ class Toggle extends AutoComponent {
         new Box({
           children: [
             new Button({
-              onClick: _ -> toggle = !toggle,
+              onClick: _ -> toggle.update(toggle -> !toggle),
               children: [ 'Flip' ]
             })
           ]
@@ -266,53 +263,55 @@ class Toggle extends AutoComponent {
 }
 
 class ShowModal extends AutoComponent {
-  var isOpen:Bool = false;
+  @:signal final isOpen:Bool = false;
 
-  public function render(context:Context) {
-    return new Fragment({
-      children: [
-        new Button({
-          priority: Primary,
-          onClick: _ -> isOpen = true,
-          children: [ 'Modal' ]
-        }),
-        if (isOpen) new Modal({
-          onHide: () -> isOpen = false,
-          children: [
-            new ModalHeader({
-              child: new ModalTitle({ child: 'Test' }) 
-            }),
-            new ModalBody({ children: [ 'This should work' ] }),
-            new Scope({
-              render: context -> new ModalFooter({
-                children: [
-                  new Button({
-                    onClick: _ -> LayerContext.from(context).hide(),
-                    priority: Primary,
-                    children: [ 'Ok' ]
-                  }),
-                  new Button({
-                    onClick: _ -> LayerContext.from(context).hide(),
-                    children: [ 'Cancel' ]
-                  }),
-                ]
-              })
-            })
-          ]
-        }) else null
-      ] 
-    });
+  public function build() {
+    return new Fragment([
+      new Button({
+        priority: Primary,
+        onClick: _ -> isOpen.set(true),
+        children: [ 'Modal' ]
+      }),
+      new Show(isOpen, () -> new Modal({
+        onHide: () -> isOpen.set(false),
+        children: [
+          new ModalHeader({
+            child: new ModalTitle({ child: 'Test' }) 
+          }),
+          new ModalBody({ children: [ 'This should work' ] }),
+          new Scope(context -> new ModalFooter({
+            children: [
+              new Button({
+                onClick: _ -> LayerContext.from(context).hide(),
+                priority: Primary,
+                children: [ 'Ok' ]
+              }),
+              new Button({
+                onClick: _ -> LayerContext.from(context).hide(),
+                children: [ 'Cancel' ]
+              }),
+            ]
+          }))
+        ]
+      }))
+    ]);
   }
 }
 
 class ShowSidebar extends AutoComponent {
-  var isOpen:Bool = false;
+  @:signal final isOpen:Bool = false;
 
-  function render(context:Context) {
-    var sidebar = if (isOpen)
-      new Sidebar({
+  function build() {
+    return new Fragment([
+      new Button({
+        priority: Primary,
+        borderRadius: Pill,
+        onClick: _ -> isOpen.set(true),
+        children: [ 'Sidebar' ]
+      }),
+      new Show(isOpen, () -> new Sidebar({
         attachment: Right,
-        onHide: () -> isOpen = false,
+        onHide: () -> isOpen.set(false),
         children: [
           new SidebarHeader({
             child: new SidebarTitle({ child: 'Main Menu' })
@@ -321,61 +320,48 @@ class ShowSidebar extends AutoComponent {
             children: [ 'hey world' ]
           })
         ]
-      })
-    else
-      null;
-
-    return new Fragment({
-      children: [
-        new Button({
-          priority: Primary,
-          borderRadius: Pill,
-          onClick: _ -> isOpen = true,
-          children: [ 'Sidebar' ]
-        }),
-        sidebar
-      ]
-    });
+      }))
+    ]);
   }
 }
 
 class TabExample extends AutoComponent {
-  var variant:TabVariant = Underline;
+  @:signal final variant:TabVariant = TabVariant.Underline;
 
-  function render(context:Context) {
-    var tabs = new TabGroup({
-      variant: variant,
+  function build() {
+    var tabs = new Scope(_ -> new TabGroup({
+      variant: variant(),
       tabs: [
         new Tab({
-          label: 'One',
-          child: 'Hello World'
+          label: _ -> 'One',
+          body: _ -> 'Hello World'
         }),
         new Tab({
-          label: 'Two',
-          child: 'Hello Other World'
+          label: _ -> 'Two',
+          body:  _ -> 'Hello Other World'
         })
       ]
-    });
+    }));
 
     var dropdown = new Dropdown({
-      toggle: new DropdownButton({
-        child: switch variant {
+      toggle: _ -> new DropdownButton({
+        child: variant.map(variant -> switch variant {
           case Underline: 'Underline';
           case Pill: 'Pill';
           default: 'Wtf';
-        }
+        })
       }),
-      child: new DropdownMenu({
+      body: _ -> new DropdownMenu({
         children: [
           new MenuItem({
             child: new DropdownMenuLink({
-              kind: Action(() -> variant = Underline),
+              kind: Action(() -> variant.set(Underline)),
               child: 'Underline'
             })
           }),
           new MenuItem({
             child: new DropdownMenuLink({
-              kind: Action(() -> variant = Pill),
+              kind: Action(() -> variant.set(Pill)),
               child: 'Pill'
             })
           })
@@ -384,15 +370,10 @@ class TabExample extends AutoComponent {
     });
 
     return new Box({
-      key: 'this one',
       spacing: Medium,
       layout: Vertical,
       children: [
-        new Box({
-          children: [
-            dropdown
-          ]
-        }),
+        new Box({ children: dropdown }),
         tabs
       ]
     });

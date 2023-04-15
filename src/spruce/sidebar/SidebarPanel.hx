@@ -9,7 +9,7 @@ class SidebarPanel extends AutoComponent {
   final children:Children;
   final attachment:SidebarAttachment;
 
-  public function render(context:Context) {
+  public function build() {
     return new Paper({
       borderRadius: None,
       onClick: e -> e.stopPropagation(),

@@ -13,7 +13,7 @@ class DropdownMenuLink extends AutoComponent {
   final kind:MenuLinkKind;
   final closeOnClick:Bool = true;
 
-  public function render(context:Context) {
+  public function build() {
     var link = new MenuLink({
       styles: [
         'spruce-dropdown-menu-link',
@@ -33,7 +33,7 @@ class DropdownMenuLink extends AutoComponent {
         styles
       ],
       onClick: if (closeOnClick) _ -> {
-        DropdownContext.from(context).close();
+        DropdownContext.from(this).close();
       } else null,
       kind: kind,
       child: child

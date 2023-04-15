@@ -34,7 +34,7 @@ class ControlButton extends AutoComponent {
   final child:Child = null;
   final disabled:Bool = false;
 
-  public function render(context:Context):Component {
+  public function build():Component {
     var onClick = e -> {
       if (!disabled) onClick(e);
     }
@@ -50,7 +50,7 @@ class ControlButton extends AutoComponent {
         ]),
         children: child == null ? [] : [ child ]
       }) else new Html<'a'>({
-        onclick: onClick,
+        onClick: onClick,
         href: href,
         role: 'button',
         ariaLabel: ariaLabel,
@@ -63,7 +63,7 @@ class ControlButton extends AutoComponent {
     }
     
     return new Html<'button'>({
-      onclick: onClick,
+      onClick: onClick,
       role: 'button',
       ariaLabel: ariaLabel,
       disabled: disabled,

@@ -1,4 +1,4 @@
-package spruce.accordian;
+package spruce.accordion;
 
 import eg.AccordionContext;
 import pine.*;
@@ -12,11 +12,10 @@ class Accordion extends AutoComponent {
   final children:Children;
   final spacing:Spacing = Small;
 
-  function render(context:Context) {
+  function build() {
     return new AccordionContextProvider({
-      create: () -> new AccordionContext({ sticky: sticky }),
-      dispose: accordion -> accordion.dispose(),
-      render: accordion -> new Box({
+      value: new AccordionContext({ sticky: sticky }),
+      build: accordion -> new Box({
         styles: [
           'spruce-accordion',
           styles

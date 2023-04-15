@@ -21,27 +21,25 @@ class Collapse extends AutoComponent {
   final borderRadius:BorderRadius = Medium;
   final duration:Int = 200;
 
-  function render(context:Context) {
+  function build() {
+    var collapse = new CollapseContext({ 
+      status: Collapsed,
+      duration: duration
+    });
+    switch AccordionContext.maybeFrom(this) {
+      case Some(accordion): accordion.add(collapse);
+      case None:
+    }
     return new CollapseContextProvider({
-      create: () -> {
-        var collapse = new CollapseContext({ 
-          status: Collapsed,
-          duration: duration
-        });
-        switch AccordionContext.maybeFrom(context) {
-          case Some(accordian): accordian.add(collapse);
-          case None:
-        }
-        return collapse;
-      },
+      value: collapse,
       dispose: collapse -> {
-        switch AccordionContext.maybeFrom(context) {
-          case Some(accordian): accordian.remove(collapse);
+        switch AccordionContext.maybeFrom(this) {
+          case Some(accordion): accordion.remove(collapse);
           case None:
         }
         collapse.dispose();
       },
-      render: collapse -> new Box({
+      build: collapse -> new Box({
         styles: [
           'spruce-collapse',
           baseStyles,

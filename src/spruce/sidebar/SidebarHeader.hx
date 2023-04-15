@@ -12,7 +12,7 @@ class SidebarHeader extends AutoComponent {
   final styles:ClassName = null;
   final child:Child = null;
   
-  public function render(context:Context) {
+  public function build() {
     return new Box({
       tag: Header,
       styles: Css.atoms({
@@ -30,7 +30,7 @@ class SidebarHeader extends AutoComponent {
         new ControlGroup({
           controls: [
             new ControlButton({
-              onClick: _ -> LayerContext.from(context).hide(),
+              onClick: _ -> LayerContext.from(this).hide(),
               ariaLabel: 'Close',
               child: new Icon({ 
                 styles: Css.atoms({ width: 2.em(), height: 2.em() }),

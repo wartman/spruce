@@ -16,7 +16,7 @@ class MenuItem extends AutoComponent {
   final styles:ClassName = null;
   final child:Child;
 
-  public function render(context:Context) {
+  public function build() {
     return new Box({
       tag: ListItem,
       styles: [

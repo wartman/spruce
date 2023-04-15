@@ -24,7 +24,7 @@ class Paper extends AutoComponent {
   final role:String = null;
   final onClick:EventListener = null;
 
-  function render(context:Context) {
+  function build() {
     return new Box({  
       styles: [
         'spruce-paper',
@@ -39,7 +39,7 @@ class Paper extends AutoComponent {
       role: role == null 
         ? focusable ? 'dialog' : null
         : role,
-      onclick: onClick,
+      onClick: onClick,
       children: children
     });
   }

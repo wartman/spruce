@@ -15,17 +15,15 @@ abstract class GridColumnBase extends ProxyComponent {
 
   public function new(props:{
     children:Children,
-    ?styles:ClassName,
-    ?key:Key
+    ?styles:ClassName
   }) {
-    super(props.key);
     this.styles = props.styles;
     this.children = props.children;
   }
 
   abstract function getStyles():ClassName;
 
-  public function render(context:Context) {
+  public function build() {
     return new Box({
       styles: [
         'spruce-grid-column',

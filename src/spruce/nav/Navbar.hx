@@ -19,7 +19,7 @@ class Navbar extends AutoComponent {
   final styles:ClassName = null;
   final children:Children;
 
-  public function render(context:Context):Component {
+  public function build():Component {
     return new Box({
       tag: tag,
       styles: [

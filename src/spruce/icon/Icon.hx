@@ -2,6 +2,7 @@ package spruce.icon;
 
 import pine.*;
 import pine.html.*;
+import pine.signal.Signal;
 
 using Nuke;
 
@@ -23,17 +24,17 @@ enum IconKind {
 // isn't a great way to do this, but it'll let us test some things.
 class Icon extends AutoComponent {
   final kind:IconKind;
-  final styles:ClassName = null;
+  final styles:ReadonlySignal<ClassName> = null;
 
-  function render(context:Context) {
+  function build() {
     return new Svg<'svg'>({
       width: '32',
       height: '32',
       viewBox: '0 0 16 16',
-      className: Css.atoms({
+      className: compute(() -> Css.atoms({
         fill: 'currentColor',
         display: 'block'
-      }).with(styles),
+      }).with(styles())),
       children: switch kind {
         case Close:
           new Svg<'path'>({

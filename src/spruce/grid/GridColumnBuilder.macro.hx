@@ -2,10 +2,10 @@ package spruce.grid;
 
 import haxe.macro.Expr;
 import haxe.macro.Context;
-import pine.macro.ClassBuilder;
+import pine.internal.macro.ClassBuilder;
 
 using StringTools;
-using pine.macro.MacroTools;
+using pine.internal.macro.MacroTools;
 
 function buildGeneric() {
   return switch Context.getLocalType() {
@@ -52,12 +52,7 @@ private function buildGridColumn(infos:Array<GridColumnInfo>) {
         name: 'GridColumn',
         sub: 'GridColumnBase',
         params: []
-      }, [
-        {
-          pack: [ 'pine', 'core' ],
-          name: 'HasComponentType'
-        }
-      ], false, true, false),
+      }, null, false, true, false),
       fields: builder.export()
     });
   }

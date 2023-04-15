@@ -17,10 +17,8 @@ abstract class GridBase extends ProxyComponent {
   public function new(props:{
     children:Children,
     ?styles:ClassName,
-    ?span:GridSpan,
-    ?key:Key
+    ?span:GridSpan
   }) {
-    super(props.key);
     this.styles = props.styles;
     this.children = props.children;
     this.span = props.span == null ? Auto : props.span;
@@ -28,7 +26,7 @@ abstract class GridBase extends ProxyComponent {
 
   abstract function getStyles():ClassName;
   
-  public function render(context:Context) {
+  public function build() {
     return new Box({
       styles: [
         'spruce-grid',

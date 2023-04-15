@@ -1,42 +1,29 @@
 package spruce.core;
 
 import pine.*;
-import pine.core.UniqueId;
-import pine.diffing.Key;
 import pine.html.*;
 import pine.html.HtmlAttributes;
 import pine.html.HtmlEvents;
-import pine.html.TagTypes.getTypeForTag;
 import spruce.core.BorderRadius;
 import spruce.core.Shadow;
+import pine.html.HtmlAttributes;
 
 using Nuke;
 using Reflect;
 
-typedef BoxProps = {
-  ?tag:BoxTag,
-  ?styles:ClassName,
-  ?layout:Layout,
-  ?spacing:Spacing,
-  ?shadow:Shadow,
-  ?borderRadius:BorderRadius,
-  ?children:Children,
-  ?key:Key,
-} & AriaAttributes & GlobalAttr & HtmlEvents;
+class Box extends ProxyComponent {
+  final props:BoxProps;
 
-class Box extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
-  final componentType:UniqueId;
+  public function new(props) {
+    this.props = props;  
+  }
 
-  public function new(props:BoxProps) {
-    var tag:BoxTag = props.tag == null ? Div : props.tag;
-    var layout:Layout = props.layout == null ? Auto : props.layout;
-    var spacing:Spacing = props.spacing == null ? None : props.spacing;
-    var shadow:Shadow = props.shadow == null ? None : props.shadow;
-    var borderRadius:BorderRadius = props.borderRadius == null ? None : props.borderRadius;
-    var children = props.children == null ? [] : props.children;
-    var key = props.key;
-
-    componentType = getTypeForTag(tag);
+  function build() {
+    var tag = props.tag ?? Div;
+    var layout:Layout = props.layout ?? Auto;
+    var spacing:Spacing = props.spacing ?? None;
+    var shadow:Shadow = props.shadow ?? Shadow.None;
+    var borderRadius:BorderRadius = props.borderRadius ?? BorderRadius.None;
     
     props.className = ClassName.ofArray([
       props.styles,
@@ -48,25 +35,51 @@ class Box extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
 
     props.deleteField('tag');
     props.deleteField('styles');
-    props.deleteField('children');
     props.deleteField('layout');
     props.deleteField('spacing');
     props.deleteField('shadow');
     props.deleteField('borderRadius');
-    props.deleteField('key');
 
-    super({
-      tag: tag,
-      attrs: props,
-      children: children,
-      key: key
-    });
-  }
-
-  public function getComponentType():UniqueId {
-    return componentType;
+    return new HtmlObjectComponent<GlobalAttr & HtmlEvents & { ?children:Children }>(tag, props);
   }
 }
+
+typedef BoxProps = {
+  ?tag:BoxTag,
+  ?styles:ClassName,
+  ?layout:Layout,
+  ?spacing:Spacing,
+  ?shadow:Shadow,
+  ?borderRadius:BorderRadius,
+  ?children:Children
+} & AriaAttributes & GlobalAttr & HtmlEvents;
+
+// class Box extends HtmlObjectComponent<GlobalAttr & HtmlEvents & { ?children:Children }> {
+//   public function new(props:BoxProps) {
+//     var tag = props.tag ?? Div;
+//     var layout:Layout = props.layout ?? Auto;
+//     var spacing:Spacing = props.spacing ?? None;
+//     var shadow:Shadow = props.shadow ?? Shadow.None;
+//     var borderRadius:BorderRadius = props.borderRadius ?? BorderRadius.None;
+    
+//     props.className = ClassName.ofArray([
+//       props.styles,
+//       layout.toStyle(),
+//       spacing.toGap(),
+//       shadow.toStyle(),
+//       borderRadius.toStyle()
+//     ]);
+
+//     props.deleteField('tag');
+//     props.deleteField('styles');
+//     props.deleteField('layout');
+//     props.deleteField('spacing');
+//     props.deleteField('shadow');
+//     props.deleteField('borderRadius');
+  
+//     super(tag, props);
+//   }
+// }
 
 enum abstract BoxTag(String) to String {
   // final Html = 'html';

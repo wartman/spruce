@@ -1,47 +1,31 @@
 package spruce.typography;
 
+import kit.Assert;
 import pine.*;
-import pine.core.UniqueId;
-import pine.debug.Debug;
 import pine.html.*;
-import pine.html.HtmlAttributes;
 import pine.html.HtmlEvents;
-import pine.html.TagTypes.getTypeForTag;
+import pine.html.HtmlAttributes;
 
 using Nuke;
 
-typedef HeadingProps = {
-  level:Int,
-  ?styles:ClassName,
-  ?onClick:EventListener,
-  ?role:String,
-  ?children:Children
-}
+class Heading extends AutoComponent {
+  final level:Int;
+  final styles:ClassName = null;
+  final onClick:EventListener = null;
+  final role:String = null;
+  final children:Children;
 
-class Heading extends HtmlElementComponent<GlobalAttr & HtmlEvents> {
-  final type:UniqueId;
-
-  public function new(props:HeadingProps) {
-    var tag = getTag(props.level);
-    type = getTypeForTag(tag);
-
-    super({
-      tag: tag,
-      attrs: {
-        className: props.styles,
-        onclick: props.onClick,
-        role: props.role
-      },
-      children: props.children
+  function build() {
+    return new HtmlObjectComponent<GlobalAttr & HtmlEvents & { children:Children }>(getTag(level), {
+      className: styles,
+      onClick: onClick,
+      role: role,
+      children: children
     });
   }
 
-  public function getComponentType() {
-    return type;
-  }
-
   function getTag(level:Int):String {
-    Debug.assert(level > 0 && level < 6);
+    assert(level > 0 && level < 6);
     return 'h$level';
   }
 }

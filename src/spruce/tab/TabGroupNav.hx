@@ -10,8 +10,8 @@ class TabGroupNav extends AutoComponent {
   final children:Children;
   final spacingBottom:Spacing = Medium;
 
-  function render(context:Context) {
-    var tabs = TabContext.from(context);
+  function build() {
+    var tabs = TabContext.from(this);
   
     return new Box({
       tag: Nav,

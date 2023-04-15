@@ -6,10 +6,12 @@
 -lib kit
 -lib evergreen
 
--D debug
+-debug
+
 # -D nuke.output=style.css
 -D js-es=6
 -D analyzer-optimize
+-D message-reporting=pretty
 -dce full
 
 -main Run

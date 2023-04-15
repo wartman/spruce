@@ -13,7 +13,7 @@ class ModalHeader extends AutoComponent {
   // final priority:Priority = null;
   final child:Child;
 
-  public function render(context:Context) {
+  public function build() {
     return new Box({
       tag: Header,
       layout: Horizontal,
@@ -39,7 +39,7 @@ class ModalHeader extends AutoComponent {
           styles: 'spruce-modal-header-controls',
           controls: [
             new ControlButton({
-              onClick: _ -> LayerContext.from(context).hide(),
+              onClick: _ -> LayerContext.from(this).hide(),
               ariaLabel: 'Close',
               child: new Icon({
                 styles: Css.atoms({ width: 2.em(), height: 2.em() }),

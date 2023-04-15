@@ -12,7 +12,7 @@ class Breadcrumbs extends AutoComponent {
   final separator:Child;
   final children:Children;
 
-  public function render(context:Context) {
+  public function build() {
     return new Box({
 
     });

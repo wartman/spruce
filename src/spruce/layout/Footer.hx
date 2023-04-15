@@ -11,7 +11,7 @@ class Footer extends AutoComponent {
   final children:Children;
   final kind:ContainerKind = Lg;
 
-  public function render(context:Context) {
+  public function build() {
     return new Box({
       tag: Footer,
       styles: [

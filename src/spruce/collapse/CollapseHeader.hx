@@ -20,8 +20,8 @@ class CollapseHeader extends AutoComponent {
   final styles:ClassName = null;
   final child:Child;
 
-  function render(context:Context) {
-    var collapse = CollapseContext.from(context);
+  function build() {
+    var collapse = CollapseContext.from(this);
 
     return new Box({
       tag: Header,
@@ -32,8 +32,8 @@ class CollapseHeader extends AutoComponent {
         styles
       ],
       layout: Horizontal,
-      onclick: _ -> collapse.toggle(),
-      onkeydown: e -> {
+      onClick: _ -> collapse.toggle(),
+      onKeyDown: e -> {
         var event:js.html.KeyboardEvent = cast e;
         switch event.key {
           case 'Enter': collapse.toggle();
@@ -48,16 +48,16 @@ class CollapseHeader extends AutoComponent {
           children: [ child ]
         }),
         new Icon({
-          styles: [
+          styles: compute(() -> ClassName.ofArray([
             Css.atoms({
               width: 1.em(),
               height: 1.em(),
               transition: [ 'transform', collapse.duration.ms(), 'ease-in-out' ]
             }),
-            if (collapse.status == Expanded) Css.atoms({
+            if (collapse.status() == Expanded) Css.atoms({
               transform: rotate((-180).deg())
             }) else null
-          ],
+          ])),
           kind: ChevronDown
         })
       ]

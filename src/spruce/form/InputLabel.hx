@@ -9,7 +9,7 @@ class InputLabel extends AutoComponent {
   final styles:ClassName = null;
   final target:String;
 
-  function render(context:Context) {
+  function build() {
     return new Html<'label'>({
       className: ClassName.ofArray([
         styles

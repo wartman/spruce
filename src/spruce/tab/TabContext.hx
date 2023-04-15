@@ -4,14 +4,14 @@ import pine.*;
 
 typedef TabContextProvider = Provider<TabContext>; 
 
-class TabContext implements Record {
+class TabContext extends Record {
   public static function from(context) {
     return TabContextProvider.from(context);
   }
 
   public final variant:TabVariant;
-  public var tabs:Array<Tab>;
-  public var activeTab:Tab;
+  @:signal public final tabs:Array<Tab>;
+  @:signal public final activeTab:Tab;
 
   public function isActive(tab:Tab) {
     return activeTab == tab;
@@ -19,6 +19,6 @@ class TabContext implements Record {
 
   public function setActiveTab(tab:Tab) {
     if (activeTab == tab) return;
-    activeTab = tab;
+    activeTab.set(tab);
   }
 }

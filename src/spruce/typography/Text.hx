@@ -17,7 +17,7 @@ class Text extends AutoComponent {
   final content:String;
   final kind:TextKind = Normal;
 
-  function render(context:Context):Component {
+  function build():Component {
     return switch kind {
       case Bold: 
         new Html<'b'>({ className: styles, children: content });

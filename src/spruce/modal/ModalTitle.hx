@@ -10,7 +10,7 @@ class ModalTitle extends AutoComponent {
   final level:Int = 5;
   final child:Child;
 
-  public function render(context:Context) {
+  public function build() {
     return new Heading({
       level: level,
       styles: Css.atoms({

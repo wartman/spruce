@@ -9,7 +9,7 @@ class SidebarTitle extends AutoComponent {
   final styles:ClassName = null;
   final child:Child;
 
-  public function render(context:Context) {
+  public function build() {
     return new Html<'h5'>({
       className: Css.atoms({
         marginBottom: 0,
