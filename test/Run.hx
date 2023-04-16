@@ -185,7 +185,7 @@ class App extends AutoComponent {
       }),
       children: [
         new NavbarMobile({
-          children: 'test'
+          body: _ -> 'test'
         }),
         new NavbarBrand({
           child: new Heading({

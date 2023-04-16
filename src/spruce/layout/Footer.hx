@@ -15,14 +15,14 @@ class Footer extends AutoComponent {
     return new Box({
       tag: Footer,
       styles: [
-        'seed-footer',
+        'spruce-footer',
         styles,
         Css.atoms({
-          backgroundColor: theme(seed.footer.bgColor, theme(seed.color.dark)),
-          color: theme(seed.footer.bgColor, theme(seed.color.light)),
-          paddingTop: theme(seed.box.padding.y),
-          paddingBottom: theme(seed.box.padding.y),
-          marginTop: theme(seed.grid.gap)
+          backgroundColor: theme(spruce.footer.bgColor, theme(spruce.color.dark)),
+          color: theme(spruce.footer.bgColor, theme(spruce.color.light)),
+          paddingTop: theme(spruce.box.padding.y),
+          paddingBottom: theme(spruce.box.padding.y),
+          marginTop: theme(spruce.grid.gap)
         })
       ],
       children: new Container({

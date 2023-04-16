@@ -14,7 +14,6 @@ class CollapseBody extends AutoComponent {
 
   function build() {
     var collapse = CollapseContext.from(this);
-
     return new Animated({
       dontAnimateInitial: true,
       dontRepeatCurrentAnimation: true,

@@ -6,7 +6,6 @@ import pine.html.HtmlAttributes;
 import pine.html.HtmlEvents;
 import spruce.core.BorderRadius;
 import spruce.core.Shadow;
-import pine.html.HtmlAttributes;
 
 using Nuke;
 using Reflect;
@@ -53,33 +52,6 @@ typedef BoxProps = {
   ?borderRadius:BorderRadius,
   ?children:Children
 } & AriaAttributes & GlobalAttr & HtmlEvents;
-
-// class Box extends HtmlObjectComponent<GlobalAttr & HtmlEvents & { ?children:Children }> {
-//   public function new(props:BoxProps) {
-//     var tag = props.tag ?? Div;
-//     var layout:Layout = props.layout ?? Auto;
-//     var spacing:Spacing = props.spacing ?? None;
-//     var shadow:Shadow = props.shadow ?? Shadow.None;
-//     var borderRadius:BorderRadius = props.borderRadius ?? BorderRadius.None;
-    
-//     props.className = ClassName.ofArray([
-//       props.styles,
-//       layout.toStyle(),
-//       spacing.toGap(),
-//       shadow.toStyle(),
-//       borderRadius.toStyle()
-//     ]);
-
-//     props.deleteField('tag');
-//     props.deleteField('styles');
-//     props.deleteField('layout');
-//     props.deleteField('spacing');
-//     props.deleteField('shadow');
-//     props.deleteField('borderRadius');
-  
-//     super(tag, props);
-//   }
-// }
 
 enum abstract BoxTag(String) to String {
   // final Html = 'html';

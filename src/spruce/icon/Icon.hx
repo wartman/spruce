@@ -24,7 +24,7 @@ enum IconKind {
 // isn't a great way to do this, but it'll let us test some things.
 class Icon extends AutoComponent {
   final kind:IconKind;
-  final styles:ReadonlySignal<ClassName> = null;
+  @:readonly final styles:ClassName = null;
 
   function build() {
     return new Svg<'svg'>({
@@ -34,7 +34,7 @@ class Icon extends AutoComponent {
       className: compute(() -> Css.atoms({
         fill: 'currentColor',
         display: 'block'
-      }).with(styles())),
+      }).with(styles?.get())),
       children: switch kind {
         case Close:
           new Svg<'path'>({

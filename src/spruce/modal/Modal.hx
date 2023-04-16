@@ -22,7 +22,7 @@ class Modal extends AutoComponent {
   public function build():Component {
     var paper = new Paper({
       styles: [
-        'seed-modal-container',
+        'spruce-modal-container',
         styles,
         Css.atoms({ width: 100.vw() }),
         getContainerSize()

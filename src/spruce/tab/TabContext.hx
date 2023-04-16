@@ -18,7 +18,11 @@ class TabContext extends Record {
   }
 
   public function setActiveTab(tab:Tab) {
-    if (activeTab == tab) return;
     activeTab.set(tab);
+  }
+
+  override function dispose() {
+    for (tab in tabs.peek()) tab.dispose();
+    super.dispose();
   }
 }
