@@ -4,6 +4,7 @@ import eg.Animated;
 import eg.CollapseContext;
 import eg.Keyframes;
 import pine.*;
+import pine.signal.Computation;
 import spruce.core.Box;
 
 using Nuke;
@@ -17,7 +18,7 @@ class CollapseBody extends AutoComponent {
     return new Animated({
       dontAnimateInitial: true,
       dontRepeatCurrentAnimation: true,
-      keyframes: compute(() -> switch collapse.status() {
+      keyframes: new Computation(() -> switch collapse.status() {
         case Collapsed: new Keyframes('collapse', context -> [
           { height: getHeight(context), offset: 0 },
           { height: 0, offset: 1 }

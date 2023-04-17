@@ -21,8 +21,8 @@ class MenuLink extends AutoComponent {
     }
   });
 
-  @:readonly final selected:Bool = false;
-  @:readonly final kind:MenuLinkKind;
+  @:observable final selected:Bool = false;
+  @:observable final kind:MenuLinkKind;
   final styles:ClassName = null;
   final selectedStyles:ClassName = null;
   final child:Child;

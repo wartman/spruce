@@ -2,9 +2,10 @@ package spruce.icon;
 
 import pine.*;
 import pine.html.*;
-import pine.signal.Signal;
+import pine.signal.Computation;
 
 using Nuke;
+
 
 // @todo: Using enums is a terrible way to handle icons.
 // @todo: Also we have some XML stuff from evergreen we can use
@@ -24,14 +25,14 @@ enum IconKind {
 // isn't a great way to do this, but it'll let us test some things.
 class Icon extends AutoComponent {
   final kind:IconKind;
-  @:readonly final styles:ClassName = null;
+  @:observable final styles:ClassName = null;
 
   function build() {
     return new Svg<'svg'>({
       width: '32',
       height: '32',
       viewBox: '0 0 16 16',
-      className: compute(() -> Css.atoms({
+      className: new Computation(() -> Css.atoms({
         fill: 'currentColor',
         display: 'block'
       }).with(styles?.get())),

@@ -2,6 +2,7 @@ package spruce.collapse;
 
 import eg.CollapseContext;
 import pine.*;
+import pine.signal.Computation;
 import spruce.core.Box;
 import spruce.icon.Icon;
 
@@ -48,7 +49,7 @@ class CollapseHeader extends AutoComponent {
           children: [ child ]
         }),
         new Icon({
-          styles: compute(() -> ClassName.ofArray([
+          styles: new Computation(() -> ClassName.ofArray([
             Css.atoms({
               width: 1.em(),
               height: 1.em(),

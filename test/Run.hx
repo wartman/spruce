@@ -1,24 +1,25 @@
+import eg.Animated;
 import eg.Keyframes;
+import eg.LayerContext;
 import js.Browser;
 import pine.*;
 import pine.html.*;
 import pine.html.client.Client;
-import eg.Animated;
-import eg.LayerContext;
-import spruce.layout.*;
+import pine.signal.Computation;
+import spruce.accordion.Accordion;
+import spruce.button.Button;
+import spruce.collapse.*;
 import spruce.core.Box;
 import spruce.core.PortalContext;
-import spruce.button.Button;
-import spruce.modal.*;
-import spruce.sidebar.*;
-import spruce.collapse.*;
-import spruce.grid.*;
 import spruce.dropdown.*;
+import spruce.grid.*;
+import spruce.layout.*;
 import spruce.menu.*;
-import spruce.tab.*;
+import spruce.modal.*;
 import spruce.nav.*;
+import spruce.sidebar.*;
+import spruce.tab.*;
 import spruce.typography.*;
-import spruce.accordion.Accordion;
 
 using Nuke;
 
@@ -223,7 +224,7 @@ class Toggle extends AutoComponent {
       spacing: Small,
       children: [
         new Animated({
-          keyframes: compute(() -> switch toggle() {
+          keyframes: new Computation(() -> switch toggle() {
             case true: new Keyframes('in', _ -> [
               { opacity: 1, width: 100.pct() },
               { opacity: 0, width: 0 }
