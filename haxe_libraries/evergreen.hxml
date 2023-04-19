@@ -1,5 +1,6 @@
-# @install: lix --silent download "gh://github.com/wartman/evergreen#e1986226e1b6085409d619f5c277f11ab06a5bc9" into evergreen/0.0.0/github/e1986226e1b6085409d619f5c277f11ab06a5bc9
+# @install: lix --silent download "gh://github.com/wartman/evergreen#6260d65999bee42b87e0c3546f92b0be48d4d803" into evergreen/0.0.0/github/6260d65999bee42b87e0c3546f92b0be48d4d803
+-lib kit
 -lib nuke
 -lib pine
--cp ../evergreen/src
+-cp ${HAXE_LIBCACHE}/evergreen/0.0.0/github/6260d65999bee42b87e0c3546f92b0be48d4d803/src
 -D evergreen=0.0.0
