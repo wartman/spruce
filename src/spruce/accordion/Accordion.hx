@@ -15,7 +15,7 @@ class Accordion extends AutoComponent {
   function build() {
     return new AccordionContextProvider({
       value: new AccordionContext({ sticky: sticky }),
-      build: accordion -> new Box({
+      child: accordion -> new Box({
         styles: [
           'spruce-accordion',
           styles

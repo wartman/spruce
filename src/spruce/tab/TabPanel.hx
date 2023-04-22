@@ -14,7 +14,7 @@ class TabPanel extends AutoComponent {
         'spruce-tab-panel',
         tab.styles
       ],
-      children: [ tab.body(this) ]
+      children: [ tab.child(this) ]
     });
   }
 }

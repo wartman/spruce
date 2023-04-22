@@ -8,7 +8,7 @@ import spruce.core.*;
 
 using Nuke;
 
-class Button extends ProxyComponent {
+class Button extends AutoComponent {
   public static final baseStyles = Css.atoms({
     outline: 'none',
     border: 'none',

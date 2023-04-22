@@ -10,7 +10,7 @@ using Nuke;
 
 class NavbarMobile extends AutoComponent {
   final sidebarTitle:String = null;
-  final body:(context:Component)->Child;
+  final child:(context:Component)->Child;
   @:signal final isOpen:Bool = false;
 
   function build() {
@@ -40,7 +40,7 @@ class NavbarMobile extends AutoComponent {
             child: if (sidebarTitle != null) new SidebarTitle({ child: sidebarTitle }) else null
           }),
           new SidebarBody({
-            children: new Scope(body)
+            children: new Scope(child)
           })
         ]
       }))

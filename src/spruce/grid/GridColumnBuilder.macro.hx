@@ -2,10 +2,10 @@ package spruce.grid;
 
 import haxe.macro.Expr;
 import haxe.macro.Context;
-import pine.internal.macro.ClassBuilder;
+import pine.macro.ClassBuilder;
 
 using StringTools;
-using pine.internal.macro.MacroTools;
+using pine.macro.MacroTools;
 
 function buildGeneric() {
   return switch Context.getLocalType() {
@@ -38,6 +38,10 @@ private function buildGridColumn(infos:Array<GridColumnInfo>) {
     }
     
     builder.add(macro class {
+      public function new(props) {
+        super(props);
+      }
+
       function getStyles():nuke.ClassName {
         return $expr;
       }

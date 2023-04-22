@@ -22,7 +22,7 @@ class TabGroup extends AutoComponent {
         variant: variant,
         activeTab: tabs[0]
       }),
-      build: tabs -> new Box({
+      child: tabs -> new Box({
         styles: [
           'spruce-tab-group',
           styles

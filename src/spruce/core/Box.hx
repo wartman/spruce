@@ -10,7 +10,7 @@ import spruce.core.Shadow;
 using Nuke;
 using Reflect;
 
-class Box extends ProxyComponent {
+class Box extends AutoComponent {
   final props:BoxProps;
 
   public function new(props) {

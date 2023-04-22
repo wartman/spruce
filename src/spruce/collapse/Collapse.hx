@@ -39,7 +39,7 @@ class Collapse extends AutoComponent {
         }
         collapse.dispose();
       },
-      build: collapse -> new Box({
+      child: collapse -> new Box({
         styles: [
           'spruce-collapse',
           baseStyles,

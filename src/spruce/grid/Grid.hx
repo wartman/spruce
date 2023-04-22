@@ -1,7 +1,6 @@
 package spruce.grid;
 
 import pine.*;
-import pine.diffing.*;
 import spruce.core.*;
 
 using Nuke;
@@ -9,20 +8,10 @@ using Nuke;
 @:genericBuild(spruce.grid.GridBuilder.buildGeneric())
 class Grid<@:const Rest> {}
 
-abstract class GridBase extends ProxyComponent {
-  final styles:Null<ClassName>;
+abstract class GridBase extends AutoComponent {
   final children:Children;
-  final span:GridSpan;
-
-  public function new(props:{
-    children:Children,
-    ?styles:ClassName,
-    ?span:GridSpan
-  }) {
-    this.styles = props.styles;
-    this.children = props.children;
-    this.span = props.span == null ? Auto : props.span;
-  }
+  final styles:Null<ClassName> = null;
+  final span:GridSpan = Auto;
 
   abstract function getStyles():ClassName;
   

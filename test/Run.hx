@@ -32,7 +32,7 @@ function main() {
     Browser.document.getElementById('root'),
     () -> new PortalContextProvider({
       value: new PortalContext(Browser.document.getElementById('portal')),
-      build: _ -> new App({})
+      child: _ -> new App({})
     })
   );
 }
@@ -76,7 +76,7 @@ class App extends AutoComponent {
                   toggle: _ -> new DropdownButton({
                     child: 'A dropdown!'
                   }),
-                  body: _ -> new DropdownMenu({
+                  child: _ -> new DropdownMenu({
                     children: [
                       new MenuItem({ 
                         child: new DropdownMenuLink({
@@ -186,7 +186,7 @@ class App extends AutoComponent {
       }),
       children: [
         new NavbarMobile({
-          body: _ -> 'test'
+          child: _ -> 'test'
         }),
         new NavbarBrand({
           child: new Heading({
@@ -335,11 +335,11 @@ class TabExample extends AutoComponent {
       tabs: [
         new Tab({
           label: _ -> 'One',
-          body: _ -> 'Hello World'
+          child: _ -> 'Hello World'
         }),
         new Tab({
           label: _ -> 'Two',
-          body:  _ -> 'Hello Other World'
+          child:  _ -> 'Hello Other World'
         })
       ]
     }));
@@ -352,7 +352,7 @@ class TabExample extends AutoComponent {
           default: 'Wtf';
         })
       }),
-      body: _ -> new DropdownMenu({
+      child: _ -> new DropdownMenu({
         children: [
           new MenuItem({
             child: new DropdownMenuLink({
