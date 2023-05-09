@@ -1,9 +1,9 @@
 package spruce.core;
 
 import pine.*;
-import pine.html.*;
 import pine.html.HtmlAttributes;
 import pine.html.HtmlEvents;
+import pine.signal.Signal;
 import spruce.core.BorderRadius;
 import spruce.core.Shadow;
 
@@ -23,7 +23,8 @@ class Box extends AutoComponent {
     var spacing:Spacing = props.spacing ?? None;
     var shadow:Shadow = props.shadow ?? Shadow.None;
     var borderRadius:BorderRadius = props.borderRadius ?? BorderRadius.None;
-    
+    var children = props.children;
+
     props.className = ClassName.ofArray([
       props.styles,
       layout.toStyle(),
@@ -32,6 +33,7 @@ class Box extends AutoComponent {
       borderRadius.toStyle()
     ]);
 
+    props.deleteField('children');
     props.deleteField('tag');
     props.deleteField('styles');
     props.deleteField('layout');
@@ -39,7 +41,17 @@ class Box extends AutoComponent {
     props.deleteField('shadow');
     props.deleteField('borderRadius');
 
-    return new HtmlObjectComponent<GlobalAttr & HtmlEvents & { ?children:Children }>(tag, props);
+    return new ObjectComponent({
+      createObject: (adaptor, attrs) -> adaptor.createContainerObject(attrs),
+      attributes: {
+        var attributes:Map<String, ReadonlySignal<Any>> = [];
+        for (field in Reflect.fields(props)) {
+          attributes.set(field, Reflect.field(props, field));
+        }
+        attributes;
+      },
+      children: children
+    });
   }
 }
 

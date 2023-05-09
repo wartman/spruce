@@ -50,39 +50,76 @@ class Button extends AutoComponent {
     var radius:BorderRadius = props.borderRadius ?? Medium;
     var size:ButtonSize = props.size ?? Md;
 
-    return new HtmlObjectComponent<GlobalAttr & ButtonAttr & AnchorAttr & HtmlEvents & { ?children:Children }>(tag, {
-      href: switch tag {
-        case Anchor: props.href;
-        default: null;
-      },
-      onClick: switch tag {
-        case Button: props.onClick;
-        default: e -> {
-          e.preventDefault();
-          props.onClick(e);
-        }
-      },
-      role: switch tag {
-        case Button: null;
-        default: 'button';
-      },
-      type: switch tag {
-        case Button: props.kind;
-        default: null;
-      },
-      className: baseStyles.with([
-        'spruce-button',
-        'spruce-button-${priority.toString()}',
-        'spruce-button-${size}',
-        focusStyles,
-        priority.toStyle(),
-        layout.toStyle(),
-        spacing.toGap(),  
-        radius.toStyle(),
-        props.styles
-      ]),
+    return new ObjectComponent({
+      createObject: (adaptor, attrs) -> adaptor.createCustomObject(tag, attrs),
+      attributes: [
+        'href' => switch tag {
+          case Anchor: props.href;
+          default: null;
+        },
+        'onclick' => switch tag {
+          case Button: props.onClick;
+          default: e -> {
+            e.preventDefault();
+            props.onClick(e);
+          }
+        },
+        'role' => switch tag {
+          case Button: null;
+          default: 'button';
+        },
+        'type' => switch tag {
+          case Button: props.kind;
+          default: null;
+        },
+        'class' => baseStyles.with([
+          'spruce-button',
+          'spruce-button-${priority.toString()}',
+          'spruce-button-${size}',
+          focusStyles,
+          priority.toStyle(),
+          layout.toStyle(),
+          spacing.toGap(),  
+          radius.toStyle(),
+          props.styles
+        ])
+      ],
       children: props.children
     });
+
+    // return new HtmlObjectComponent<GlobalAttr & ButtonAttr & AnchorAttr & HtmlEvents & { ?children:Children }>(tag, {
+    //   href: switch tag {
+    //     case Anchor: props.href;
+    //     default: null;
+    //   },
+    //   onClick: switch tag {
+    //     case Button: props.onClick;
+    //     default: e -> {
+    //       e.preventDefault();
+    //       props.onClick(e);
+    //     }
+    //   },
+    //   role: switch tag {
+    //     case Button: null;
+    //     default: 'button';
+    //   },
+    //   type: switch tag {
+    //     case Button: props.kind;
+    //     default: null;
+    //   },
+    //   className: baseStyles.with([
+    //     'spruce-button',
+    //     'spruce-button-${priority.toString()}',
+    //     'spruce-button-${size}',
+    //     focusStyles,
+    //     priority.toStyle(),
+    //     layout.toStyle(),
+    //     spacing.toGap(),  
+    //     radius.toStyle(),
+    //     props.styles
+    //   ]),
+    //   children: props.children
+    // });
   }
 }
 

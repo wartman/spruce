@@ -4,7 +4,7 @@ import pine.*;
 
 typedef FormContextProvider = Provider<FormContext>; 
 
-class FormContext implements Record {
+class FormContext extends Record {
   #if (js && !nodejs)
   final form:js.html.FormElement;
   #end

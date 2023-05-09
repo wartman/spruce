@@ -16,7 +16,7 @@ class Form extends AutoComponent {
     return new Html<'form'>({
       action: action,
       method: method,
-      onsubmit: onSubmit,
+      onSubmit: onSubmit,
       children: new Box({
         tag: UnorderedList,
         children: children
