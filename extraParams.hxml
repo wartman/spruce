@@ -1,0 +1,3 @@
+# Warning: Spruce will *not* compile if Setup is not 
+# run first.
+--macro spruce.core.Setup.setup()

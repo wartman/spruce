@@ -1,10 +1,6 @@
 package spruce.modal;
 
-import pine.*;
-import spruce.core.*;
 import spruce.paper.Paper;
-
-using Nuke;
 
 enum ModalSize {
   Sm;
@@ -18,14 +14,20 @@ class Modal extends AutoComponent {
   final children:Children;
   final size:ModalSize = Md;
   final hideOnEscape:Bool = true;
-
-  public function build():Component {
+  
+  function build() {
     var paper = new Paper({
       styles: [
         'spruce-modal-container',
         styles,
-        Css.atoms({ width: 100.vw() }),
-        getContainerSize()
+        Sizing.width('screen'),
+        switch size {
+          case Sm: Breakpoint.viewport('200px', Sizing.width('200px'));
+          case Md: Breakpoint.viewport('md', Sizing.width('500px'));
+          case Lg: Breakpoint
+            .viewport('md', Sizing.width('500px'))
+            .with(Breakpoint.viewport('lg', Sizing.width('900px')));
+        }
       ],
       onClick: e -> e.stopPropagation(),
       focusable: true,
@@ -34,32 +36,20 @@ class Modal extends AutoComponent {
     });
 
     return new eg.Modal({
-      layerStyles: [
+      layerStyles: Breeze.compose(
         'spruce-overlay',
-        Overlay.baseStyles
-      ],
+        Layout.position('fixed'),
+        Layout.attach('inset', 0),
+        Layout.overflow('x', 'hidden'),
+        Layout.overflow('y', 'scroll'),
+        Background.color('rgba(0,0,0,0.5)'),
+        Flex.display(),
+        Flex.justify('center'),
+        Flex.alignItems('center')
+      ),
       onHide: onHide,
       hideOnEscape: hideOnEscape,
       children: paper
     });
-  }
-  
-  function getContainerSize() {
-    return switch size {
-      case Sm: Css.mediaQuery({
-        type: 'screen',
-        minWidth: 200.px()
-      }, {
-        width: 200.px()
-      });
-      case Md: Breakpoint.md({
-        width: Constants.breakpointMd
-      });
-      case Lg: Breakpoint.md({
-        width: Constants.breakpointMd
-      }).with(Breakpoint.lg({
-        width: Constants.breakpointLg
-      }));
-    }
   }
 }

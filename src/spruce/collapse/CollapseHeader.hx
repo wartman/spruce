@@ -1,38 +1,28 @@
 package spruce.collapse;
 
 import eg.CollapseContext;
-import pine.*;
-import pine.signal.Computation;
-import spruce.core.Box;
-import spruce.icon.Icon;
-
-using Nuke;
+import pine.signal.*;
+import spruce.box.Box;
+import spruce.icon.ChevronDown;
 
 class CollapseHeader extends AutoComponent {
-  public static final baseStyles = Css.atoms({
-    display: 'flex',
-    width: 100.pct(),
-    padding: theme(spruce.spacing.medium),
-    cursor: 'pointer',
-    outline: 0,
-    alignItems: 'center'
-  });
-  
   final styles:ClassName = null;
   final child:Child;
 
   function build() {
     var collapse = CollapseContext.from(this);
-
     return new Box({
       tag: Header,
-      styles: [
+      styles: Breeze.compose(
         'spruce-collapse-header',
-        baseStyles,
-        spruce.button.Button.focusStyles,
-        styles
-      ],
-      layout: Horizontal,
+        styles,
+        Flex.display(),
+        Flex.alignItems('center'),
+        Sizing.width('full'),
+        Spacing.pad(2),
+        Border.outlineWidth(0),
+        Interactive.cursor('pointer')
+      ),
       onClick: _ -> collapse.toggle(),
       onKeyDown: e -> {
         var event:js.html.KeyboardEvent = cast e;
@@ -45,21 +35,16 @@ class CollapseHeader extends AutoComponent {
       tabIndex: 0,
       children: [
         new Box({
-          styles: Css.atoms({ marginRight: 'auto' }),
+          styles: Spacing.margin('right', 'auto'),
           children: [ child ]
         }),
-        new Icon({
-          styles: new Computation(() -> ClassName.ofArray([
-            Css.atoms({
-              width: 1.em(),
-              height: 1.em(),
-              transition: [ 'transform', collapse.duration.ms(), 'ease-in-out' ]
-            }),
-            if (collapse.status() == Expanded) Css.atoms({
-              transform: rotate((-180).deg())
-            }) else null
-          ])),
-          kind: ChevronDown
+        new ChevronDown({
+          styles: new Computation(() -> Breeze.compose(
+            Sizing.width(5),
+            Sizing.height(5),
+            Transition.transition('transform'),
+            if (collapse.status() == Expanded) Transform.rotate(-180) else null
+          ))
         })
       ]
     });

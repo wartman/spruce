@@ -3,11 +3,8 @@ package spruce.collapse;
 import eg.Animated;
 import eg.CollapseContext;
 import eg.Keyframes;
-import pine.*;
-import pine.signal.Computation;
-import spruce.core.Box;
-
-using Nuke;
+import spruce.box.Box;
+import pine.signal.*;
 
 class CollapseBody extends AutoComponent {
   final children:Children;
@@ -39,27 +36,22 @@ class CollapseBody extends AutoComponent {
       },
       duration: collapse.duration,
       child: new Box({
-        styles: [
-          Css.atoms({ 
-            overflow: 'hidden', 
-            height: 0,
-            padding: [
-              0,
-              theme(spruce.spacing.medium)
-            ],
-            margin: 0,
-          }),
-          styles
-        ],
+        styles: Breeze.compose(
+          styles,
+          Layout.overflow('hidden'),
+          Sizing.height(0),
+          Spacing.pad('x', 2),
+          Spacing.margin(0)
+        ),
         children: children
       })
     });
   }
-
+  
   function getHeight(context:Component) {
     #if (js && !nodejs)
     var el:js.html.Element = context.getObject();
-    return el.scrollHeight.px();
+    return el.scrollHeight + 'px';
     #else
     return 'auto';
     #end

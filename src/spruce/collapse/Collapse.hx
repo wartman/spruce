@@ -2,23 +2,13 @@ package spruce.collapse;
 
 import eg.AccordionContext;
 import eg.CollapseContext;
-import pine.*;
-import spruce.core.BorderRadius;
-import spruce.core.Box;
-
-using Nuke;
+import spruce.core.*;
+import spruce.panel.Panel;
 
 class Collapse extends AutoComponent {
-  public static final baseStyles = Css.atoms({
-    borderStyle: 'solid',
-    borderWidth: 1.px(),
-    borderColor: theme(spruce.color.neutral300),
-    backgroundColor: theme(spruce.color.neutral0),
-  });
-
   final styles:ClassName = null;
   final children:Children;
-  final borderRadius:BorderRadius = Medium;
+  final radius:BorderRadiusStyle = Medium;
   final duration:Int = 200;
 
   function build() {
@@ -26,26 +16,24 @@ class Collapse extends AutoComponent {
       status: Collapsed,
       duration: duration
     });
-    switch AccordionContext.maybeFrom(this) {
-      case Some(accordion): accordion.add(collapse);
-      case None:
-    }
+    AccordionContext
+      .maybeFrom(this)
+      .ifExtract(Some(accordion), accordion.add(collapse));
+    
     return new CollapseContextProvider({
       value: collapse,
       dispose: collapse -> {
-        switch AccordionContext.maybeFrom(this) {
-          case Some(accordion): accordion.remove(collapse);
-          case None:
-        }
+        AccordionContext
+          .maybeFrom(this)
+          .ifExtract(Some(accordion), accordion.remove(collapse));
         collapse.dispose();
       },
-      child: collapse -> new Box({
-        styles: [
+      child: collapse -> new Panel({
+        styles: Breeze.compose(
           'spruce-collapse',
-          baseStyles,
           styles
-        ],
-        borderRadius: borderRadius,
+        ),
+        radius: radius,
         children: children
       })
     });

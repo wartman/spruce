@@ -1,9 +1,7 @@
 package spruce.control;
 
-import pine.*;
-import spruce.core.Box;
-
-using Nuke;
+import spruce.core.LayoutStyle;
+import spruce.box.Box;
 
 class ControlGroup extends AutoComponent {
   final styles:ClassName = null;
@@ -11,11 +9,11 @@ class ControlGroup extends AutoComponent {
   
   public function build() {
     return new Box({
-      styles: [
+      styles: Breeze.compose(
         'spruce-control-group',
         styles
-      ],
-      layout: Horizontal,
+      ),
+      layout: LayoutStyle.Horizontal,
       children: controls
     });
   }

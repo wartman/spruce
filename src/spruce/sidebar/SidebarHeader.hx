@@ -3,10 +3,9 @@ package spruce.sidebar;
 import eg.LayerContext;
 import pine.*;
 import spruce.control.*;
+import spruce.box.Box;
 import spruce.core.*;
-import spruce.icon.Icon;
-
-using Nuke;
+import spruce.icon.*;
 
 class SidebarHeader extends AutoComponent {
   final styles:ClassName = null;
@@ -15,16 +14,14 @@ class SidebarHeader extends AutoComponent {
   public function build() {
     return new Box({
       tag: Header,
-      styles: Css.atoms({
-        padding: theme(spruce.spacing.medium),
-      }).with([
-        'spruce-sidebar-header',
-        Layout.Horizontal.toStyle(),
-        styles
-      ]),
+      styles: Breeze.compose(
+        'spruce-sidebar-header'
+      ),
+      padding: SpacingStyle.Medium,
+      layout: LayoutStyle.Horizontal,
       children: [
         new Box({
-          styles: Css.atoms({ marginRight: 'auto' }),
+          styles: Spacing.margin('right', 'auto'),
           children: [ child ]
         }),
         new ControlGroup({
@@ -32,9 +29,11 @@ class SidebarHeader extends AutoComponent {
             new ControlButton({
               onClick: _ -> LayerContext.from(this).hide(),
               ariaLabel: 'Close',
-              child: new Icon({ 
-                styles: Css.atoms({ width: 2.em(), height: 2.em() }),
-                kind: Close 
+              child: new Close({
+                styles: Breeze.compose(
+                  Sizing.width(5),
+                  Sizing.height(5)
+                )
               })
             })
           ]

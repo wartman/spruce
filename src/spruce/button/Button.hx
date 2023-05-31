@@ -1,67 +1,48 @@
 package spruce.button;
 
-import pine.*;
-import pine.html.*;
 import pine.html.HtmlEvents;
-import pine.html.HtmlAttributes;
 import spruce.core.*;
 
-using Nuke;
-
 class Button extends AutoComponent {
-  public static final baseStyles = Css.atoms({
-    outline: 'none',
-    border: 'none',
-    fontFamily: 'inherit',
-    fontSize: theme(spruce.button.font.size.medium),
-    fontWeight: theme(spruce.font.weight.semibold),
-    lineHeight: theme(spruce.input.height.medium),
-    height: theme(spruce.input.height.medium),
-    textAlign: 'center',
-    textDecoration: 'none',
-    verticalAlign: 'middle',
-    boxSizing: 'border-box',
-    padding: [ 0, theme(spruce.spacing.medium)],
-    borderWidth: theme(spruce.input.border.width),
-    borderStyle: 'solid'
-  });
-  public static final focusStyles = Css.atoms({
-    ':focus-visible': {
-      outline: theme(spruce.focus.ring),
-      outlineOffset: theme(spruce.focus.ring.offset)
-    }
-  });
+  public static final baseStyles = Breeze.compose(
+    Typography.textAlign('center'),
+    Typography.textDecoration('none'),
+    Typography.textVerticalAlign('middle'),
+    BorderStyle.Small.toStyle()
+  );
 
-  final props:ButtonProps;
+  public static final focusStyles = Modifier.focusVisible(
+    Border.outlineStyle('solid'),
+    Border.outlineOffset('1px'),
+    Border.outlineColor('primary', 600)
+  );
 
-  public function new(props) {
-    this.props = props;
-  }
+  final tag:ButtonTag = Button;
+  final styles:ClassName = null;
+  final href:Null<String> = null;
+  final kind:ButtonKind = null;
+  final onClick:EventListener = null;
+  final size:ButtonSize = Md;
+  final priority:PriorityStyle = Neutral;
+  final layout:LayoutStyle = Auto;
+  final radius:BorderRadiusStyle = Medium;
+  final spacing:SpacingStyle = None;
+  final children:Children;
 
   function build() {
-    var tag:ButtonTag = props.href != null 
-      ? Anchor 
-      : props.tag == null
-        ? Button
-        : props.tag;
-    var priority:Priority = props.priority ?? Neutral;
-    var layout:Layout = props.layout ?? Auto;
-    var spacing:Spacing = props.spacing ?? None;
-    var radius:BorderRadius = props.borderRadius ?? Medium;
-    var size:ButtonSize = props.size ?? Md;
-
+    var tag:ButtonTag = href == null ? tag : Anchor;
     return new ObjectComponent({
       createObject: (adaptor, attrs) -> adaptor.createCustomObject(tag, attrs),
       attributes: [
         'href' => switch tag {
-          case Anchor: props.href;
+          case Anchor: href;
           default: null;
         },
         'onclick' => switch tag {
-          case Button: props.onClick;
+          case Button: onClick;
           default: e -> {
             e.preventDefault();
-            props.onClick(e);
+            onClick(e);
           }
         },
         'role' => switch tag {
@@ -69,7 +50,7 @@ class Button extends AutoComponent {
           default: 'button';
         },
         'type' => switch tag {
-          case Button: props.kind;
+          case Button: kind;
           default: null;
         },
         'class' => baseStyles.with([
@@ -81,58 +62,24 @@ class Button extends AutoComponent {
           layout.toStyle(),
           spacing.toGap(),  
           radius.toStyle(),
-          props.styles
+          switch size {
+            case Sm: Breeze.compose(
+              Spacing.pad('x', 1.5),
+              InputHeightStyle.Sm.toStyle()
+            );
+            case Md: Breeze.compose(
+              Spacing.pad('x', 3),
+              InputHeightStyle.Md.toStyle()
+            );
+            case Lg: Breeze.compose(
+              Spacing.pad('x', 4),
+              InputHeightStyle.Lg.toStyle()
+            );
+          },
+          styles
         ])
       ],
-      children: props.children
+      children: children
     });
-
-    // return new HtmlObjectComponent<GlobalAttr & ButtonAttr & AnchorAttr & HtmlEvents & { ?children:Children }>(tag, {
-    //   href: switch tag {
-    //     case Anchor: props.href;
-    //     default: null;
-    //   },
-    //   onClick: switch tag {
-    //     case Button: props.onClick;
-    //     default: e -> {
-    //       e.preventDefault();
-    //       props.onClick(e);
-    //     }
-    //   },
-    //   role: switch tag {
-    //     case Button: null;
-    //     default: 'button';
-    //   },
-    //   type: switch tag {
-    //     case Button: props.kind;
-    //     default: null;
-    //   },
-    //   className: baseStyles.with([
-    //     'spruce-button',
-    //     'spruce-button-${priority.toString()}',
-    //     'spruce-button-${size}',
-    //     focusStyles,
-    //     priority.toStyle(),
-    //     layout.toStyle(),
-    //     spacing.toGap(),  
-    //     radius.toStyle(),
-    //     props.styles
-    //   ]),
-    //   children: props.children
-    // });
   }
 }
-
-typedef ButtonProps = {
-  ?tag:ButtonTag,
-  ?priority:Priority,
-  ?layout:Layout,
-  ?spacing:Spacing,
-  ?borderRadius:BorderRadius,
-  ?kind:ButtonKind,
-  ?size:ButtonSize,
-  ?styles:ClassName,
-  ?href:String,
-  ?onClick:EventListener,
-  ?children:Children
-};

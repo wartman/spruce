@@ -1,43 +1,35 @@
 package spruce.panel;
 
-import pine.*;
 import pine.html.HtmlEvents;
+import spruce.box.Box;
 import spruce.core.*;
 
-using Nuke;
-
 class Panel extends AutoComponent {
-  public static final baseStyles = Css.atoms({
-    backgroundColor: theme(spruce.paper.background.color),
-    borderStyle: 'solid',
-    borderWidth: theme(spruce.panel.border.width),
-    borderColor: theme(spruce.panel.border.color),
-    backgroundClip: 'padding-box',
-    ':focus-visible': {
-      outline: 'none'
-    }
-  });
-
   final styles:ClassName = null;
   final children:Children;
-  final layout:Layout = Auto;
-  final shadow:Shadow = Medium;
-  final borderRadius:BorderRadius = Medium;
+  final layout:LayoutStyle = Auto;
+  final shadow:ShadowStyle = None;
+  final radius:BorderRadiusStyle = Medium;
+  final border:BorderStyle = Small;
   final focusable:Bool = false;
   final role:String = null;
   final onClick:EventListener = null;
 
   function build() {
     return new Box({  
-      styles: [
+      styles: Breeze.compose(
         'spruce-panel',
-        baseStyles,
+        Background.color('neutral', 0),
+        Background.clip('padding'),
+        Border.color('neutral', 300),
+        Modifier.focusVisible(Border.outlineStyle('none')),
         styles
-      ],
+      ),
       layout: layout,
       shadow: shadow,
-      borderRadius: borderRadius,
-      ariaModal: focusable ? 'true' : null,
+      border: border,
+      radius: radius,
+      isModal: focusable ? true : null,
       tabIndex: focusable ? -1 : null,
       role: role == null 
         ? focusable ? 'dialog' : null

@@ -3,9 +3,7 @@ package spruce.nav;
 import pine.*;
 import pine.html.*;
 import pine.html.HtmlEvents;
-import spruce.core.Box;
-
-using Nuke;
+import spruce.box.Box;
 
 class NavbarBrand extends AutoComponent {
   final styles:ClassName = null;
@@ -14,17 +12,15 @@ class NavbarBrand extends AutoComponent {
   final href:String = null;
 
   public function build():Component {
-    var navbarBrandStyle = Css.atoms({
-      display: 'block',
-      marginTop: 0,
-      marginBottom: 0,
-      marginRight: 'auto',
-      marginLeft: 0,
-      padding: 0
-    }).with([
+    var navbarBrandStyle = Breeze.compose(
       'spruce-navbar-brand',
-      styles
-    ]);
+      styles,
+      Layout.display('block'),
+      Spacing.margin('y', 0),
+      Spacing.margin('left', 0),
+      Spacing.margin('right', 'auto'),
+      Spacing.pad(0)
+    );
 
     if (href != null) return new Html<'a'>({
       href: href,

@@ -2,10 +2,8 @@ package spruce.dropdown;
 
 import eg.DropdownContext;
 import eg.DropdownItem;
-import pine.*;
+import spruce.core.*;
 import spruce.menu.MenuLink;
-
-using Nuke;
 
 class DropdownMenuLink extends AutoComponent {
   final styles:ClassName = null;
@@ -15,23 +13,19 @@ class DropdownMenuLink extends AutoComponent {
 
   public function build() {
     var link = new MenuLink({
-      styles: [
+      styles: Breeze.compose(
         'spruce-dropdown-menu-link',
-        Css.atoms({
-          padding: [
-            0,
-            theme(spruce.spacing.small)
-          ],
-          ':hover': {
-            backgroundColor: theme(spruce.color.primary600),
-            color: theme(spruce.color.neutral0)
-          },
-          borderRadius: theme(spruce.border.radius.small),
-          height: theme(spruce.input.height.medium),
-          lineHeight: theme(spruce.input.height.medium)
-        }),
+        Spacing.pad('x', 0),
+        Spacing.pad('y', 2),
+        Typography.textVerticalAlign('middle'),
+        InputHeightStyle.Md.toStyle(),
+        BorderRadiusStyle.Small.toStyle(),
+        Modifier.hover(
+          Background.color('primary', 600),
+          Typography.textColor('neutral', 0)
+        ),
         styles
-      ],
+      ),
       onClick: if (closeOnClick) _ -> {
         DropdownContext.from(this).close();
       } else null,

@@ -1,12 +1,11 @@
 package spruce.tab;
 
 import kit.Assert;
-import pine.*;
-import spruce.core.Box;
+import spruce.box.Box;
+import spruce.core.*;
 import spruce.tab.TabContext;
 
 using Lambda;
-using Nuke;
 
 class TabGroup extends AutoComponent {
   final styles:ClassName = null;
@@ -23,11 +22,11 @@ class TabGroup extends AutoComponent {
         activeTab: tabs[0]
       }),
       child: tabs -> new Box({
-        styles: [
+        styles: Breeze.compose(
           'spruce-tab-group',
           styles
-        ],
-        layout: Vertical,
+        ),
+        layout: LayoutStyle.Vertical,
         children: [
           new TabGroupNav({
             children: new Each(tabs.tabs, tab -> new TabButton({ tab: tab }))

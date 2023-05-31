@@ -3,32 +3,27 @@ package spruce.sidebar;
 import pine.*;
 import spruce.paper.Paper;
 
-using Nuke;
-
 class SidebarPanel extends AutoComponent {
   final children:Children;
   final attachment:SidebarAttachment;
 
   public function build() {
     return new Paper({
-      borderRadius: None,
+      radius: None,
       onClick: e -> e.stopPropagation(),
-      styles: [
-        Css.atoms({
-          position: 'absolute',
-          top: 0,
-          minHeight: 100.vh(),
-          width: 250.px(), // @todo: make configurable?
-          '@media screen and (max-width: 250px)': {
-            width: 100.vw()
-          }
-        }),
+      styles: Breeze.compose(
+        'spruce-sidebar',
+        Breakpoint.markContainer('spruce-sidebar', 'inline-size'),
+        Layout.position('absolute'),
+        Layout.attach('top', 0),
+        Sizing.height('min', 'screen'),
+        Sizing.width('screen'),
+        Breakpoint.viewport('250px', Sizing.width('250px')), // @todo: make configurable
         switch attachment {
-          case Left: Css.atoms({ left: 0 });
-          case Right: Css.atoms({ right: 0 });
-        },
-        'spruce-sidebar'
-      ],
+          case Left: Layout.attach('left', 0);
+          case Right: Layout.attach('right', 0);
+        }
+      ),
       focusable: true,
       role: 'dialog',
       children: children

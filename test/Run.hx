@@ -1,3 +1,8 @@
+import Breeze.Typography;
+import Breeze.Background;
+import Breeze.Layout;
+import Breeze.Effect;
+import Breeze.Sizing;
 import eg.Animated;
 import eg.Keyframes;
 import eg.LayerContext;
@@ -9,7 +14,7 @@ import pine.signal.Computation;
 import spruce.accordion.Accordion;
 import spruce.button.Button;
 import spruce.collapse.*;
-import spruce.core.Box;
+import spruce.box.Box;
 import spruce.core.PortalContext;
 import spruce.dropdown.*;
 import spruce.grid.*;
@@ -21,13 +26,7 @@ import spruce.sidebar.*;
 import spruce.tab.*;
 import spruce.typography.*;
 
-using Nuke;
-
 function main() {
-  Spruce.useBaseStyles();
-  Spruce.useLightColors();
-  Spruce.useDefaultTheme();
-
   mount(
     Browser.document.getElementById('root'),
     () -> new PortalContextProvider({
@@ -133,7 +132,7 @@ class App extends AutoComponent {
                       ]
                     }),
                     new Collapse({
-                      borderRadius: Large,
+                      radius: Large,
                       children: [
                         new CollapseHeader({
                           child: 'Two' 
@@ -180,10 +179,10 @@ class App extends AutoComponent {
 
     var nav = new Navbar({
       spacing: Small,
-      styles: Css.atoms({
-        backgroundColor: theme(spruce.color.neutral900),
-        color: theme(spruce.color.neutral0),
-      }),
+      styles: Breeze.compose(
+        Background.color('neutral', 900),
+        Typography.textColor('neutral', 0)
+      ),
       children: [
         new NavbarMobile({
           child: _ -> 'test'
@@ -214,24 +213,22 @@ class Toggle extends AutoComponent {
 
   function build() {
     return new Box({
-      styles: [
-        Css.atoms({ 
-          width: 100.pct(),
-          overflow: ' '
-        })
-      ],
+      styles: Breeze.compose(
+        Sizing.width('full'),
+        Layout.overflow('auto')
+      ),
       layout: Vertical,
       spacing: Small,
       children: [
         new Animated({
           keyframes: new Computation(() -> switch toggle() {
             case true: new Keyframes('in', _ -> [
-              { opacity: 1, width: 100.pct() },
-              { opacity: 0, width: 0 }
+              { opacity: 1, width: '100%' },
+              { opacity: 0, width: '0' }
             ]);
             case false: new Keyframes('out', _ -> [
               { opacity: 0, width: 0 },
-              { opacity: 1, width: 100.pct() }
+              { opacity: 1, width: '100%' }
             ]);
           }),
           duration: 300,
@@ -240,14 +237,15 @@ class Toggle extends AutoComponent {
             // as a part of the Animate component?
             var el:js.html.Element = context.getObject();
             el.style.opacity = toggle.peek() ? '0' : '1';
-            el.style.width = toggle.peek() ? '0' : 100.pct();
+            el.style.width = toggle.peek() ? '0' : '100%';
           },
           child: new Box({
-            styles: Css.atoms({
-              width: 200.px(),
-              height: 200.px(),
-              background: 'black'
-            })
+            styles: Breeze.compose(
+              Sizing.width('200px'),
+              Sizing.height('200px'),
+              Background.color('neutral', 1000)
+            ),
+            children: []
           })
         }),
         new Box({
@@ -306,7 +304,7 @@ class ShowSidebar extends AutoComponent {
     return new Fragment([
       new Button({
         priority: Primary,
-        borderRadius: Pill,
+        radius: Pill,
         onClick: _ -> isOpen.set(true),
         children: [ 'Sidebar' ]
       }),

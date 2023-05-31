@@ -1,12 +1,8 @@
 package spruce.typography;
 
 import kit.Assert;
-import pine.*;
 import pine.html.HtmlEvents;
 import pine.internal.AttributeHost;
-
-using Nuke;
-
 
 class Heading extends AutoComponent implements AttributeHost {
   @:constant final level:Int;

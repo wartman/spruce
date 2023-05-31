@@ -1,7 +1,9 @@
+extraParams.hxml
+
 -cp src
 -cp test
 
--lib nuke
+-lib breeze
 -lib pine
 -lib kit
 -lib evergreen
@@ -9,6 +11,7 @@
 -debug
 
 # -D nuke.output=style.css
+-D breeze.output=runtime
 -D js-es=6
 -D analyzer-optimize
 -D message-reporting=pretty

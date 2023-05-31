@@ -4,10 +4,8 @@ import eg.Keyframes;
 import eg.Layer;
 import eg.PortalContext;
 import eg.ScrollLocked;
-import pine.*;
+import spruce.box.Box;
 import spruce.core.*;
-
-using Nuke;
 
 class Sidebar extends AutoComponent {
   final onHide:()->Void;
@@ -37,10 +35,17 @@ class Sidebar extends AutoComponent {
       ]);
     };
     var portal = new Portal(PortalContext.from(this).getTarget(), () -> new Layer({
-      styles: [
+      styles: Breeze.compose(
         'spruce-overlay',
-        Overlay.baseStyles
-      ],
+        Layout.position('fixed'),
+        Layout.attach('inset', 0),
+        Layout.overflow('x', 'hidden'),
+        Layout.overflow('y', 'scroll'),
+        Background.color('rgba(0,0,0,0.5)'),
+        Flex.display(),
+        Flex.justify('center'),
+        Flex.alignItems('center')
+      ),
       onHide: onHide,
       hideOnEscape: hideOnEscape,
       showAnimation: show,

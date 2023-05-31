@@ -1,9 +1,8 @@
 package spruce.layout;
 
 import pine.*;
+import spruce.box.Box;
 import spruce.core.*;
-
-using Nuke;
 
 enum ContainerKind {
   Fluid;
@@ -14,35 +13,33 @@ enum ContainerKind {
 }
 
 class Container extends AutoComponent {
-  public static final baseStyles = Css.atoms({
-    display: 'flex',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: 100.pct(),
-    paddingLeft: theme(spruce.spacing.large),
-    paddingRight: theme(spruce.spacing.large),
-  });
+  public static final baseStyles = Breeze.compose(
+    Flex.display(),
+    Spacing.margin('x', 'auto'),
+    Spacing.pad('x', 10),
+    Sizing.width('full'),
+  );
 
   final kind:ContainerKind = Fluid;
-  final spacing:Spacing = None;
-  final layout:Layout = Auto;
+  final spacing:SpacingStyle = None;
+  final layout:LayoutStyle = Auto;
   final styles:ClassName = null;
   final children:Children;
 
   public function build() {
     return new Box({
-      styles: [
+      styles: Breeze.compose(
         'spruce-container',
         baseStyles,
         switch kind {
           case Fluid: null;
-          case Sm: Css.atoms({ maxWidth: Constants.breakpointSm });
-          case Md: Css.atoms({ maxWidth: Constants.breakpointMd });
-          case Lg: Css.atoms({ maxWidth: Constants.breakpointLg });
-          case Xl: Css.atoms({ maxWidth: Constants.breakpointXl });
+          case Sm: Layout.container('sm');
+          case Md: Layout.container('md');
+          case Lg: Layout.container('lg');
+          case Xl: Layout.container('xl');
         },
         styles
-      ],
+      ),
       spacing: spacing,
       layout: layout,
       children: children

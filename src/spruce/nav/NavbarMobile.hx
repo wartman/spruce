@@ -2,11 +2,8 @@ package spruce.nav;
 
 import pine.*;
 import spruce.control.*;
-import spruce.core.*;
-import spruce.icon.Icon;
+import spruce.icon.*;
 import spruce.sidebar.*;
-
-using Nuke;
 
 class NavbarMobile extends AutoComponent {
   final sidebarTitle:String = null;
@@ -16,18 +13,18 @@ class NavbarMobile extends AutoComponent {
   function build() {
     return new Fragment([
       new ControlGroup({
-        styles: Breakpoint.md({ display: [ 'none', '!important' ] }),
+        styles: Breeze.compose(
+          Breakpoint.viewport('md', Layout.display('none'))
+        ),
         controls: [
           new ControlButton({
             onClick: _ -> isOpen.set(true),
             ariaLabel: 'Open Main Menu',
-            child: new Icon({
-              // @todo: Replace with Small, Medium and Large for icon size
-              styles: Css.atoms({
-                height: 2.em(),
-                width: 2.em()
-              }),
-              kind: Hamburger
+            child: new Hamburger({
+              styles: Breeze.compose(
+                Sizing.width(5),
+                Sizing.height(5)
+              )
             })
           })
         ]

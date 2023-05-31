@@ -1,10 +1,6 @@
 package spruce.menu;
 
-import pine.*;
-import pine.html.*;
 import pine.html.HtmlEvents;
-
-using Nuke;
 
 enum MenuLinkKind {
   Link(url:String);
@@ -12,15 +8,6 @@ enum MenuLinkKind {
 }
 
 class MenuLink extends AutoComponent {
-  public static final baseStyles = Css.atoms({
-    display: 'block',
-    textDecoration: 'none',
-    ':focus-visible': {
-      outline: theme(spruce.focus.ring),
-      outlineOffset: theme(spruce.focus.ring.offset)
-    }
-  });
-
   @:observable final selected:Bool = false;
   @:observable final kind:MenuLinkKind;
   final styles:ClassName = null;
@@ -30,12 +17,18 @@ class MenuLink extends AutoComponent {
 
   public function build() {
     return new Html<'a'>({
-      className: selected.map(selected -> ClassName.ofArray([
+      className: selected.map(selected -> Breeze.compose(
         'spruce-menu-link',
-        baseStyles,
         styles,
-        selected ? selectedStyles : null
-      ])),
+        selected ? selectedStyles : null,
+        Layout.display('block'),
+        Typography.textDecoration('none'),
+        Modifier.focusVisible(
+          Border.outlineStyle('solid'),
+          Border.outlineOffset('1px'),
+          Border.outlineColor('primary', 600)
+        )
+      )),
       href: kind.map(kind -> switch kind {
         case Link(url): url;
         default: '#'; // Required to allow tabbing.

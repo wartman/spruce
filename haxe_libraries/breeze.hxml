@@ -1,0 +1,4 @@
+# @install: lix --silent download "gh://github.com/wartman/breeze#9f3f08b96cbf3287cdce389e667d3021ae8a1cb7" into breeze/0.0.1/github/9f3f08b96cbf3287cdce389e667d3021ae8a1cb7
+# -cp ${HAXE_LIBCACHE}/breeze/0.0.1/github/9f3f08b96cbf3287cdce389e667d3021ae8a1cb7/src
+-cp ../breeze/src
+-D breeze=0.0.1

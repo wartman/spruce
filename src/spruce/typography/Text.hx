@@ -3,8 +3,6 @@ package spruce.typography;
 import pine.*;
 import pine.html.*;
 
-using Nuke;
-
 enum TextKind {
   Normal;
   Bold;

@@ -1,9 +1,7 @@
 package spruce.grid;
 
 import pine.*;
-import spruce.core.*;
-
-using Nuke;
+import spruce.box.Box;
 
 @:genericBuild(spruce.grid.GridColumnBuilder.buildGeneric())
 class GridColumn<@:const Rest> {}
@@ -16,11 +14,11 @@ abstract class GridColumnBase extends AutoComponent {
 
   public function build() {
     return new Box({
-      styles: [
+      styles: Breeze.compose(
         'spruce-grid-column',
         getStyles(),
         styles
-      ],
+      ),
       children: children
     });
   }

@@ -1,9 +1,6 @@
 package spruce.modal;
 
-import pine.*;
 import spruce.typography.Heading;
-
-using Nuke;
 
 class ModalTitle extends AutoComponent {
   final styles:ClassName = null;
@@ -13,14 +10,13 @@ class ModalTitle extends AutoComponent {
   public function build() {
     return new Heading({
       level: level,
-      styles: Css.atoms({
-        marginBottom: 0,
-        lineHeight: theme(spruce.modalTitle.lineHeight)
-      }).with([
+      styles: Breeze.compose(
         'spruce-modal-title',
+        Spacing.margin('bottom', 0),
         styles
-      ]),
+      ),
       children: [ child ]
     });
   }
 }
+

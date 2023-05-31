@@ -1,40 +1,32 @@
 package spruce.paper;
 
-import pine.*;
 import pine.html.HtmlEvents;
 import spruce.core.*;
-
-using Nuke;
+import spruce.box.Box;
 
 class Paper extends AutoComponent {
-  public static final baseStyles = Css.atoms({
-    backgroundColor: theme(spruce.paper.background.color),
-    backgroundClip: 'padding-box',
-    ':focus-visible': {
-      outline: 'none'
-    }
-  });
-
   final styles:ClassName = null;
   final children:Children;
-  final layout:Layout = Auto;
-  final borderRadius:BorderRadius = Medium;
-  final shadow:Shadow = Medium;
+  final layout:LayoutStyle = Auto;
+  final radius:BorderRadiusStyle = Medium;
+  final shadow:ShadowStyle = Medium;
   final focusable:Bool = false;
   final role:String = null;
   final onClick:EventListener = null;
 
   function build() {
     return new Box({  
-      styles: [
+      styles: Breeze.compose(
         'spruce-paper',
-         baseStyles,
-         styles
-      ],
+        Background.color('neutral', 0),
+        Background.clip('padding'),
+        Modifier.focusVisible(Border.outlineStyle('none')),
+        styles
+      ),
       layout: layout,
       shadow: shadow,
-      borderRadius: borderRadius,
-      ariaModal: focusable ? 'true' : null,
+      radius: radius,
+      isModal: focusable ? true : null,
       tabIndex: focusable ? -1 : null,
       role: role == null 
         ? focusable ? 'dialog' : null

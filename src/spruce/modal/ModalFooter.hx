@@ -1,9 +1,8 @@
 package spruce.modal;
 
 import pine.*;
-import spruce.core.Box;
-
-using Nuke;
+import spruce.box.Box;
+import spruce.core.*;
 
 class ModalFooter extends AutoComponent {
   final styles:ClassName = null;
@@ -11,19 +10,13 @@ class ModalFooter extends AutoComponent {
 
   public function build() {
     return new Box({
-      styles: [
+      styles: Breeze.compose(
         'spruce-modal-footer',
-        Css.atoms({
-          padding: [ 
-            theme(spruce.spacing.medium),
-            theme(spruce.spacing.medium) 
-          ],
-          justifyContent: 'flex-end'
-        }),
-        styles
-      ],
-      layout: Horizontal,
-      spacing: Small,
+        Flex.justify('end')
+      ),
+      layout: LayoutStyle.Horizontal,
+      spacing: SpacingStyle.Small,
+      padding: SpacingStyle.Medium,
       children: children
     });
   }

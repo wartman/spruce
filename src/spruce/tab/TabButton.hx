@@ -1,12 +1,9 @@
 package spruce.tab;
 
-import pine.*;
 import spruce.button.Button;
-import spruce.core.BorderRadius;
+import spruce.core.*;
 import spruce.menu.*;
 import spruce.menu.MenuLink;
-
-using Nuke;
 
 class TabButton extends AutoComponent {
   final tab:Tab;
@@ -16,15 +13,13 @@ class TabButton extends AutoComponent {
 
     return new MenuItem({
       child: new MenuLink({
-        styles: [
+        styles: Breeze.compose(
           'spruce-tab-button',
           tab.buttonStyles,
-          Css.atoms({
-            alignItems: 'center',
-            cursor: 'pointer'
-          }),
+          Flex.alignItems('center'),
+          Interactive.cursor('pointer'),
           getTabStyle(tabs)
-        ],
+        ),
         selectedStyles: [
           'spruce-tab-button--selected',
           getTabSelectedStyle(tabs)
@@ -39,37 +34,26 @@ class TabButton extends AutoComponent {
   function getTabStyle(tabs:TabContext) {
     return switch tabs.variant {
       case Underline: 
-        Css.atoms({
-          padding: [ 0, theme(spruce.spacing.medium)],
-          lineHeight: theme(spruce.input.height.medium),
-          height: theme(spruce.input.height.medium),
-          marginBottom: (-2).px(),
-          borderBottom: [ 
-            'solid', 
-            2.px(), 
-            theme(spruce.color.neutral300)
-          ],
-          ':hover': {
-            backgroundColor: theme(spruce.color.primary50)
-          },
-          ':active': {
-            backgroundColor: theme(spruce.color.primary100),
-          }
-        });
+        Breeze.compose(
+          Spacing.pad('y', 0),
+          Spacing.pad('x', 4),
+          Spacing.margin('bottom', '-2px'),
+          Border.width('bottom', '2px'),
+          Border.style('solid'),
+          Border.color('neutral', 300),
+          Modifier.hover(Background.color('primary', 50)),
+          Modifier.active(Background.color('primary', 100)),
+          InputHeightStyle.Md.toStyle()
+        );
       case Pill:
-        Button.baseStyles.with([
-          BorderRadius.Pill.toStyle(),
-          Css.atoms({ 
-            borderColor: theme(spruce.color.neutral0),
-            backgroundColor: theme(spruce.color.neutral0),
-            ':hover': {
-              backgroundColor: theme(spruce.color.primary50)
-            },
-            ':active': {
-              backgroundColor: theme(spruce.color.primary100)
-            }
-          })
-        ]);
+        Breeze.compose(
+          Button.baseStyles,
+          BorderRadiusStyle.Pill.toStyle(),
+          Border.color('neutral', 0),
+          Background.color('neutral', 0),
+          Modifier.hover(Background.color('primary', 50)),
+          Modifier.active(Background.color('primary', 100))
+        );
       default: null;
     }
   }
@@ -77,27 +61,25 @@ class TabButton extends AutoComponent {
   function getTabSelectedStyle(tabs:TabContext) {
     return switch tabs.variant {
       case Underline: 
-        Css.atoms({
-          borderBottom: [ 
-            'solid', 
-            2.px(), 
-            theme(spruce.color.primary600)
-          ],
-        });
+        Breeze.compose(
+          Border.width('bottom', '2px'),
+          Border.style('solid'),
+          Border.color('primary', 600),
+        );
       case Pill:
-        Css.atoms({
-          backgroundColor: theme(spruce.color.primary600),
-          borderColor: theme(spruce.color.primary600),
-          color: theme(spruce.color.neutral0),
-          ':hover': {
-            backgroundColor: theme(spruce.color.primary500),
-            borderColor: theme(spruce.color.primary500),
-          },
-          ':active': {
-            backgroundColor: theme(spruce.color.primary600),
-            borderColor: theme(spruce.color.primary600),
-          }
-        });
+        Breeze.compose(
+          Background.color('primary', 600),
+          Border.color('primary', 600),
+          Typography.textColor('neutral', 0),
+          Modifier.hover(
+            Background.color('primary', 500),
+            Border.color('primary', 500)
+          ),
+          Modifier.active(
+            Background.color('primary', 600),
+            Border.color('primary', 600),
+          )
+        );
       default: null;
     }
   }

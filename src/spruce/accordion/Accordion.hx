@@ -1,27 +1,25 @@
 package spruce.accordion;
 
 import eg.AccordionContext;
-import pine.*;
+import spruce.box.Box;
 import spruce.core.*;
-
-using Nuke;
 
 class Accordion extends AutoComponent {
   final styles:ClassName = null;
   final sticky:Bool = false;
   final children:Children;
-  final spacing:Spacing = Small;
+  final spacing:SpacingStyle = Small;
 
   function build() {
     return new AccordionContextProvider({
       value: new AccordionContext({ sticky: sticky }),
       child: accordion -> new Box({
-        styles: [
+        styles: Breeze.compose(
           'spruce-accordion',
           styles
-        ],
+        ),
         spacing: spacing,
-        layout: Vertical, // todo: make configurable
+        layout: LayoutStyle.Vertical, // todo: make configurable
         children: children
       })
     });

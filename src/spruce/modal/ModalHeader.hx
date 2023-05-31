@@ -1,38 +1,31 @@
 package spruce.modal;
 
 import eg.LayerContext;
-import pine.*;
+import spruce.box.Box;
 import spruce.control.*;
 import spruce.core.*;
-import spruce.icon.Icon;
-
-using Nuke;
+import spruce.icon.*;
 
 class ModalHeader extends AutoComponent {
   final styles:ClassName = null;
-  // final priority:Priority = null;
   final child:Child;
-
-  public function build() {
+ 
+  function build() {
     return new Box({
       tag: Header,
-      layout: Horizontal,
-      styles: Css.atoms({
-        alignItems: 'center',
-        padding: [ 
-          theme(spruce.spacing.medium), 
-          theme(spruce.spacing.medium) 
-        ],
-      }).with([
+      layout: LayoutStyle.Horizontal,
+      padding: SpacingStyle.Medium,
+      styles: Breeze.compose(
         'spruce-modal-header',
-        // if (priority != null) priority.toStyle() else null,
+        Flex.alignItems('center'),
         styles
-      ]),
+      ),
       children: [
         new Box({
-          styles: Css
-            .atoms({ marginRight: 'auto' })
-            .with('spruce-modal-header-info'),
+          styles: Breeze.compose(
+            'spruce-modal-header-info',
+            Spacing.margin('right', 'auto')
+          ),
           children: [ child ]
         }),
         new ControlGroup({
@@ -41,9 +34,11 @@ class ModalHeader extends AutoComponent {
             new ControlButton({
               onClick: _ -> LayerContext.from(this).hide(),
               ariaLabel: 'Close',
-              child: new Icon({
-                styles: Css.atoms({ width: 2.em(), height: 2.em() }),
-                kind: Close
+              child: new Close({
+                styles: Breeze.compose(
+                  Sizing.width(5),
+                  Sizing.height(5)
+                )
               })
             })
           ]

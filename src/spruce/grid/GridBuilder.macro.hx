@@ -39,15 +39,11 @@ private function buildGrid(columns:Int, ?rows:Null<Int>) {
         super(props);
       }
 
-      function getStyles():nuke.ClassName {
-        return nuke.Theme.define({
-          spruce: {
-            grid: {
-              rows: $v{rows == null ? 1 : rows},
-              columns: $v{columns}
-            }
-          }
-        });
+      function getStyles():breeze.ClassName {
+        return Breeze.compose(
+          breeze.rule.Grid.rows($v{rows == null ? 1 : rows}),
+          breeze.rule.Grid.columns($v{columns})
+        );
       }
     });
 

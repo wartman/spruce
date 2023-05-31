@@ -1,10 +1,8 @@
 package spruce.layout;
 
 import pine.*;
-import spruce.core.Box;
+import spruce.box.Box;
 import spruce.layout.Container;
-
-using Nuke;
 
 class Footer extends AutoComponent {
   final styles:ClassName = null;
@@ -14,17 +12,14 @@ class Footer extends AutoComponent {
   public function build() {
     return new Box({
       tag: Footer,
-      styles: [
+      styles: Breeze.compose(
         'spruce-footer',
         styles,
-        Css.atoms({
-          backgroundColor: theme(spruce.footer.bgColor, theme(spruce.color.dark)),
-          color: theme(spruce.footer.bgColor, theme(spruce.color.light)),
-          paddingTop: theme(spruce.box.padding.y),
-          paddingBottom: theme(spruce.box.padding.y),
-          marginTop: theme(spruce.grid.gap)
-        })
-      ],
+        Background.color('secondary', 800),
+        Typography.textColor('neutral', 0),
+        Spacing.pad('y', 10),
+        Spacing.margin('top', 10)
+      ),
       children: new Container({
         kind: kind,
         children: children

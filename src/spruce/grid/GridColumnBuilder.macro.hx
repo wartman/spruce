@@ -34,7 +34,7 @@ private function buildGridColumn(infos:Array<GridColumnInfo>) {
     var styles = infos.map(createStyle);
     var expr = switch styles.length {
       case 1: styles[0];
-      default: macro nuke.ClassName.ofArray([ $a{styles} ]);
+      default: macro Breeze.compose($a{styles});
     }
     
     builder.add(macro class {
@@ -42,7 +42,7 @@ private function buildGridColumn(infos:Array<GridColumnInfo>) {
         super(props);
       }
 
-      function getStyles():nuke.ClassName {
+      function getStyles():breeze.ClassName {
         return $expr;
       }
     });
@@ -65,22 +65,17 @@ private function buildGridColumn(infos:Array<GridColumnInfo>) {
 }
 
 private function createStyle(info:GridColumnInfo):Expr {
-  var span = info.span;
-  var expr = macro [ 'auto/span', $v{info.span + ''} ];
-
   return switch info.kind {
-    case All: macro nuke.Css.atoms({ gridColumn: $expr });
-    case Xs: macro spruce.core.Breakpoint.xs({ gridColumn: $expr });
-    case Sm: macro spruce.core.Breakpoint.sm({ gridColumn: $expr });
-    case Md: macro spruce.core.Breakpoint.md({ gridColumn: $expr });
-    case Lg: macro spruce.core.Breakpoint.lg({ gridColumn: $expr });
-    case Xl: macro spruce.core.Breakpoint.xl({ gridColumn: $expr });
+    case All: macro breeze.rule.Grid.column($v{info.span});
+    case Sm: macro breeze.variant.Breakpoint.viewport('sm', breeze.rule.Grid.column($v{info.span}));
+    case Md: macro breeze.variant.Breakpoint.viewport('md', breeze.rule.Grid.column($v{info.span}));
+    case Lg: macro breeze.variant.Breakpoint.viewport('lg', breeze.rule.Grid.column($v{info.span}));
+    case Xl: macro breeze.variant.Breakpoint.viewport('xl', breeze.rule.Grid.column($v{info.span}));
   }
 }
 
 private enum abstract GridColumnBreakpoint(String) to String {
   final All;
-  final Xs;
   final Sm;
   final Md;
   final Lg;
@@ -109,7 +104,6 @@ function toGridColumnInfo(expr:Expr):GridColumnInfo {
           { 
             kind: switch kind {
               case 'all': All;
-              case 'xs': Xs;
               case 'sm': Sm;
               case 'md': Md;
               case 'lg': Lg;

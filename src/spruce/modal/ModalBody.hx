@@ -1,20 +1,18 @@
 package spruce.modal;
 
-import pine.*;
-import spruce.core.Box;
-
-using Nuke;
+import spruce.box.Box;
+import spruce.core.*;
 
 class ModalBody extends AutoComponent {
   final children:Children;
 
   public function build() {
     return new Box({
-      styles: Css.atoms({
-        padding: theme(spruce.spacing.medium)
-      }).with([
-        'spruce-modal-body'
-      ]),
+      styles: Breeze.compose(
+        'spruce-modal-body',
+        Breakpoint.markContainer('spruce-modal', 'inline-size')
+      ),
+      padding: SpacingStyle.Medium,
       children: children
     });
   }
