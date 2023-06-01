@@ -12,27 +12,27 @@ class SpacingStyleTools {
   public static function toGap(spacing:SpacingStyle):ClassName {
     return switch spacing {
       case None: '';
-      case Small: Flex.gap('.75rem');
-      case Medium: Flex.gap('1rem');
-      case Large: Flex.gap('1.25rem');
+      case Small: Flex.gap(3);
+      case Medium: Flex.gap(4);
+      case Large: Flex.gap(5);
     }
   }
 
   public static function toPadding(spacing:SpacingStyle):ClassName {
     return switch spacing {
       case None: '';
-      case Small: Spacing.pad('.75rem');
-      case Medium: Spacing.pad('1rem');
-      case Large: Spacing.pad('1.25rem');
+      case Small: Spacing.pad(3);
+      case Medium: Spacing.pad(4);
+      case Large: Spacing.pad(5);
     }
   }
 
   public static function toBottomMargin(spacing:SpacingStyle):ClassName {
     return switch spacing {
       case None: '';
-      case Small: Spacing.margin('bottom', '.75rem');
-      case Medium: Spacing.margin('bottom', '1rem');
-      case Large: Spacing.margin('bottom', '1.25rem');
+      case Small: Spacing.margin('bottom', 3);
+      case Medium: Spacing.margin('bottom', 4);
+      case Large: Spacing.margin('bottom', 5);
     }
   }
 }

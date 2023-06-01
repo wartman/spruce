@@ -51,8 +51,8 @@ class TabButton extends AutoComponent {
           BorderRadiusStyle.Pill.toStyle(),
           Border.color('neutral', 0),
           Background.color('neutral', 0),
-          Modifier.hover(Background.color('primary', 50)),
-          Modifier.active(Background.color('primary', 100))
+          Spacing.pad('x', 4),
+          Sizing.height(10)
         );
       default: null;
     }

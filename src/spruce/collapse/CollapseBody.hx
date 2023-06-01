@@ -40,7 +40,7 @@ class CollapseBody extends AutoComponent {
           styles,
           Layout.overflow('hidden'),
           Sizing.height(0),
-          Spacing.pad('x', 2),
+          Spacing.pad('x', 3),
           Spacing.margin(0)
         ),
         children: children

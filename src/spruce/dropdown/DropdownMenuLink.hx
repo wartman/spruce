@@ -15,8 +15,9 @@ class DropdownMenuLink extends AutoComponent {
     var link = new MenuLink({
       styles: Breeze.compose(
         'spruce-dropdown-menu-link',
-        Spacing.pad('x', 0),
-        Spacing.pad('y', 2),
+        Spacing.pad('x', 3),
+        Spacing.pad('y', 0),
+        Flex.alignItems('center'),
         Typography.textVerticalAlign('middle'),
         InputHeightStyle.Md.toStyle(),
         BorderRadiusStyle.Small.toStyle(),

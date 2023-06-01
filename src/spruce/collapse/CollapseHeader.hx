@@ -19,7 +19,7 @@ class CollapseHeader extends AutoComponent {
         Flex.display(),
         Flex.alignItems('center'),
         Sizing.width('full'),
-        Spacing.pad(2),
+        Spacing.pad(3),
         Border.outlineWidth(0),
         Interactive.cursor('pointer')
       ),

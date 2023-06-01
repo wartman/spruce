@@ -21,7 +21,7 @@ class MenuLink extends AutoComponent {
         'spruce-menu-link',
         styles,
         selected ? selectedStyles : null,
-        Layout.display('block'),
+        Flex.display(),
         Typography.textDecoration('none'),
         Modifier.focusVisible(
           Border.outlineStyle('solid'),

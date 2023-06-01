@@ -10,6 +10,7 @@ class Panel extends AutoComponent {
   final layout:LayoutStyle = Auto;
   final shadow:ShadowStyle = None;
   final radius:BorderRadiusStyle = Medium;
+  final padding:SpacingStyle = None;
   final border:BorderStyle = Small;
   final focusable:Bool = false;
   final role:String = null;
@@ -29,6 +30,7 @@ class Panel extends AutoComponent {
       shadow: shadow,
       border: border,
       radius: radius,
+      padding: padding,
       isModal: focusable ? true : null,
       tabIndex: focusable ? -1 : null,
       role: role == null 
