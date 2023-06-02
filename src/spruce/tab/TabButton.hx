@@ -43,7 +43,7 @@ class TabButton extends AutoComponent {
           Border.color('neutral', 300),
           Modifier.hover(Background.color('primary', 50)),
           Modifier.active(Background.color('primary', 100)),
-          InputHeightStyle.Md.toStyle()
+          Sizing.height(10)
         );
       case Pill:
         Breeze.compose(

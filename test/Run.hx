@@ -25,6 +25,7 @@ import spruce.nav.*;
 import spruce.sidebar.*;
 import spruce.tab.*;
 import spruce.typography.*;
+import spruce.placeholder.*;
 
 function main() {
   mount(
@@ -42,6 +43,7 @@ class App extends AutoComponent {
       layout: Vertical,
       spacing: Large,
       children: [
+        new Spinner({}),
         new Toggle({}),
         new Box({
           layout: Horizontal,

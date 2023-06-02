@@ -41,7 +41,7 @@ class Sidebar extends AutoComponent {
         Layout.attach('inset', 0),
         Layout.overflow('x', 'hidden'),
         Layout.overflow('y', 'scroll'),
-        Background.color('rgba(0,0,0,0.5)'),
+        Background.color('scrim', 50),
         Flex.display(),
         Flex.justify('center'),
         Flex.alignItems('center')

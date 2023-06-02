@@ -16,8 +16,16 @@ function setup() {
   config.colors.get('neutral').set('0', 'var(--spruce-color-neutral-0)');
   config.colors.get('neutral').set('1000', 'var(--spruce-color-neutral-1000)');
 
+  config.colors.set('scrim', [
+    '50' => 'var(--spruce-color-scrim-50)',
+    '100' => 'var(--spruce-color-scrim-100)',
+  ]);
+
   // @todo: Still need `warning`.
   config.preflight.set('light-colors', prepareCss(':root{
+    --spruce-color-scrim-50: rgba(0, 0, 0, 0.5);
+    --spruce-color-scrim-100: rgba(0, 0, 0, 1);
+
     --spruce-color-neutral-0: rgb(255, 255, 255);
     --spruce-color-neutral-50: rgb(249, 249, 249);
     --spruce-color-neutral-100: rgb(244, 244, 245);
